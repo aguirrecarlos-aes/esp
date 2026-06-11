@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Español en Acción - Aguirre  Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght=400;700&family=Poppins:wght=600;700&display=swap" rel="stylesheet">
+    <style>
+        /* SETUP ACCESIBILIDAD Y DISEÑO (DISLEXIA-FRIENDLY) */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: #cbd5e1;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            font-family: 'Lexend', sans-serif;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #fff9e6;
+            display: none;
+            flex-direction: column;
+            padding: 40px 60px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border-radius: 24px;
+        }
+
+        .active { display: flex; }
+
+        .slide-title {
+            color: #1e3a8a;
+            font-family: 'Poppins', sans-serif;
+            font-size: 46px;
+            font-weight: 700;
+            border-left: 12px solid #d97706;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        p, li { font-size: 24px; color: #1e293b; line-height: 1.4; }
+
+        /* ZONAS INTERACTIVAS (ALTURA FIJA PARA EVITAR DESPLAZAMIENTOS) */
+        .interactive-zone {
+            background: #0f172a;
+            border-radius: 28px;
+            padding: 25px;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 440px; 
+            position: relative;
+        }
+
+        .display-main { font-size: 70px; color: #fbbf24; font-weight: bold; margin: 5px 0; }
+        .display-sub { font-size: 26px; color: #94a3b8; font-weight: bold; }
+
+        .btn-game {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            font-family: 'Lexend', sans-serif;
+        }
+        .btn-game:hover { background: #2563eb; transform: translateY(-1px); }
+        .btn-solve { background: #059669; }
+        .btn-solve:hover { background: #10b981; }
+
+        .answer-box {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            width: 95%;
+            border: 3px dashed #d97706;
+            min-height: 55px;
+            display: none;
+        }
+
+        /* HIGHLIGHTS VISUALES */
+        .pill { padding: 6px 16px; border-radius: 8px; font-weight: bold; display: inline-block; margin: 5px; font-size: 22px; }
+        .el { background-color: #dbeafe; color: #1e40af; }
+        .la { background-color: #fce7f3; color: #9d174d; }
+        .under { text-decoration: underline; text-decoration-thickness: 3px; }
+        
+        .grid-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .card { background: white; padding: 18px; border-radius: 18px; border-top: 6px solid #1e3a8a; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+        /* JUEGO DE ARTÍCULOS */
+        .game-slots { display: flex; gap: 20px; justify-content: center; width: 100%; margin: 10px 0; }
+        .slot-card { background: #1e293b; padding: 10px; border-radius: 16px; width: 180px; font-size: 40px; border: 2px solid #475569; min-height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .slot-card span { font-size: 20px; color: #cbd5e1; display: block; margin-top: 5px; font-weight: bold; }
+
+        /* NAVEGACIÓN */
+        .footer-nav {
+            position: absolute;
+            bottom: 25px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 15px;
+            background-color: #fff9e6;
+            z-index: 10;
+        }
+
+        .nav-btn { background: #e2e8f0; border: none; padding: 10px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 18px; font-family: 'Lexend', sans-serif; }
+        .nav-btn:hover:not(:disabled) { background: #1e3a8a; color: white; }
+        .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+    <div class="slide-container active" id="slide1" style="justify-content: center; align-items: center; text-align: center;">
+        <h1 style="font-size: 95px; color: #1e3a8a; font-family: 'Poppins', sans-serif;">¡A hablar español!</h1>
+        <p style="font-size: 38px; color: #64748b; margin-top: 10px;">Fluidez Práctica y Estrategias Reales</p>
+        <div style="margin: 40px auto; width: 150px; height: 10px; background: #d97706; border-radius: 5px;"></div>
+        <p style="font-weight: bold; color: #1e3a8a; font-size: 24px;">Aguirre  Studio</p>
+        <div class="footer-nav">
+            <span style="font-weight: bold; color: #94a3b8;">1 / 9</span>
+            <button class="nav-btn" onclick="moveSlide(1)">Siguiente</button>
+        </div>
+    </div>
+
+    <div class="slide-container" id="slide2">
+        <div class="slide-title">Subasta de Palabras</div>
+        <p><strong>Reto de rapidez:</strong> Tienen 30 segundos para escribir en su cuaderno todas las palabras posibles con la combinación de letra y categoría.</p>
+        <div class="interactive-zone" style="background: #1e293b; justify-content: center; gap: 15px;">
+            <div class="display-sub" id="auction-cat">Categoría</div>
+            <div class="display-main" id="auction-letter">🎲</div>
+            <button class="btn-game" onclick="rollAuction()">🎲 Girar Dado</button>
+        </div>
+        <div class="footer-nav">
+            <span style="font-weight: bold; color: #94a3b8;">2 / 9</span>
+            <button class="nav-btn" onclick="moveSlide(-1)">Anterior</button>
+            <button class="nav-btn" onclick="moveSlide(1)">Siguiente</button>
+        </div>
+    </div>
+
+    <div class="slide-container" id="slide3">
+        <div class="slide-title">Gimnasia Fonética</div>
+        <div class="grid-cards">
+            <div class="card">
+                <h3>👅 La letra L (Final)</h3>
+                <p style="font-size: 18px; color:#475569;">La lengua toca los dientes superiores de forma firme. ¡No la pronuncies como una "U"!</p>
+                <div style="margin: 10px 0;">
+                    <span class="pill el" style="background-color: #dcfce7; color: #14532d;">Bra-si<span class="under">l</span></span>
+                    <span class="pill el" style="background-color: #dcfce7; color: #14532d;">Ho-te<span class="under">l</span></span>
+                    <span class="pill el" style="background-color: #dcfce7; color: #14532d;">So<span class="under">l</span></span>
+                </div>
+                <p style="font-size: 16px; font-style: italic; background: #f1f5f9; padding: 10px; border-radius: 8px;">
+                    "Raúl el albañil lleva un barril al hotel."
+                </p>
+            </div>
+            <div class="card" style="border-top-color: #d97706;">
+                <h3>🔥 Las letras J y G</h3>
+                <p style="font-size: 18px; color:#475569;">Sonido fuerte raspando el aire en la garganta.</p>
+                <div style="margin: 10px 0;">
+                    <span class="pill la" style="background-color: #ffedd5; color: #7c2d12;"><span class="under">J</span>u-go</span>
+                    <span class="pill la" style="background-color: #ffedd5; color: #7c2d12;"><span class="under">G</span>en-te</span>
+                    <span class="pill la" style="background-color: #ffedd5; color: #7c2d12;"><span class="under">G</span>e-ren-te</span>
+                </div>
+                <p style="font-size: 16px; font-style: italic; background: #f1f5f9; padding: 10px; border-radius: 8px;">
+                    "El jefe Juan juega con jarabe de jengibre."
+                </p>
+            </div>
+        </div>
+        <div class="footer-nav">
+            <span style="font-weight: bold; color: #94a3b8;">3 / 9</span>
+            <button class="nav-btn" onclick="moveSlide(-1)">Anterior</button>
+            <button class="nav-btn" onclick="moveSlide(1)">Siguiente</button>
+        </div>
+    </div>
+
+    <div class="slide-container" id="slide4">
+        <div class="slide-title">Pedir con Éxito</div>
+        <p style="margin-bottom: 15px;">Usa estos 4 bloques modulares para estructurar cualquier pedido con confianza:</p>
+        <div style="display: flex; gap: 15px; justify-content: center; text-align: center;">
+            <div class="card" style="flex:1;"><h4>1. Saludo 👋</h4><p style="font-size: 18px; color: #d97706; margin-top: 5px;">¡Buenos días!<br>¡Buenas tardes!</p></div>
+            <div class="card" style="flex:1;"><h4>2. Verbo 🛒</h4><p style="font-size: 18px; color: #d97706; margin-top: 5px;">Quisiera...<br>Me gustaría...</p></div>
+            <div class="card" style="flex:1;"><h4>3. Producto 🍔</h4><p style="font-size: 18px; color: #d97706; margin-top: 5px;">un café<br>una ración de pizza</p></div>
+            <div class="card" style="flex:1;"><h4>4. Cortesía ✨</h4><p style="font-size: 18px; color: #d97706; margin-top: 5px;">...por favor.</p></div>
+        </div>
+        <div style="background: #eff6ff; padding: 20px; border-radius: 12px; margin-top: 30px; border-left: 8px solid #1e3a8a;">
+            🚀 <strong>Ejemplo Real e Idiomático:</strong> "¡Buenas tardes! <strong>Quisiera</strong> un filete de carne y una copa de vino, <strong>por favor</strong>."
+        </div>
+        <div class="footer-nav">
+            <span style="font-weight: bold; color: #94a3b8;">4 / 9</span>
+            <button class="nav-btn" onclick="moveSlide(-1)">Anterior</button>
+            <button class="nav-btn" onclick="moveSlide(1)">Siguiente</button>
+        </div>
+    </div>
+
+    <div class="slide-container" id="slide5">
+        <div class="slide-title">Reto del Viajero</div>
+        <p style="margin-bottom: 10px; font-size: 20px;">Instrucción: Mira el reloj para el saludo, identifica los alimentos e integra la fórmula de cortesía.</p>
+        <div class="interactive-zone">
+            <button class="btn-game btn-solve" onclick="toggleAnswer('sim-ans')" style="position: absolute; top: 15px; right: 25px;">👁️ Ver Ejemplo</button>
+            
+            <div style="margin-top: 40px;">
+                <div class="display-sub" id="sim-city">Santiago, Chile 🇨🇱</div>
+                <div style="font-size: 60px; color: #fbbf24; font-weight: bold;" id="sim-time">01:30 PM</div>
+                <div id="sim-icons" style="font-size: 80px; letter-spacing: 20px;">🥩 🍷</div>
+            </div>
+
+            <button class="btn-game" onclick="generateSim()">🔄 Generar Nuevo Reto</button>
+            
+            <div class="answer-box" id="sim-ans">¡Buenas tardes! Quisiera un filete de carne y una copa de vino, por favor.</div>
+        </div>
+        <div class="footer-nav">
+            <span style="font-weight: bold; color: #94a3b8;">5 / 9</span>
+            <button class="nav-btn" onclick="moveSlide(-1)">Anterior</button>
+            <button class="nav-btn" onclick="moveSlide(1)">Siguiente</button>
+        </div>
+    </div>
+
+    <div class="slide-container" id="slide6">
+        <div class="slide-title">Guía de Supervivencia Gramatical</div>
+        <div class="grid-cards">
+            <div class="card" style="border-top-color: #ef4444;">
+                <h3 style="color: #ef4444;">🚫 Estructura Sustantiva: EL / LA vs LO</h3>
+                <p style="font-size: 18px; margin-top: 5px;">Los objetos y conceptos físicos tienen género: <b>EL</b> (masculino) o <b>LA</b> (femenino). El artículo neutro <b>LO</b> jamás acompaña sustantivos.</p>
+                <p style="font-size: 17px; margin-top: 8px; background: #fee2e2; padding: 8px; border-radius: 8px;">
+                    ✅ <b>El</b> libro / <b>La</b> mesa / <b>El</b> viaje<br>
+                    ❌ <span style="text-decoration: line-through;">Lo libro / Lo mesa / Lo viaje</span>
+                </p>
+            </div>
+            <div class="card" style="border-top-color: #d97706;">
+                <h3 style="color: #d97706;">👔 Identidad Profesional Directa</h3>
+                <p style="font-size: 18px; margin-top: 5px;">Al hablar de la ocupación habitual o profesión, se omite el artículo indefinido (un/una).</p>
+                <p style="font-size: 17px; margin-top: 8px; background: #ffedd5; padding: 8px; border-radius: 8px;">
+                    ✅ Soy abogado. / Soy ingeniera.<br>
+                    ❌ <span style="text-decoration: line-through;">Soy un abogado. / Soy una ingeniera.</span>
+                </p>
+            </div>
+            <div class="card" style="border-top-color: #059669;">
+                <h3 style="color: #059669;">👃 Emisión Vocálica Limpia</h3>
+                <p style="font-size: 18px; margin-top: 5px;">Las vocales en español son puras y abiertas. Evita esconder el sonido en la nariz.</p>
+                <p style="font-size: 17px; margin-top: 8px;">✅ Ma-ña-na / Ma-no<br>❌ <span style="text-decoration: line-through;">Mañã / Mãno</span></p>
+            </div>
+            <div class="card" style="border-top-color: #3b82f6;">
+                <h3 style="color: #3b82f6;">🔗 Enlace Lógico con "Y"</h3>
+                <p style="font-size: 18px; margin-top: 5px;">Para conectar elementos se utiliza exclusivamente la conjunción <b>Y</b>.</p>
+                <p style="font-size: 17px; margin-top: 8px;">✅ Agua <b>y</b> café / Sal <b>y</b> pimienta.<br>❌ <span style="text-decoration: line-through;">Agua e café.</span></p>
+            </div>
+        </div>
+        <div class="footer-nav">
+            <span style="font-weight: bold; color: #94a3b8;">6 / 9</span>
+            <button class="nav-btn" onclick="moveSlide(-1)">Anterior</button>
+            <button class="nav-btn" onclick="moveSlide(1)">Siguiente</button>
+        </div>
+    </div>
+
+    <div class="slide-container" id="slide7">
+        <div class="slide-title">Misión Práctica: ¿El o La?</div>
+        <p>¡Mucho cuidado! Estas palabras suelen generar errores de género por interferencia del portugués. Determinen si llevan <b>EL</b> o <b>LA</b>.</p>
+        <div class="interactive-zone" style="background: #334155;">
+            <button class="btn-game btn-solve" onclick="toggleAnswer('article-ans')" style="position: absolute; top: 15px; right: 25px;">👁️ Revelar Respuestas</button>
+            
+            <div class="game-slots">
+                <div class="slot-card" id="item1">🚗 <span>Coche</span></div>
+                <div class="slot-card" id="item2">🧂 <span>Sal</span></div>
+                <div class="slot-card" id="item3">🌉 <span>Puente</span></div>
+            </div>
+            
+            <div class="answer-box" id="article-ans" style="text-align: center; background: #f0fdf4; border-color: #16a34a; color: #14532d;">
+            </div>
+            
+            <button class="btn-game" onclick="generateArticles()">🎲 Nuevos Objetos</button>
+        </div>
+        <div class="footer-nav">
+            <span style="font-weight: bold; color: #94a3b8;">7 / 9</span>
+            <button class="nav-btn" onclick="moveSlide(-1)">Anterior</button>
+            <button class="nav-btn" onclick="moveSlide(1)">Siguiente</button>
+        </div>
+    </div>
+
+    <div class="slide-container" id="slide8">
+        <div class="slide-title">Falsos Amigos bajo la lupa</div>
+        <p>Analicen la palabra en pantalla y eviten la traducción automática para asegurar precisión comunicativa.</p>
+        <div class="interactive-zone" style="background: #1e293b;">
+            <button class="btn-game btn-solve" onclick="toggleAnswer('trap-ans')" style="position: absolute; top: 15px; right: 25px;">👁️ Revelar Significado</button>
+            
+            <div style="margin-top: 30px;">
+                <div class="display-sub">Palabra en español:</div>
+                <div class="display-main" id="trap-word" style="font-size: 80px;">OFICINA</div>
+            </div>
+            
+            <button class="btn-game" onclick="generateTrap()">🎲 Siguiente Palabra</button>
+            
+            <div class="answer-box" id="trap-ans" style="text-align: left; font-size: 18px;">
+                <strong>Significa:</strong> Escritorio / Sala administrativa de trabajo.<br>
+                <span style="color: #166534; font-style: italic;">Ejemplo: "Mañana tengo una reunión de equipo en la oficina."</span>
+            </div>
+        </div>
+        <div class="footer-nav">
+            <span style="font-weight: bold; color: #94a3b8;">8 / 9</span>
+            <button class="nav-btn" onclick="moveSlide(-1)">Anterior</button>
+            <button class="nav-btn" onclick="moveSlide(1)">Siguiente</button>
+        </div>
+    </div>
+
+    <div class="slide-container" id="slide9" style="justify-content: center; align-items: center; text-align: center;">
+        <h2 style="font-size: 95px; color: #1e3a8a; font-family: 'Poppins', sans-serif;">¡Excelente trabajo!</h2>
+        <div style="margin: 35px auto; width: 160px; height: 12px; background: #d97706; border-radius: 6px;"></div>
+        <p style="font-size: 30px; font-weight: bold; color: #475569;">¿Tienen alguna pregunta o duda?</p>
+        <p style="font-size: 70px; margin-top: 25px;">🌟 👏</p>
+        <p style="margin-top: 40px; font-weight: bold; color: #1e3a8a; font-size: 24px;">Aguirre Studio</p>
+        <div class="footer-nav">
+            <span style="font-weight: bold; color: #94a3b8;">9 / 9</span>
+            <button class="nav-btn" onclick="moveSlide(-1)">Anterior</button>
+            <button class="nav-btn" disabled>Fin</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+
+        function moveSlide(n) {
+            const slides = document.querySelectorAll('.slide-container');
+            slides[currentSlide - 1].classList.remove('active');
+            currentSlide += n;
+            slides[currentSlide - 1].classList.add('active');
+        }
+
+        function toggleAnswer(id) {
+            const box = document.getElementById(id);
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function rollAuction() {
+            const letters = "ABCDEFGLMNOPRSTV";
+            const cats = ["Comida 🍎", "Ciudad 🏙️", "Profesión 💼", "Deporte ⚽", "Animal 🐶"];
+            document.getElementById('auction-cat').textContent = cats[Math.floor(Math.random()*cats.length)];
+            document.getElementById('auction-letter').textContent = letters[Math.floor(Math.random()*letters.length)];
+        }
+
+        // RETO DEL VIAJERO: Combinaciones realistas y naturales de comida/bebida
+        const simData = [
+            { loc: "Bogotá, Colombia 🇨🇴", t: "09:00 AM", emo: "☕ 🥐", ans: "¡Buenos días! Quisiera un café y un cruasán, por favor." },
+            { loc: "Madrid, España 🇪🇸", t: "01:30 PM", emo: "🥩 🍷", ans: "¡Buenas tardes! Quisiera un filete de carne y una copa de vino, por favor." },
+            { loc: "Buenos Aires, Arg 🇦🇷", t: "09:15 PM", emo: "🍕 🍺", ans: "¡Buenas noches! Quisiera una ración de pizza y una cerveza, por favor." },
+            { loc: "México DF 🇲🇽", t: "04:30 PM", emo: "🌮 🥤", ans: "¡Buenas tardes! Quisiera unos tacos y un refresco, por favor." },
+            { loc: "Lima, Perú 🇵🇪", t: "08:15 AM", emo: "🍹 🍰", ans: "¡Buenos días! Quisiera un jugo y un trozo de pastel, por favor." },
+            { loc: "Barcelona, España 🇪🇸", t: "02:00 PM", emo: "🥘 🥤", ans: "¡Buenas tardes! Me gustaría una ración de paella y un refresco, por favor." },
+            { loc: "Montevideo, Uruguay 🇺🇾", t: "08:30 PM", emo: "🍔 🍺", ans: "¡Buenas noches! Quisiera una hamburguesa con papas y una cerveza, por favor." }
+        ];
+
+        function generateSim() {
+            const item = simData[Math.floor(Math.random()*simData.length)];
+            document.getElementById('sim-city').textContent = item.loc;
+            document.getElementById('sim-time').textContent = item.t;
+            document.getElementById('sim-icons').textContent = item.emo;
+            document.getElementById('sim-ans').textContent = item.ans;
+            document.getElementById('sim-ans').style.display = 'none';
+        }
+
+        // BANCO DE DATOS: Palabras claras, accesibles y con emojis exactos
+        const articleItems = [
+            { e: "🚗 <span>Coche</span>", a: "EL Coche", g: "el" },
+            { e: "🧂 <span>Sal</span>", a: "LA Sal", g: "la" },
+            { e: "🌉 <span>Puente</span>", a: "EL Puente", g: "el" },
+            { e: "🥛 <span>Leche</span>", a: "LA Leche", g: "la" },
+            { e: "🍯 <span>Miel</span>", a: "LA Miel", g: "la" },
+            { e: "🧤 <span>Guante</span>", a: "EL Guante", g: "el" },
+            { e: "👚 <span>Blusa</span>", a: "LA Blusa", g: "la" },
+            { e: "❤️ <span>Dolor</span>", a: "EL Dolor", g: "el" },
+            { e: "👃 <span>Nariz</span>", a: "LA Nariz", g: "la" },
+            { e: "🪑 <span>Mesa</span>", a: "LA Mesa", g: "la" },
+            { e: "✈️ <span>Viaje</span>", a: "EL Viaje", g: "el" },
+            { e: "🌳 <span>Árbol</span>", a: "EL Árbol", g: "el" }
+        ];
+
+        function generateArticles() {
+            document.getElementById('article-ans').style.display = 'none';
+            let res = "";
+            let used = [];
+            for(let i=1; i<=3; i++) {
+                let r; do { r = Math.floor(Math.random()*articleItems.length); } while(used.includes(r));
+                used.push(r);
+                const item = articleItems[r];
+                document.getElementById('item'+i).innerHTML = item.e;
+                res += `<span class="pill ${item.g}">${item.a}</span> `;
+            }
+            document.getElementById('article-ans').innerHTML = res;
+        }
+
+        // FALSOS AMIGOS CRÍTICOS
+        const traps = [
+            { w: "OFICINA", a: "<strong>Significa:</strong> Escritorio o sala de trabajo administrativo.<br><i>Ej: 'Mañana trabajo desde la oficina corporativa.'</i>" },
+            { w: "APELLIDO", a: "<strong>Significa:</strong> Sobrenome familiar de una persona.<br><i>Ej: 'Mi apellido paterno es Rodríguez.'</i>" },
+            { w: "TALLER", a: "<strong>Significa:</strong> Establecimiento técnico de reparación o workshop.<br><i>Ej: 'Dejé mi bicicleta de montaña en el taller.'</i>" },
+            { w: "VASO", a: "<strong>Significa:</strong> Recipiente cilíndrico ordinario para beber agua o jugo.<br><i>Ej: '¿Me sirves un vaso de agua por favor?'</i>" },
+            { w: "BRINCO", a: "<strong>Significa:</strong> El acto físico de saltar.<br><i>Ej: 'El atleta dio un brinco muy alto en la pista.'</i>" }
+        ];
+
+        function generateTrap() {
+            const t = traps[Math.floor(Math.random()*traps.length)];
+            document.getElementById('trap-word').textContent = t.w;
+            document.getElementById('trap-ans').innerHTML = t.a;
+            document.getElementById('trap-ans').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
