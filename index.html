@@ -3,18 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aguirre English Studio | Clases Interactivas</title>
+    <title>Aguirre English Studio | Portal de Clases</title>
+
+    <!-- Lexend: fuente con alto soporte de legibilidad para dislexia -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
         :root {
-            --bg-color: #1e2219; /* Oliva profundo */
-            --card-bg: #2a2f24;  /* Oliva suave texturizado */
-            --text-main: #f4f3ef; /* Blanco cálido */
-            --text-muted: #a8a7a1; /* Gris suave */
-            --accent: #d4a373;    /* Bronce / Dorado otoñal */
-            --accent-hover: #e9c46a;
+            /* Paleta Deep Autumn / Oliva, ajustada para contraste AA+ */
+            --bg-color: #1e2219;
+            --bg-gradient: radial-gradient(circle at 15% 0%, #2a3325 0%, #1e2219 55%);
+            --card-bg: #2a2f24;
+            --card-bg-hover: #313828;
+            --text-main: #f7f5ef;
+            --text-muted: #c7c5bc;
+            --accent: #d4a373;
+            --accent-soft: #e9c46a;
+            --accent-strong: #f0b865;
+            --focus-ring: #8ecae6;
+            --border-soft: rgba(255, 255, 255, 0.06);
+
+            /* Tipografía */
+            --font-display: 'Lexend', sans-serif;
+            --font-body: 'Atkinson Hyperlegible', 'Lexend', sans-serif;
+
+            /* Espaciado base (amplio para lectura cómoda) */
+            --space-line: 1.75;
+            --letter-space: 0.01em;
         }
 
         * {
@@ -23,42 +43,177 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
+            font-family: var(--font-body);
+            background: var(--bg-gradient);
             color: var(--text-main);
-            line-height: 1.6;
+            line-height: var(--space-line);
+            letter-spacing: var(--letter-space);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            padding: 2rem 1rem;
+            padding: 2rem 1.25rem;
+        }
+
+        /* Foco visible accesible para teclado */
+        a:focus-visible,
+        button:focus-visible,
+        .lang-btn:focus-visible {
+            outline: 3px solid var(--focus-ring);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 920px;
             width: 100%;
             margin: 0 auto;
             flex: 1;
         }
 
+        /* ===== Toolbar de accesibilidad ===== */
+        .a11y-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .a11y-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background-color: var(--card-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-soft);
+            padding: 0.5rem 0.9rem;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .a11y-btn:hover,
+        .a11y-btn.active {
+            color: var(--accent-soft);
+            border-color: var(--accent);
+        }
+
+        /* Modo lectura cómoda: tipografía más grande y espaciada */
+        body.comfort-mode {
+            font-size: 1.15rem;
+            line-height: 2;
+            letter-spacing: 0.03em;
+        }
+
+        body.comfort-mode .card-content p {
+            font-size: 1.05rem;
+        }
+
+        /* ===== Header ===== */
         header {
             text-align: center;
-            margin-bottom: 3.5rem;
+            margin-bottom: 3rem;
             padding-top: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-soft);
+            color: var(--accent-soft);
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+        }
+
+        .badge i {
+            font-size: 0.8rem;
         }
 
         header h1 {
-            font-weight: 600;
-            font-size: 2.2rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 2.4rem;
             letter-spacing: -0.5px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
             color: var(--text-main);
+        }
+
+        header h1 span {
+            color: var(--accent);
         }
 
         header p {
             color: var(--text-muted);
-            font-weight: 300;
+            font-weight: 400;
             font-size: 1.1rem;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* ===== Buscador de clases ===== */
+        .search-wrap {
+            max-width: 480px;
+            margin: 2rem auto 0;
+            position: relative;
+        }
+
+        .search-wrap input {
+            width: 100%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-soft);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            padding: 0.85rem 1rem 0.85rem 2.8rem;
+            border-radius: 10px;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-wrap input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-wrap input:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        .search-wrap i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        /* ===== Grid de clases ===== */
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1.25rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-title i {
+            color: var(--accent);
         }
 
         .grid {
@@ -69,24 +224,59 @@
 
         .card {
             background-color: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 1.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid var(--border-soft);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+            animation-delay: var(--delay, 0s);
         }
 
         .card:hover {
             transform: translateY(-4px);
-            border-color: rgba(212, 163, 115, 0.3);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(212, 163, 115, 0.45);
+            background-color: var(--card-bg-hover);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .class-number {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--accent-soft);
+            background-color: rgba(212, 163, 115, 0.12);
+            padding: 0.3rem 0.7rem;
+            border-radius: 999px;
+        }
+
+        .class-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background-color: rgba(233, 196, 106, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-soft);
+            font-size: 1.1rem;
         }
 
         .card-content h2 {
-            font-size: 1.3rem;
-            font-weight: 500;
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
             color: var(--text-main);
         }
@@ -94,21 +284,42 @@
         .card-content p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            font-weight: 300;
-            margin-bottom: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1.25rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            background-color: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-soft);
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
         }
 
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
             text-align: center;
             background-color: transparent;
             color: var(--accent);
             border: 1px solid var(--accent);
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
             transition: all 0.2s ease;
         }
 
@@ -117,49 +328,244 @@
             color: var(--bg-color);
         }
 
+        .btn i {
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Estado vacío para búsqueda sin resultados */
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: var(--text-muted);
+            border: 1px dashed var(--border-soft);
+            border-radius: 14px;
+        }
+
+        .empty-state.visible {
+            display: block;
+        }
+
+        .empty-state i {
+            font-size: 1.6rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        /* Próximamente */
+        .card.coming-soon {
+            border-style: dashed;
+            opacity: 0.55;
+            animation: none;
+            opacity: 0.55;
+        }
+
+        .card.coming-soon:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .card.coming-soon .btn {
+            border-color: var(--text-muted);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        /* ===== Footer ===== */
         footer {
             text-align: center;
             margin-top: 4rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid var(--border-soft);
             color: var(--text-muted);
             font-size: 0.85rem;
-            font-weight: 300;
+            font-weight: 400;
+        }
+
+        footer .heart {
+            color: var(--accent);
+        }
+
+        /* ===== Animaciones ===== */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, header, .card {
+                animation: none !important;
+                opacity: 1 !important;
+                transition: none !important;
+            }
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.9rem;
+            }
+
+            .a11y-bar {
+                justify-content: center;
+            }
+
+            .card {
+                padding: 1.4rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+
+        <!-- Barra de accesibilidad -->
+        <div class="a11y-bar">
+            <button class="a11y-btn" id="comfortToggle" type="button" aria-pressed="false">
+                <i class="fa-solid fa-text-height"></i>
+                Modo lectura cómoda
+            </button>
+        </div>
+
         <header>
-            <h1>Aguirre English Studio</h1>
-            <p>Clases Interactivas y Material de Estudio</p>
+            <span class="badge"><i class="fa-solid fa-graduation-cap"></i> Portal del Estudiante</span>
+            <h1>Aguirre <span>English</span> Studio</h1>
+            <p>Tus clases interactivas y material de estudio, todo en un solo lugar.</p>
+
+            <div class="search-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Buscar una clase (ej: fundamentos, fluidez...)"
+                    aria-label="Buscar clase"
+                >
+            </div>
         </header>
 
-        <main class="grid">
-            
-            <div class="card">
-                <div class="card-content">
-                    <h2>Clase 1: Introducción & Fundamentos</h2>
-                    <p>Revisión de estructuras esenciales, vocabulario clave y acercamiento al idioma</p>
+        <main>
+            <h2 class="section-title"><i class="fa-solid fa-book-open"></i> Tus clases</h2>
+
+            <div class="grid" id="classGrid">
+
+                <div class="card" data-keywords="introducción fundamentos vocabulario gramática estructuras" style="--delay: 0.05s">
+                    <div>
+                        <div class="card-top">
+                            <span class="class-number">CLASE 01</span>
+                            <span class="class-icon"><i class="fa-solid fa-seedling"></i></span>
+                        </div>
+                        <div class="card-content">
+                            <h2>Introducción &amp; Fundamentos</h2>
+                            <p>Revisión de estructuras esenciales, vocabulario clave y primer acercamiento al idioma.</p>
+                            <div class="tags">
+                                <span class="tag">Vocabulario</span>
+                                <span class="tag">Gramática base</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="clase1/index.html" class="btn">
+                        Acceder a la clase <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
-                <a href="clase1/index.html" class="btn">Acceder a la Clase</a>
+
+                <div class="card" data-keywords="comprensión fluidez sonidos pronunciación describir personas artículos" style="--delay: 0.15s">
+                    <div>
+                        <div class="card-top">
+                            <span class="class-number">CLASE 02</span>
+                            <span class="class-icon"><i class="fa-solid fa-comments"></i></span>
+                        </div>
+                        <div class="card-content">
+                            <h2>Comprensión y Fluidez</h2>
+                            <p>Práctica de sonidos "Ñ" y "RR", cómo describir personas y uso de los artículos EL / LA.</p>
+                            <div class="tags">
+                                <span class="tag">Pronunciación</span>
+                                <span class="tag">Vocabulario</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="clase2/index.html" class="btn">
+                        Acceder a la clase <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="card coming-soon" data-keywords="próxima clase futura" style="--delay: 0.25s">
+                    <div>
+                        <div class="card-top">
+                            <span class="class-number">CLASE 03</span>
+                            <span class="class-icon"><i class="fa-solid fa-hourglass-half"></i></span>
+                        </div>
+                        <div class="card-content">
+                            <h2>Próxima clase</h2>
+                            <p>Este espacio se habilitará pronto con nuevo material y actividades.</p>
+                            <div class="tags">
+                                <span class="tag">Próximamente</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn" aria-disabled="true">
+                        Disponible pronto <i class="fa-solid fa-lock"></i>
+                    </a>
+                </div>
+
             </div>
 
-            <div class="card">
-                <div class="card-content">
-                    <h2>Clase 2: Comprensión y Fluidez</h2>
-                    <p>Sonidos "Ñ"  Y "RR", describir personas, artículos EL/LA </p>
-                </div>
-                <a href="clase2/index.html" class="btn">Acceder a la Clase</a>
+            <div class="empty-state" id="emptyState">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                No encontramos una clase con ese nombre. Prueba con otra palabra.
             </div>
-
         </main>
 
         <footer>
-            <p>&copy; 2026 Aguirre English Studio. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Aguirre English Studio. Hecho con <span class="heart">&#9825;</span> para nuestros estudiantes.</p>
         </footer>
     </div>
+
+    <script>
+        // Modo lectura cómoda (persistente en la sesión)
+        const comfortToggle = document.getElementById('comfortToggle');
+        const body = document.body;
+
+        const savedComfort = sessionStorage ? null : null; // sin uso de storage persistente entre sesiones
+
+        comfortToggle.addEventListener('click', () => {
+            const isActive = body.classList.toggle('comfort-mode');
+            comfortToggle.classList.toggle('active', isActive);
+            comfortToggle.setAttribute('aria-pressed', isActive);
+        });
+
+        // Buscador en vivo de clases
+        const searchInput = document.getElementById('searchInput');
+        const cards = Array.from(document.querySelectorAll('#classGrid .card'));
+        const emptyState = document.getElementById('emptyState');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const title = card.querySelector('h2').textContent.toLowerCase();
+                const keywords = (card.dataset.keywords || '').toLowerCase();
+                const matches = title.includes(query) || keywords.includes(query);
+
+                card.style.display = matches ? '' : 'none';
+                if (matches) visibleCount++;
+            });
+
+            emptyState.classList.toggle('visible', visibleCount === 0);
+        });
+    </script>
 
 </body>
 </html>
