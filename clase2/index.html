@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Español en Acción · Clase 02 – Aguirre Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght=400;600;700&family=Poppins:wght=700&display=swap" rel="stylesheet">
+    <style>
+        /* ─── RESET & BASE ─────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #cbd5e1;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            font-family: 'Lexend', sans-serif;
+            overflow: hidden;
+        }
+
+        /* ─── SLIDE SHELL ──────────────────────────────────────── */
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: #fff9e6;
+            display: none;
+            flex-direction: column;
+            padding: 36px 56px 90px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,.22);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .slide.active { display: flex; }
+
+        /* ─── TYPOGRAPHY ───────────────────────────────────────── */
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 44px;
+            font-weight: 700;
+            color: #1e3a8a;
+            border-left: 12px solid #d97706;
+            padding-left: 18px;
+            margin-bottom: 18px;
+            line-height: 1.15;
+        }
+        .sub { font-size: 20px; color: #475569; font-weight: 600; margin-bottom: 10px; }
+        p, li { font-size: 22px; color: #1e293b; line-height: 1.5; }
+
+        /* ─── PILLS & HIGHLIGHTS ───────────────────────────────── */
+        .pill { padding: 6px 16px; border-radius: 8px; font-weight: 700; display: inline-block; margin: 4px; font-size: 22px; }
+        .p-blue  { background: #dbeafe; color: #1e40af; }
+        .p-pink  { background: #fce7f3; color: #9d174d; }
+        .p-green { background: #dcfce7; color: #14532d; }
+        .p-amber { background: #fef3c7; color: #92400e; }
+        .p-red   { background: #fee2e2; color: #991b1b; }
+        .under { text-decoration: underline; text-decoration-thickness: 3px; }
+
+        /* ─── GRID CARDS ───────────────────────────────────────── */
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; }
+        .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; flex: 1; }
+        .card {
+            background: white;
+            padding: 18px 20px;
+            border-radius: 18px;
+            border-top: 6px solid #1e3a8a;
+            box-shadow: 0 4px 10px rgba(0,0,0,.06);
+        }
+        .card h3 { font-size: 20px; color: #1e293b; margin-bottom: 8px; }
+        .card p  { font-size: 17px; color: #475569; }
+
+        /* ─── INTERACTIVE ZONE ─────────────────────────────────── */
+        .iz {
+            background: #0f172a;
+            border-radius: 26px;
+            padding: 22px 28px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+        .iz-big   { font-size: 68px; color: #fbbf24; font-weight: 700; }
+        .iz-label { font-size: 22px; color: #94a3b8; font-weight: 600; }
+
+        /* ─── BUTTONS ──────────────────────────────────────────── */
+        .btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 12px 26px;
+            font-size: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Lexend', sans-serif;
+            transition: background .2s, transform .15s;
+        }
+        .btn:hover { background: #2563eb; transform: translateY(-2px); }
+        .btn-reveal { background: #059669; }
+        .btn-reveal:hover { background: #10b981; }
+        .btn-abs { position: absolute; top: 16px; right: 22px; }
+
+        /* ─── ANSWER BOX ───────────────────────────────────────── */
+        .ans-box {
+            background: #f0fdf4;
+            color: #14532d;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 19px;
+            font-weight: 700;
+            width: 100%;
+            border: 3px dashed #16a34a;
+            display: none;
+            text-align: center;
+        }
+
+        /* ─── SCAFFOLD STRIP ───────────────────────────────────── */
+        .scaffold {
+            background: #eff6ff;
+            border-left: 8px solid #1e3a8a;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 19px;
+            color: #1e3a8a;
+            line-height: 1.7;
+        }
+        .scaffold strong { color: #d97706; }
+
+        /* ─── SPEAK BADGE ──────────────────────────────────────── */
+        .speak-badge {
+            display: inline-block;
+            background: #d97706;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 4px 12px;
+            margin-bottom: 8px;
+            letter-spacing: .5px;
+        }
+
+        /* ─── READING TEXT ─────────────────────────────────────── */
+        .reading-box {
+            background: white;
+            border-radius: 18px;
+            padding: 22px 26px;
+            border-left: 10px solid #1e3a8a;
+            box-shadow: 0 4px 14 rgba(0,0,0,.07);
+            font-size: 20px;
+            line-height: 1.8;
+            color: #1e293b;
+            flex: 1;
+            overflow-y: auto;
+        }
+        .reading-box em { color: #1e3a8a; font-style: normal; font-weight: 700; }
+        .reading-q { background: #fef3c7; border-radius: 10px; padding: 10px 16px; font-size: 18px; color: #92400e; margin-top: 6px; font-weight: 600; }
+
+        /* ─── PRONUNCIATION PAIR ───────────────────────────────── */
+        .pair-row { display: flex; gap: 16px; align-items: stretch; justify-content: center; width: 100%; }
+        .pair-box {
+            flex: 1;
+            border-radius: 18px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .pair-pt { background: #dbeafe; }
+        .pair-es { background: #fce7f3; }
+        .pair-flag { font-size: 34px; }
+        .pair-word { font-size: 42px; font-weight: 700; color: #1e293b; }
+        .pair-sound { font-size: 19px; color: #475569; font-weight: 600; font-style: italic; }
+
+        /* ─── GENDER SLOTS ─────────────────────────────────────── */
+        .slots { display: flex; gap: 18px; justify-content: center; width: 100%; }
+        .slot {
+            background: #1e293b;
+            border: 2px solid #475569;
+            border-radius: 16px;
+            width: 200px;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 44px;
+            color: white;
+        }
+        .slot span { font-size: 18px; color: #cbd5e1; margin-top: 4px; font-weight: 600; }
+
+        /* ─── FOOTER NAV ───────────────────────────────────────── */
+        .nav {
+            position: absolute;
+            bottom: 22px;
+            left: 56px;
+            right: 56px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 12px;
+            background: #fff9e6;
+            z-index: 10;
+        }
+        .nav-counter { font-weight: 700; color: #94a3b8; font-size: 17px; }
+        .nav-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 18px;
+            font-family: 'Lexend', sans-serif;
+            transition: background .18s, color .18s;
+        }
+        .nav-btn:hover:not(:disabled) { background: #1e3a8a; color: white; }
+        .nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+        /* ─── DIVIDER ACCENT ───────────────────────────────────── */
+        .accent-bar { width: 120px; height: 8px; background: #d97706; border-radius: 4px; margin: 22px auto; }
+
+        /* ─── PROGRESS BAR ─────────────────────────────────────── */
+        .progress-track {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 0 0 24px 24px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #d97706;
+            border-radius: 0 0 24px 24px;
+            transition: width .4s ease;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide active" id="s1" style="justify-content:center; align-items:center; text-align:center;">
+    <p style="font-size:20px; font-weight:700; color:#d97706; letter-spacing:2px; text-transform:uppercase;">Clase 02</p>
+    <h1 style="font-family:'Poppins',sans-serif; font-size:82px; color:#1e3a8a; line-height:1.1; margin-top:10px;">¡Vamos a hablar<br>más!</h1>
+    <div class="accent-bar"></div>
+    <p style="font-size:26px; color:#64748b; font-weight:600;">Sonidos · Descripción · Lectura</p>
+    <p style="margin-top:35px; font-weight:700; color:#1e3a8a; font-size:20px;">Aguirre Studio</p>
+    <div class="nav">
+        <span class="nav-counter">1 / 12</span>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog" style="width:8.3%"></div></div>
+</div>
+
+<div class="slide" id="s2">
+    <div class="slide-title">⚡ Charla Relámpago</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — Rompiendo el hielo</div>
+    <p style="margin-bottom:14px;">¡Hablemos un poco de la clase anterior de forma relajada! Gira el dado y responde con confianza.</p>
+
+    <div class="iz" style="background:#1e293b; gap:14px;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('r-ans')">👁️ Ver recordatorio</button>
+        <div style="margin-top:30px; text-align:center;">
+            <div class="iz-label" id="r-q-label">Tu pregunta de hoy es:</div>
+            <div class="iz-big" id="r-q" style="font-size:38px; line-height:1.4; max-width: 950px;">🎲</div>
+        </div>
+        <button class="btn" onclick="rollReview()">🎲 Girar Pregunta</button>
+        <div class="ans-box" id="r-ans" style="font-size:17px; text-align:left;"></div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">2 / 12</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:16.6%"></div></div>
+</div>
+
+<div class="slide" id="s3">
+    <div class="slide-title">🎙️ Gimnasia Fonética — Parte 2</div>
+    <p style="margin-bottom:12px;">En la Clase 01 vimos <b>L final</b> y <b>J/G</b>. Hoy practicamos dos diferencias críticas para hablantes de portugués.</p>
+    <div class="grid2" style="flex:1;">
+        <div class="card" style="border-top-color:#1e3a8a;">
+            <h3>🇧🇷→🇪🇸 La <span style="color:#1e3a8a;">Ñ</span> — un sonido nuevo</h3>
+            <p style="font-size:16px; color:#475569; margin-bottom:8px;">En portugués existe el <b>NH</b> (= mismo sonido). ¡Úsalo como puente!</p>
+            <div style="display:flex; gap:6px; flex-wrap:wrap; margin:8px 0;">
+                <span class="pill p-blue">ma<span class="under">ñ</span>a·na</span>
+                <span class="pill p-blue">espa<span class="under">ñ</span>ol</span>
+                <span class="pill p-blue">ba<span class="under">ñ</span>o</span>
+            </div>
+            <p style="font-size:15px; font-style:italic; background:#f1f5f9; padding:8px; border-radius:8px;">
+                "Mañana, España tiene un cañón muy bonito."
+            </p>
+        </div>
+        <div class="card" style="border-top-color:#d97706;">
+            <h3>🔊 La <span style="color:#d97706;">RR</span> — vibración múltiple</h3>
+            <p style="font-size:16px; color:#475569; margin-bottom:8px;">La <b>RR</b> vibra varias veces. La <b>R</b> simple vibra solo una vez.</p>
+            <div style="display:flex; gap:6px; flex-wrap:wrap; margin:8px 0;">
+                <span class="pill p-amber">pe<span class="under">r</span>o</span>
+                <span class="pill p-amber">pe<span class="under">rr</span>o</span>
+                <span class="pill p-amber"><span class="under">r</span>ío</span>
+            </div>
+            <p style="font-size:15px; font-style:italic; background:#f1f5f9; padding:8px; border-radius:8px;">
+                "El perro corre por el río en la tarde."
+            </p>
+        </div>
+    </div>
+    <div style="margin-top:10px;" class="scaffold">
+        <strong>📌 Puente portugués–español:</strong> NH (porto) → Ñ (es.) &nbsp;|&nbsp; R simple (porto) → R suave (es.) &nbsp;|&nbsp; RR (es.) = energía extra en la lengua
+    </div>
+    <div class="nav">
+        <span class="nav-counter">3 / 12</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:25%"></div></div>
+</div>
+
+<div class="slide" id="s4">
+    <div class="slide-title">👂 ¿Pero o Perro? — Pares Mínimos</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — repite y diferencia</div>
+    <p style="margin-bottom:12px;">El profesor dice una palabra. Ustedes repiten <b>y</b> señalan si es R simple o RR doble.</p>
+
+    <div class="iz" style="background:#1e293b;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('pair-ans')">👁️ Revelar</button>
+        <div class="pair-row" style="margin-top:20px;">
+            <div class="pair-box pair-pt">
+                <div class="pair-flag">🔹 R suave</div>
+                <div class="pair-word" id="pair-soft">pero</div>
+                <div class="pair-sound" id="pair-soft-ipa">/ˈpe.ɾo/</div>
+            </div>
+            <div style="font-size:50px; display:flex; align-items:center; color:#fbbf24;">⟷</div>
+            <div class="pair-box pair-es">
+                <div class="pair-flag">🔸 RR fuerte</div>
+                <div class="pair-word" id="pair-hard">perro</div>
+                <div class="pair-sound" id="pair-hard-ipa">/ˈpe.ro/</div>
+            </div>
+        </div>
+        <button class="btn" onclick="rollPairs()" style="margin-top:8px;">🎲 Nuevo Par</button>
+        <div class="ans-box" id="pair-ans" style="font-size:17px;"></div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">4 / 12</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:33.3%"></div></div>
+</div>
+
+<div class="slide" id="s5">
+    <div class="slide-title">🧍 ¿Cómo es? — Describir Personas</div>
+    <p style="margin-bottom:10px;">Para describir a alguien en español usamos <b>ES + adjetivo</b>.</p>
+    <div class="grid2" style="flex:1; gap:12px;">
+        <div class="card" style="border-top-color:#059669;">
+            <h3 style="color:#059669;">🟢 Adjetivos físicos</h3>
+            <p style="font-size:17px; line-height:2.0;">
+                <span class="pill p-green">alto / alta</span>
+                <span class="pill p-green">bajo / baja</span>
+                <span class="pill p-green">delgado / delgada</span>
+                <span class="pill p-green">moreno / morena</span>
+                <span class="pill p-green">rubio / rubia</span>
+            </p>
+        </div>
+        <div class="card" style="border-top-color:#3b82f6;">
+            <h3 style="color:#3b82f6;">🔵 Adjetivos de personalidad</h3>
+            <p style="font-size:17px; line-height:2.0;">
+                <span class="pill p-blue">simpático / simpática</span>
+                <span class="pill p-blue">tímido / tímida</span>
+                <span class="pill p-blue">trabajador / trabajadora</span>
+                <span class="pill p-blue">divertido / divertida</span>
+            </p>
+        </div>
+        <div class="card" style="border-top-color:#d97706; grid-column: 1 / -1;">
+            <h3 style="color:#d97706;">⚡ Concordancia — ¡ojo con el género!</h3>
+            <p style="font-size:17px; line-height:1.8;">
+                ✅ Él es alt<b>o</b>. / Ella es alt<b>a</b>.<br>
+                ✅ Él es trabajad<b>or</b>. / Ella es trabajad<b>ora</b>.<br>
+                ❌ <span style="text-decoration:line-through; color:#991b1b;">Ella es alto.</span>
+            </p>
+        </div>
+    </div>
+    <div class="nav">
+        <span class="nav-counter">5 / 12</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:41.6%"></div></div>
+</div>
+
+<div class="slide" id="s6">
+    <div class="slide-title">🎯 Reto: ¿Quién es?</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — 2 minutos</div>
+    <p style="margin-bottom:12px;">El dado muestra una persona famosa. Descríbela usando el modelo de abajo. Los demás adivinan.</p>
+
+    <div class="iz" style="background:#1e293b; gap:14px;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('desc-hint')">💡 Ver frases de ayuda</button>
+        <div style="text-align:center; margin-top:30px;">
+            <div class="iz-label">¿Quién es esta persona?</div>
+            <div class="iz-big" id="desc-person" style="font-size:52px;">🎲</div>
+        </div>
+        <button class="btn" onclick="rollPerson()">🎲 Nueva Persona</button>
+        <div class="ans-box" id="desc-hint" style="text-align:left; font-size:17px; color:#1e3a8a; background:#eff6ff; border-color:#3b82f6;"></div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Modelo:</strong> "Es un/una [profesión]. Es [adjetivo físico] y [adjetivo personalidad]. Trabaja en / vive en…"
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">6 / 12</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
+</div>
+
+<div class="slide" id="s7">
+    <div class="slide-title">🔬 Artículos — Casos Especiales</div>
+    <p style="margin-bottom:12px;">En la Clase 01 practicamos EL/LA. Hoy vemos casos que <b>confunden más</b> a los hablantes de portugués.</p>
+    <div class="iz" style="background:#334155;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('art2-ans')">👁️ Revelar Respuestas</button>
+        <div class="slots" style="margin-top:20px;">
+            <div class="slot" id="a1">🖐️ <span id="a1l">Mano</span></div>
+            <div class="slot" id="a2">📻 <span id="a2l">Radio</span></div>
+            <div class="slot" id="a3">🌅 <span id="a3l">Día</span></div>
+        </div>
+        <button class="btn" onclick="rollArticles2()">🎲 Nuevas Palabras</button>
+        <div class="ans-box" id="art2-ans" style="text-align:center;"></div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Regla:</strong> Palabras en <b>-ma</b> / <b>-pa</b> / <b>-ta</b> de origen griego son <b>masculinas</b> (el problema, el mapa, el planeta). &nbsp;|&nbsp; <b>La mano</b> es femenina aunque termina en <b>-o</b>.
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">7 / 12</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:58.3%"></div></div>
+</div>
+
+<div class="slide" id="s8">
+    <div class="slide-title">📖 Lectura: "Un día en Buenos Aires"</div>
+    <div class="speak-badge">📖 ACTIVIDAD DE LECTURA — voz alta por turnos</div>
+    <div class="reading-box">
+        <p>
+            <em>Lucía</em> es argentina. Ella es <em>alta</em>, <em>morena</em> y muy <em>simpática</em>.
+            Trabaja en <em>una oficina</em> en el centro de <em>Buenos Aires</em>.
+        </p>
+        <p style="margin-top:14px;">
+            Cada mañana, Lucía toma <em>un café</em> y come <em>medialunas</em> — ¡es como el
+            <em>croissant</em> de Argentina! Después va en <em>el metro</em> a su trabajo.
+            En la oficina, ella habla por <em>el teléfono</em>, escribe correos y ayuda
+            a sus colegas.
+        </p>
+        <p style="margin-top:14px;">
+            Por <em>la tarde</em>, Lucía camina por <em>el parque</em> con su perro.
+            El perro se llama <em>Rulo</em> — tiene el pelo <em>rizado</em> y es muy <em>juguetón</em>.
+            Al final del día, Lucía dice: <em>"¡Qué buen día!"</em>
+        </p>
+    </div>
+    <div class="nav">
+        <span class="nav-counter">8 / 12</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:66.6%"></div></div>
+</div>
+
+<div class="slide" id="s9">
+    <div class="slide-title">📝 Desafío: El fin de semana de Lucía</div>
+    <div class="speak-badge">🔥 RETO DE ARTÍCULOS — Completa en voz alta</div>
+    <p style="margin-bottom:12px;">Decidan en equipo si los espacios en blanco corresponden a <b>EL</b> o <b>LA</b>. ¡Cuidado con las trampas!</p>
+    
+    <div class="reading-box" style="border-left-color: #d97706; margin-bottom: 15px; flex: unset; min-height: 250px;">
+        <p>
+            El sábado, Lucía no va a la oficina. Ella prefiere ir a la playa. 
+            Mete en su bolso ______ <b>mapa</b> de la región, ______ <b>sal</b> para el almuerzo y se pone un poco de crema en ______ <b>nariz</b> para protegerse del sol.
+        </p>
+        <p style="margin-top: 14px;">
+            Durante el viaje, cruza ______ <b>puente</b> más largo de la ciudad. Ella piensa que ______ <b>viaje</b> es hermoso, aunque ______ <b>miel</b> que compró para el camino se derramó un poco. ¡Qué ______ <b>problema</b>!
+        </p>
+    </div>
+
+    <div class="iz" style="background:#1e293b; padding: 15px 28px; height: auto; flex: 1;">
+        <button class="btn btn-reveal" onclick="toggleAns('text-art-ans')">👁️ Revelar Solución del Texto</button>
+        <div class="ans-box" id="text-art-ans" style="margin-top: 10px; font-size: 18px;">
+            <span class="pill p-blue">EL mapa</span> · 
+            <span class="pill p-pink">LA sal</span> · 
+            <span class="pill p-pink">LA nariz</span> · 
+            <span class="pill p-blue">EL puente</span> · 
+            <span class="pill p-blue">EL viaje</span> · 
+            <span class="pill p-pink">LA miel</span> · 
+            <span class="pill p-blue">EL problema</span>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">9 / 12</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:75%"></div></div>
+</div>
+
+<div class="slide" id="s10">
+    <div class="slide-title">🧠 Comprensión — Hablemos</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — responde en español</div>
+
+    <div class="iz" style="background:#1e293b; gap:14px;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('comp-ans')">💡 Ver ayuda</button>
+        <div style="text-align:center; margin-top:25px;">
+            <div class="iz-label">Pregunta sobre el texto:</div>
+            <div class="iz-big" id="comp-q" style="font-size:36px; line-height:1.4; max-width:900px;">🎲</div>
+        </div>
+        <button class="btn" onclick="rollComp()">🎲 Nueva Pregunta</button>
+        <div class="ans-box" id="comp-ans" style="font-size:17px; text-align:left;"></div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Cues para responder:</strong> &nbsp;"Lucía es…" &nbsp;|&nbsp; "Ella trabaja en…" &nbsp;|&nbsp; "Por la mañana, ella…" &nbsp;|&nbsp; "El perro se llama…"
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">10 / 12</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:83.3%"></div></div>
+</div>
+
+<div class="slide" id="s11">
+    <div class="slide-title">⚠️ Falsos Amigos — Ronda 2</div>
+    <p style="margin-bottom:10px;">¡Cuidado! Estas palabras parecen portuguesas pero tienen otro significado en español.</p>
+    <div class="iz" style="background:#1e293b;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('fa2-ans')">👁️ Revelar Significado</button>
+        <div style="margin-top:30px; text-align:center;">
+            <div class="iz-label">Palabra en español:</div>
+            <div class="iz-big" id="fa2-word" style="font-size:75px;">EMBARAZADA</div>
+        </div>
+        <button class="btn" onclick="rollFA2()">🎲 Siguiente Palabra</button>
+        <div class="ans-box" id="fa2-ans" style="text-align:left; font-size:17px;"></div>
+    </div>
+    <div class="nav">
+        <span class="nav-counter">11 / 12</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:91.6%"></div></div>
+</div>
+
+<div class="slide" id="s12" style="justify-content:center; align-items:center; text-align:center;">
+    <h2 style="font-family:'Poppins',sans-serif; font-size:80px; color:#1e3a8a; line-height:1.1;">¡Lo hicieron<br>muy bien!</h2>
+    <div class="accent-bar"></div>
+    <p style="font-size:26px; font-weight:700; color:#475569; margin-bottom:18px;">Resumen de hoy:</p>
+    <div style="display:flex; gap:12px; justify-content:center;">
+        <span class="pill p-blue" style="font-size:18px;">🎙️ Ñ y RR</span>
+        <span class="pill p-green" style="font-size:18px;">🧍 Describir personas</span>
+        <span class="pill p-amber" style="font-size:18px;">📖 Lectura e Integración</span>
+        <span class="pill p-pink" style="font-size:18px;">⚠️ Falsos amigos</span>
+    </div>
+    <p style="font-size:64px; margin-top:28px;">🌟 👏 🇧🇷</p>
+    <p style="margin-top:28px; font-weight:700; color:#1e3a8a; font-size:20px;">Aguirre Studio</p>
+    <div class="nav">
+        <span class="nav-counter">12 / 12</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" disabled>Fin 🎉</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+</div>
+
+<script>
+    const TOTAL = 12;
+    let cur = 1;
+
+    function go(n) {
+        document.getElementById('s' + cur).classList.remove('active');
+        cur = Math.max(1, Math.min(TOTAL, cur + n));
+        document.getElementById('s' + cur).classList.add('active');
+    }
+
+    function toggleAns(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    /* ── CHARLA RELÁMPAGO AMIGABLE (slide 2) ── */
+    const reviewQs = [
+        {
+            q: "Imagina que entras a una cafetería linda por la mañana... ☕ ¿Cómo le pedirías tu café al camarero de forma educada?",
+            a: '<b>Estructura sugerida:</b> [Saludo] + "Quisiera un café, por favor."<br><i>Ej: "¡Buenos días! Quisiera un café, por favor."</i>'
+        },
+        {
+            q: "¡Pensemos rápido! ¿Qué artículo (El / La) le pones a estas palabras de la clase anterior?: 🌳 Árbol / 🪑 Mesa / ✈️ Viaje",
+            a: '<b>Respuestas correctas:</b> <u>EL</u> árbol · <u>LA</u> mesa · <u>EL</u> viaje.'
+        },
+        {
+            q: "Cuéntale al grupo: ¿A qué te dedicas habitualmente? 💼 (¡Recuerda el secreto de no usar 'un' o 'una'!)",
+            a: '<b>Regla de oro:</b> Decimos "Soy [profesión]" directamente.<br><i>Ej: "Soy ingeniero" / "Soy abogada" (¡Nunca "Soy un ingeniero"!).</i>'
+        },
+        {
+            q: "Hagamos un sonido rasposo... 🤭 ¿Cómo pronuncias 'Jugo' y 'Guante' sin que suene suave como en portugués?",
+            a: '<b>Tip fonético:</b> La "J" y la "G" (ante e/i) raspan la garganta con energía.<br>Jugo = /xugo/ · Gente = /xente/.'
+        },
+        {
+            q: "A veces en portugués cerramos el aire por la nariz al decir vocales... 👃 ¿Cómo dirías de forma limpia y abierta: 'Mañana tengo una reunión'?",
+            a: '<b>Evita la nasalización:</b> En español las vocales son 100% puras y abiertas. No decimos "Mañã" ni "Reuniõ".'
+        }
+    ];
+
+    function rollReview() {
+        const item = reviewQs[Math.floor(Math.random() * reviewQs.length)];
+        document.getElementById('r-q').textContent = item.q;
+        document.getElementById('r-ans').innerHTML = item.a;
+        document.getElementById('r-ans').style.display = 'none';
+    }
+    rollReview();
+
+    /* ── PARES MÍNIMOS R/RR (slide 4) ── */
+    const minPairs = [
+        { soft:'pero',  softIpa:'/ˈpe.ɾo/ (mas, porém)',  hard:'perro', hardIpa:'/ˈpe.ro/ (cachorro)', tip:'La RR vibra más tiempo que la R.' },
+        { soft:'caro',  softIpa:'/ˈka.ɾo/ (caro, querido)',hard:'carro', hardIpa:'/ˈka.ro/ (automóvil)',  tip:'En "carro" sientes la lengua vibrar varias veces.' },
+        { soft:'moro',  softIpa:'/ˈmo.ɾo/ (nombre propio)',hard:'morro', hardIpa:'/ˈmo.ro/ (cerro, monte)', tip:'Prueba sostener la RR un segundo extra.' },
+        { soft:'para',  softIpa:'/ˈpa.ɾa/ (para)',          hard:'parra', hardIpa:'/ˈpa.ra/ (vid, planta de uva)', tip:'¡Solo la vibración cambia el significado!' },
+        { soft:'ahora', softIpa:'/aˈo.ɾa/ (ahora)',         hard:'ahorra',hardIpa:'/aˈo.ra/ (ahorrar dinero)',  tip:'En "ahorra" sientes más energía en la lengua.' },
+    ];
+
+    function rollPairs() {
+        const p = minPairs[Math.floor(Math.random() * minPairs.length)];
+        document.getElementById('pair-soft').textContent      = p.soft;
+        document.getElementById('pair-soft-ipa').textContent  = p.softIpa;
+        document.getElementById('pair-hard').textContent      = p.hard;
+        document.getElementById('pair-hard-ipa').textContent  = p.hardIpa;
+        document.getElementById('pair-ans').innerHTML = '<b>💡 Tip:</b> ' + p.tip;
+        document.getElementById('pair-ans').style.display = 'none';
+    }
+    rollPairs();
+
+    /* ── DESCRIBE A ALGUIEN (slide 6) ── */
+    const persons = [
+        {
+            name: '⚽ Lionel Messi',
+            hint: 'Es un futbolista argentino. Es bajo y delgado. Es muy trabajador y talentoso. Juega en el MLS en Estados Unidos.'
+        },
+        {
+            name: '🎤 Shakira',
+            hint: 'Es una cantante colombiana. Es morena y delgada. Es muy famosa y talentosa. Vive entre España y Colombia.'
+        },
+        {
+            name: '🎬 Penélope Cruz',
+            hint: 'Es una actriz española. Es morena y elegante. Es muy simpática y trabajadora. Trabaja en Hollywood y España.'
+        },
+        {
+            name: '⚽ Neymar Jr.',
+            hint: 'Es un futbolista brasileño. Es moreno y delgado. Es muy rápido y divertido. Es famoso en todo el mundo.'
+        },
+        {
+            name: '🎵 Maluma',
+            hint: 'Es un cantante colombiano. Es moreno y alto. Es muy carismático y simpático. Canta reggaetón y pop.'
+        },
+        {
+            name: '🎤 Bad Bunny',
+            hint: 'Es un cantante puertorriqueño. Tiene pelo oscuro y es alto. Es muy creativo y exitoso. Canta en español.'
+        }
+    ];
+
+    function rollPerson() {
+        const p = persons[Math.floor(Math.random() * persons.length)];
+        document.getElementById('desc-person').textContent = p.name;
+        document.getElementById('desc-hint').innerHTML = '<b>💡 Ayuda:</b> ' + p.hint;
+        document.getElementById('desc-hint').style.display = 'none';
+    }
+    rollPerson();
+
+    /* ── ARTÍCULOS ESPECIALES (slide 7) ── */
+    const artItems2 = [
+        { e:'🖐️', l:'Mano',     a:'<span class="pill p-pink">LA Mano</span>', note:'¡Excepción! Termina en -o pero es FEMENINO.' },
+        { e:'📻', l:'Radio',    a:'<span class="pill p-blue">LA Radio</span>', note:'Femenino en España. En Latinoamérica también.' },
+        { e:'🌅', l:'Día',      a:'<span class="pill p-blue">EL Día</span>',   note:'Termina en -a pero es MASCULINO.' },
+        { e:'🗺️', l:'Mapa',     a:'<span class="pill p-blue">EL Mapa</span>',  note:'Origen griego (-ma → masculino).' },
+        { e:'❓', l:'Problema', a:'<span class="pill p-blue">EL Problema</span>',note:'Origen griego (-ma → masculino). ¡Muy común en español!' },
+        { e:'🌊', l:'Mar',      a:'<span class="pill p-blue">EL Mar</span>',   note:'Masculino en general, aunque la poesía usa "la mar".' },
+        { e:'🪐', l:'Planeta',  a:'<span class="pill p-blue">EL Planeta</span>',note:'Origen griego (-ta → masculino).' },
+        { e:'📝', l:'Tema',     a:'<span class="pill p-blue">EL Tema</span>',  note:'Origen griego (-ma → masculino).' },
+        { e:'🏳️', l:'Bandera',  a:'<span class="pill p-pink">LA Bandera</span>',note:'Termina en -a → femenino. ¡Caso regular!' },
+        { e:'🚂', l:'Tren',     a:'<span class="pill p-blue">EL Tren</span>',  note:'Masculino. Termina en consonante.' },
+    ];
+
+    function rollArticles2() {
+        document.getElementById('art2-ans').style.display = 'none';
+        let used = [], result = '';
+        const ids = ['a1','a2','a3'], lbls = ['a1l','a2l','a3l'];
+        for (let i = 0; i < 3; i++) {
+            let r;
+            do { r = Math.floor(Math.random() * artItems2.length); } while (used.includes(r));
+            used.push(r);
+            const it = artItems2[r];
+            document.getElementById(ids[i]).childNodes[0].textContent = it.e + ' ';
+            document.getElementById(lbls[i]).textContent = it.l;
+            result += `${it.a} <span style="font-size:15px; color:#475569;">(${it.note})</span><br>`;
+        }
+        document.getElementById('art2-ans').innerHTML = result;
+        document.getElementById('art2-ans').style.textAlign = 'left';
+    }
+    rollArticles2();
+
+    /* ── COMPRENSIÓN LECTORA (slide 10) ── */
+    const compQs = [
+        {
+            q: '¿Cómo es Lucía físicamente?',
+            a: '<b>Respuesta:</b> Lucía es alta y morena.<br><i>Cue: "Ella es [adjetivo] y [adjetivo]."</i>'
+        },
+        {
+            q: '¿Qué come Lucía por la mañana?',
+            a: '<b>Respuesta:</b> Come una medialuna y toma un café.<br><i>Cue: "Por la mañana, ella come… y toma…"</i>'
+        },
+        {
+            q: '¿Dónde trabaja Lucía?',
+            a: '<b>Respuesta:</b> Trabaja en una oficina en el centro de Buenos Aires.<br><i>Cue: "Ella trabaja en…"</i>'
+        },
+        {
+            q: '¿Cómo se llama el perro de Lucía? ¿Cómo es?',
+            a: '<b>Respuesta:</b> Se llama Rulo. Es rizado y juguetón.<br><i>Cue: "El perro se llama… Es… y…"</i>'
+        },
+        {
+            q: '¿Qué hace Lucía por la tarde?',
+            a: '<b>Respuesta:</b> Camina por el parque con su perro.<br><i>Cue: "Por la tarde, ella…"</i>'
+        },
+        {
+            q: '¿En qué ciudad vive Lucía?',
+            a: '<b>Respuesta:</b> Vive en Buenos Aires, Argentina.<br><i>Cue: "Ella vive en…"</i>'
+        }
+    ];
+
+    function rollComp() {
+        const q = compQs[Math.floor(Math.random() * compQs.length)];
+        document.getElementById('comp-q').textContent = q.q;
+        document.getElementById('comp-ans').innerHTML = q.a;
+        document.getElementById('comp-ans').style.display = 'none';
+    }
+    rollComp();
+
+    /* ── FALSOS AMIGOS RONDA 2 (slide 11 - Borracha eliminada y reemplazada) ── */
+    const fa2 = [
+        {
+            w: 'EMBARAZADA',
+            a: '<b>Significa:</b> Estar en estado de gestación / grávida.<br><i>Ej: "María está embarazada; el bebé nace en julio."</i><br><span style="color:#991b1b;">⚠️ NO significa "avergonzada" (en español se dice: avergonzada / con vergüenza).</span>'
+        },
+        {
+            w: 'CUELLO',
+            a: '<b>Significa:</b> La parte del cuerpo que une la cabeza con el tronco / pescoço.<br><i>Ej: "Me duele el cuello por dormir en una mala posición."</i><br><span style="color:#991b1b;">⚠️ NO significa "coelho" (el animal de orejas largas se llama conejo).</span>'
+        },
+        {
+            w: 'EXQUISITO',
+            a: '<b>Significa:</b> Muy rico, delicioso o de gran calidad / requintado.<br><i>Ej: "Este restaurante tiene una comida exquisita."</i><br><span style="color:#1e3a8a;">✅ En este caso el significado es similar al PT \'esquisito\' formal, no al uso común despectivo.</span>'
+        },
+        {
+            w: 'SALADA',
+            a: '<b>Significa:</b> Que tiene mucha sal o exceso de condimento salado / salgada.<br><i>Ej: "La sopa quedó muy salada, no puedo tomarla."</i><br><span style="color:#991b1b;">⚠️ NO significa "salada de alface" (el plato de verduras se llama ensalada).</span>'
+        },
+        {
+            w: 'LARGO',
+            a: '<b>Significa:</b> De gran longitud, extenso en el espacio / longo, comprido.<br><i>Ej: "Este camino es muy largo; tardaremos 2 horas."</i><br><span style="color:#991b1b;">⚠️ NO significa "ancho" (eso es ancho).</span>'
+        },
+        {
+            w: 'PEGAMENTO',
+            a: '<b>Significa:</b> Sustancia líquida o pastosa para unir dos superficies / cola.<br><i>Ej: "Necesito pegamento para arreglar mi cuaderno roto."</i><br><span style="color:#991b1b;">⚠️ NO es ningún tipo de insulto o golpe.</span>'
+        },
+        {
+            w: 'VARA',
+            a: '<b>Significa:</b> Palo largo y delgado de madera u otro material / bastão, vareta.<br><i>Ej: "El mago usa una vara mágica en su espectáculo."</i><br><span style="color:#991b1b;">⚠️ NO significa "vara de pescar" en portugués brasileño común (se suele decir caña de pescar).</span>'
+        }
+    ];
+
+    function rollFA2() {
+        const t = fa2[Math.floor(Math.random() * fa2.length)];
+        document.getElementById('fa2-word').textContent = t.w;
+        document.getElementById('fa2-ans').innerHTML = t.a;
+        document.getElementById('fa2-ans').style.display = 'none';
+    }
+    rollFA2();
+</script>
+</body>
+</html>
