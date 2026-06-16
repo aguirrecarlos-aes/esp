@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Español en Acción · Clase 03 – Aguirre Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* ─── RESET & BASE ─────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #cbd5e1;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            font-family: 'Lexend', sans-serif;
+            overflow: hidden;
+        }
+
+        /* ─── SLIDE SHELL ──────────────────────────────────────── */
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: #fff9e6;
+            display: none;
+            flex-direction: column;
+            padding: 36px 56px 90px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,.22);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .slide.active { display: flex; }
+
+        /* ─── TYPOGRAPHY ───────────────────────────────────────── */
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #1e3a8a;
+            border-left: 12px solid #d97706;
+            padding-left: 18px;
+            margin-bottom: 16px;
+            line-height: 1.15;
+        }
+        .sub { font-size: 20px; color: #475569; font-weight: 600; margin-bottom: 10px; }
+        p, li { font-size: 22px; color: #1e293b; line-height: 1.5; }
+
+        /* ─── PILLS & HIGHLIGHTS ───────────────────────────────── */
+        .pill { padding: 6px 16px; border-radius: 8px; font-weight: 700; display: inline-block; margin: 4px; font-size: 20px; }
+        .p-blue  { background: #dbeafe; color: #1e40af; }
+        .p-pink  { background: #fce7f3; color: #9d174d; }
+        .p-green { background: #dcfce7; color: #14532d; }
+        .p-amber { background: #fef3c7; color: #92400e; }
+        .p-red   { background: #fee2e2; color: #991b1b; }
+        .p-purple{ background: #ede9fe; color: #5b21b6; }
+        .under { text-decoration: underline; text-decoration-thickness: 3px; }
+
+        /* ─── GRID CARDS ───────────────────────────────────────── */
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; }
+        .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; flex: 1; }
+        .card {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 18px;
+            border-top: 6px solid #1e3a8a;
+            box-shadow: 0 4px 10px rgba(0,0,0,.06);
+        }
+        .card h3 { font-size: 19px; color: #1e293b; margin-bottom: 8px; }
+        .card p  { font-size: 16px; color: #475569; }
+
+        /* ─── INTERACTIVE ZONE ─────────────────────────────────── */
+        .iz {
+            background: #0f172a;
+            border-radius: 26px;
+            padding: 22px 28px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+        .iz-big   { font-size: 68px; color: #fbbf24; font-weight: 700; }
+        .iz-label { font-size: 22px; color: #94a3b8; font-weight: 600; }
+
+        /* ─── BUTTONS ──────────────────────────────────────────── */
+        .btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 12px 26px;
+            font-size: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Lexend', sans-serif;
+            transition: background .2s, transform .15s;
+        }
+        .btn:hover { background: #2563eb; transform: translateY(-2px); }
+        .btn-reveal { background: #059669; }
+        .btn-reveal:hover { background: #10b981; }
+        .btn-abs { position: absolute; top: 16px; right: 22px; }
+
+        /* ─── ANSWER BOX ───────────────────────────────────────── */
+        .ans-box {
+            background: #f0fdf4;
+            color: #14532d;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 19px;
+            font-weight: 700;
+            width: 100%;
+            border: 3px dashed #16a34a;
+            display: none;
+            text-align: center;
+        }
+
+        /* ─── SCAFFOLD STRIP ───────────────────────────────────── */
+        .scaffold {
+            background: #eff6ff;
+            border-left: 8px solid #1e3a8a;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 19px;
+            color: #1e3a8a;
+            line-height: 1.7;
+        }
+        .scaffold strong { color: #d97706; }
+
+        /* ─── SPEAK BADGE ──────────────────────────────────────── */
+        .speak-badge {
+            display: inline-block;
+            background: #d97706;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 4px 12px;
+            margin-bottom: 8px;
+            letter-spacing: .5px;
+        }
+
+        /* ─── VERB TABLE ───────────────────────────────────────── */
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 19px;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,.08);
+        }
+        .verb-table thead tr { background: #1e3a8a; color: white; }
+        .verb-table thead th { padding: 12px 16px; text-align: left; font-size: 17px; }
+        .verb-table tbody tr:nth-child(even) { background: #f1f5f9; }
+        .verb-table tbody tr:nth-child(odd)  { background: white; }
+        .verb-table tbody td { padding: 10px 16px; color: #1e293b; }
+        .verb-table .hl { color: #1e3a8a; font-weight: 700; }
+        .verb-table .pt { color: #9d174d; font-size: 15px; }
+
+        /* ─── TIMELINE / ROUTINE ───────────────────────────────── */
+        .timeline {
+            display: flex;
+            gap: 0;
+            align-items: stretch;
+            flex: 1;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0,0,0,.08);
+        }
+        .tl-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 16px 10px;
+            border-right: 2px solid #e2e8f0;
+            background: white;
+            text-align: center;
+            gap: 6px;
+        }
+        .tl-item:last-child { border-right: none; }
+        .tl-item.active-tl { background: #1e3a8a; }
+        .tl-item.active-tl .tl-time,
+        .tl-item.active-tl .tl-verb,
+        .tl-item.active-tl .tl-pt { color: white !important; }
+        .tl-emoji { font-size: 30px; }
+        .tl-time  { font-size: 15px; color: #64748b; font-weight: 700; }
+        .tl-verb  { font-size: 18px; color: #1e293b; font-weight: 700; }
+        .tl-pt    { font-size: 13px; color: #94a3b8; }
+
+        /* ─── READING TEXT ─────────────────────────────────────── */
+        .reading-box {
+            background: white;
+            border-radius: 18px;
+            padding: 20px 26px;
+            border-left: 10px solid #1e3a8a;
+            box-shadow: 0 4px 14px rgba(0,0,0,.07);
+            font-size: 19px;
+            line-height: 1.85;
+            color: #1e293b;
+            flex: 1;
+            overflow-y: auto;
+        }
+        .reading-box em { color: #1e3a8a; font-style: normal; font-weight: 700; }
+        .reading-box .verb-hl { color: #059669; font-weight: 700; }
+        .reading-q { background: #fef3c7; border-radius: 10px; padding: 10px 16px; font-size: 18px; color: #92400e; margin-top: 6px; font-weight: 600; }
+
+        /* ─── WRITE ZONE ───────────────────────────────────────── */
+        .write-area {
+            width: 100%;
+            border: 3px solid #1e3a8a;
+            border-radius: 14px;
+            padding: 14px 18px;
+            font-size: 19px;
+            font-family: 'Lexend', sans-serif;
+            resize: none;
+            background: #f8fafc;
+            color: #1e293b;
+            outline: none;
+            transition: border-color .2s;
+        }
+        .write-area:focus { border-color: #d97706; }
+        .write-area::placeholder { color: #94a3b8; }
+
+        /* ─── FOOTER NAV ───────────────────────────────────────── */
+        .nav {
+            position: absolute;
+            bottom: 22px;
+            left: 56px;
+            right: 56px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 12px;
+            background: #fff9e6;
+            z-index: 10;
+        }
+        .nav-counter { font-weight: 700; color: #94a3b8; font-size: 17px; }
+        .nav-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 18px;
+            font-family: 'Lexend', sans-serif;
+            transition: background .18s, color .18s;
+        }
+        .nav-btn:hover:not(:disabled) { background: #1e3a8a; color: white; }
+        .nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+        /* ─── DIVIDER ACCENT ───────────────────────────────────── */
+        .accent-bar { width: 120px; height: 8px; background: #d97706; border-radius: 4px; margin: 22px auto; }
+
+        /* ─── PROGRESS BAR ─────────────────────────────────────── */
+        .progress-track {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 0 0 24px 24px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #d97706;
+            border-radius: 0 0 24px 24px;
+            transition: width .4s ease;
+        }
+
+        /* ─── CONJUGATION HIGHLIGHT ─────────────────────────────── */
+        .conj-ending { color: #d97706; font-weight: 900; }
+
+        /* ─── BLANK FILL ────────────────────────────────────────── */
+        .blank {
+            display: inline-block;
+            min-width: 90px;
+            border-bottom: 3px solid #1e3a8a;
+            margin: 0 4px;
+            font-weight: 700;
+            color: #1e3a8a;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 1 — PORTADA
+═══════════════════════════════════════════════════ -->
+<div class="slide active" id="s1" style="justify-content:center; align-items:center; text-align:center;">
+    <p style="font-size:20px; font-weight:700; color:#d97706; letter-spacing:2px; text-transform:uppercase;">Clase 03</p>
+    <h1 style="font-family:'Poppins',sans-serif; font-size:76px; color:#1e3a8a; line-height:1.1; margin-top:10px;">¿Qué haces<br>cada día?</h1>
+    <div class="accent-bar"></div>
+    <p style="font-size:24px; color:#64748b; font-weight:600;">Verbos -AR · Rutinas · Tu turno de hablar</p>
+    <p style="margin-top:35px; font-weight:700; color:#1e3a8a; font-size:20px;">Aguirre Studio</p>
+    <div class="nav">
+        <span class="nav-counter">1 / 13</span>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog" style="width:7.7%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 2 — CHARLA RELÁMPAGO (repaso Clase 02)
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s2">
+    <div class="slide-title">⚡ Charla Relámpago — Repaso</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — ¿Qué recuerdas de la clase anterior?</div>
+    <p style="margin-bottom:14px;">Gira la pregunta y responde con confianza. ¡Usa las palabras de la Clase 02!</p>
+
+    <div class="iz" style="background:#1e293b; gap:14px;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('r-ans')">👁️ Ver ayuda</button>
+        <div style="margin-top:30px; text-align:center;">
+            <div class="iz-label">Tu pregunta es:</div>
+            <div id="r-q" style="font-size:34px; line-height:1.5; max-width:900px; color:#fbbf24; font-weight:700; margin-top:10px;">🎲</div>
+        </div>
+        <button class="btn" onclick="rollReview()">🎲 Girar Pregunta</button>
+        <div class="ans-box" id="r-ans" style="font-size:17px; text-align:left;"></div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">2 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:15.4%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 3 — FONÉTICA: La S en español latinoamericano + Icebreaker + Trabalenguas
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s3">
+    <div class="slide-title">🎙️ Gimnasia Fonética — Calentando la voz</div>
+
+    <div class="grid2" style="flex:1; gap:14px;">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card" style="border-top-color:#1e3a8a;">
+                <h3>🧊 Icebreaker — Pregunta exprés</h3>
+                <p style="font-size:15px; color:#475569; margin-bottom:8px;">Antes de empezar, respondan en español en 20 segundos:</p>
+                <p style="font-size:17px; color:#1e3a8a; font-weight:700;" id="icebreaker-q">🎲 Presiona para ver la pregunta</p>
+                <button class="btn" onclick="rollIce()" style="margin-top:10px; padding:8px 18px; font-size:15px;">🎲 Cambiar pregunta</button>
+            </div>
+            <div class="card" style="border-top-color:#d97706;">
+                <h3>🔊 La S en español latinoamericano</h3>
+                <p style="font-size:15px; color:#475569; margin-bottom:8px;">En Chile y toda Latinoamérica, la <b>S siempre suena /s/</b>, igual en cualquier posición. No hay distinción con Z.</p>
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin:6px 0;">
+                    <span class="pill p-green">ca<span class="under">s</span>a ✅</span>
+                    <span class="pill p-green">me<span class="under">s</span>a ✅</span>
+                    <span class="pill p-green">ro<span class="under">s</span>a ✅</span>
+                    <span class="pill p-green">má<span class="under">s</span> ✅</span>
+                </div>
+                <p style="font-size:14px; background:#fef3c7; padding:8px; border-radius:8px; color:#92400e; margin-top:6px;">
+                    En portugués "casa" suena /kaza/. En español siempre es /kasa/.
+                </p>
+            </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card" style="border-top-color:#059669; flex:1;">
+                <h3>👅 Trabalenguas — repite 3 veces</h3>
+                <div id="tongue-twister" style="font-size:19px; color:#1e293b; font-weight:700; line-height:1.7; background:#f0fdf4; padding:12px; border-radius:10px; margin:8px 0;">
+                    "Seis sillas solas.<br>Rosa sube, Susana baja.<br>La mesa está sucia, la sala está seca."
+                </div>
+                <button class="btn btn-reveal" onclick="rollTwister()" style="padding:8px 18px; font-size:15px;">🎲 Otro trabalenguas</button>
+                <p style="font-size:14px; color:#475569; margin-top:8px;">Cada S = /s/. Pronuncia lento primero, luego más rápido.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Puente PT → ES:</strong> &nbsp;En portugués "mesa" → /meza/. En español siempre → /mesa/. &nbsp;|&nbsp; La S del español latinoamericano nunca vibra como Z.
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">3 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:23.1%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 4 — VERBOS -AR: INTRODUCCIÓN
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s4">
+    <div class="slide-title">🔑 Verbos -AR — El grupo más grande</div>
+    <p style="margin-bottom:10px;">En español, los verbos en infinitivo terminan en <b>-AR</b>, <b>-ER</b> o <b>-IR</b>. Hoy nos concentramos en los <b>verbos -AR</b>, que son la mayoría.</p>
+
+    <div class="grid2" style="flex:1; gap:12px;">
+        <div class="card" style="border-top-color:#1e3a8a;">
+            <h3>📋 Verbos -AR que ya usas</h3>
+            <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
+                <span class="pill p-blue">hablar 🗣️</span>
+                <span class="pill p-blue">trabajar 💼</span>
+                <span class="pill p-blue">caminar 🚶</span>
+                <span class="pill p-blue">escuchar 👂</span>
+                <span class="pill p-blue">tomar ☕</span>
+                <span class="pill p-blue">ayudar 🤝</span>
+                <span class="pill p-blue">llegar 🚪</span>
+                <span class="pill p-blue">usar 📱</span>
+            </div>
+            <p style="font-size:14px; margin-top:10px; color:#475569;">💡 ¡Muchos son parecidos al portugués!</p>
+        </div>
+        <div class="card" style="border-top-color:#d97706;">
+            <h3>⚙️ La regla: quita -AR, añade la terminación</h3>
+            <table style="width:100%; font-size:16px; border-collapse:collapse; margin-top:8px;">
+                <tr style="background:#f1f5f9;">
+                    <td style="padding:5px 8px; font-weight:700; color:#64748b;">Pronombre</td>
+                    <td style="padding:5px 8px; font-weight:700; color:#64748b;">Terminación</td>
+                    <td style="padding:5px 8px; font-weight:700; color:#d97706;">HABLAR</td>
+                </tr>
+                <tr><td style="padding:5px 8px;">Yo</td><td style="padding:5px 8px; color:#d97706; font-weight:700;">-o</td><td style="padding:5px 8px;">habl<b style="color:#d97706;">o</b></td></tr>
+                <tr style="background:#f1f5f9;"><td style="padding:5px 8px;">Tú</td><td style="padding:5px 8px; color:#d97706; font-weight:700;">-as</td><td style="padding:5px 8px;">habl<b style="color:#d97706;">as</b></td></tr>
+                <tr><td style="padding:5px 8px;">Él/Ella</td><td style="padding:5px 8px; color:#d97706; font-weight:700;">-a</td><td style="padding:5px 8px;">habl<b style="color:#d97706;">a</b></td></tr>
+                <tr style="background:#f1f5f9;"><td style="padding:5px 8px;">Nosotros</td><td style="padding:5px 8px; color:#d97706; font-weight:700;">-amos</td><td style="padding:5px 8px;">habl<b style="color:#d97706;">amos</b></td></tr>
+                <tr><td style="padding:5px 8px;">Ellos</td><td style="padding:5px 8px; color:#d97706; font-weight:700;">-an</td><td style="padding:5px 8px;">habl<b style="color:#d97706;">an</b></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Puente portugués:</strong> "falar" → falo, falas, fala, falamos, falam. &nbsp;¡La estructura es casi idéntica! Solo cambia el sonido.
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">4 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:30.8%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 5 — ACTIVIDAD: COMPLETA LA FRASE
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s5">
+    <div class="slide-title">🧩 ¿Qué falta? — Completa la oración</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — Lee la frase y completa el verbo</div>
+    <p style="margin-bottom:12px;">Aparece una oración incompleta. Elijan juntos qué verbo va en el espacio y en qué forma. ¡Luego díganla en voz alta!</p>
+
+    <div class="iz" style="background:#1e293b; gap:14px;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('fill-ans')">👁️ Ver Respuesta</button>
+        <div style="text-align:center; margin-top:20px; padding:0 20px;">
+            <div class="iz-label">Completa la oración:</div>
+            <div id="fill-q" style="font-size:30px; line-height:1.6; color:white; font-weight:700; margin-top:14px; max-width:900px;">🎲</div>
+        </div>
+        <button class="btn" onclick="rollFill()">🎲 Nueva Oración</button>
+        <div class="ans-box" id="fill-ans" style="font-size:18px; text-align:left;"></div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Verbos del banco:</strong> &nbsp;
+        <span class="pill p-blue" style="font-size:16px;">trabajo</span>
+        <span class="pill p-blue" style="font-size:16px;">caminas</span>
+        <span class="pill p-blue" style="font-size:16px;">escucha</span>
+        <span class="pill p-blue" style="font-size:16px;">usamos</span>
+        <span class="pill p-blue" style="font-size:16px;">llegan</span>
+        <span class="pill p-blue" style="font-size:16px;">descansa</span>
+        <span class="pill p-blue" style="font-size:16px;">hablas</span>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">5 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:38.5%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 6 — RUTINA DIARIA: VOCABULARIO
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s6">
+    <div class="slide-title">🕐 Mi Rutina Diaria — Vocabulario</div>
+    <p style="margin-bottom:10px;">Estos verbos describen lo que hacemos cada día. Fíjate en las horas y en cómo conectar las acciones.</p>
+
+    <div class="timeline">
+        <div class="tl-item" style="background:#fef3c7;">
+            <div class="tl-emoji">⏰</div>
+            <div class="tl-time">6:00 – 7:00</div>
+            <div class="tl-verb">Me <b>levanto</b></div>
+            <div class="tl-verb" style="color:#059669; font-size:15px;">Desayuno</div>
+            <div class="tl-pt" style="color:#92400e;">acordo / tomo café</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-emoji">🚶</div>
+            <div class="tl-time">8:00 – 9:00</div>
+            <div class="tl-verb"><b>Llego</b> al trabajo</div>
+            <div class="tl-verb" style="color:#059669; font-size:15px;">Salgo de casa</div>
+            <div class="tl-pt">chego / saio</div>
+        </div>
+        <div class="tl-item" style="background:#1e3a8a;">
+            <div class="tl-emoji">💼</div>
+            <div class="tl-time" style="color:#93c5fd;">9:00 – 13:00</div>
+            <div class="tl-verb" style="color:white;"><b>Trabajo</b></div>
+            <div class="tl-verb" style="color:#86efac; font-size:15px;">Uso el computador</div>
+            <div class="tl-pt" style="color:#94a3b8;">trabalho / uso</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-emoji">🍽️</div>
+            <div class="tl-time">13:00 – 14:00</div>
+            <div class="tl-verb"><b>Almuerzo</b></div>
+            <div class="tl-verb" style="color:#059669; font-size:15px;">Descanso</div>
+            <div class="tl-pt">almoço / descanso</div>
+        </div>
+        <div class="tl-item" style="background:#fce7f3;">
+            <div class="tl-emoji">🌙</div>
+            <div class="tl-time">20:00 – 22:00</div>
+            <div class="tl-verb"><b>Ceno</b></div>
+            <div class="tl-verb" style="color:#059669; font-size:15px;">Me duermo</div>
+            <div class="tl-pt" style="color:#9d174d;">janto / durmo</div>
+        </div>
+    </div>
+
+    <div class="scaffold" style="margin-top:12px;">
+        <strong>Conectores clave:</strong> &nbsp;
+        <span class="pill p-amber" style="font-size:16px;">primero</span>
+        <span class="pill p-amber" style="font-size:16px;">después</span>
+        <span class="pill p-amber" style="font-size:16px;">luego</span>
+        <span class="pill p-amber" style="font-size:16px;">por la mañana / tarde / noche</span>
+        <span class="pill p-amber" style="font-size:16px;">finalmente</span>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">6 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:46.2%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 7 — ACTIVIDAD ORAL: MI RUTINA
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s7">
+    <div class="slide-title">🎤 Cuéntame tu rutina</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — 2 minutos cada uno</div>
+    <p style="margin-bottom:12px;">El dado muestra una pregunta sobre tu rutina. ¡Responde con al menos <b>3 oraciones completas</b>! Usa los conectores de la página anterior.</p>
+
+    <div class="iz" style="background:#1e293b; gap:14px;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('rut-ans')">💡 Ver frases de apoyo</button>
+        <div style="text-align:center; margin-top:20px;">
+            <div class="iz-label">Tu pregunta:</div>
+            <div id="rut-q" style="font-size:32px; line-height:1.5; max-width:900px; color:#fbbf24; font-weight:700; margin-top:10px;">🎲</div>
+        </div>
+        <button class="btn" onclick="rollRutina()">🎲 Nueva Pregunta</button>
+        <div class="ans-box" id="rut-ans" style="font-size:16px; text-align:left;"></div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Recuerda:</strong> Yo habl<span style="color:#d97706; font-weight:900;">o</span> / Tú habl<span style="color:#d97706; font-weight:900;">as</span> / Él-Ella habl<span style="color:#d97706; font-weight:900;">a</span> &nbsp;|&nbsp; "Por la mañana, <b>primero</b>… <b>después</b>… <b>luego</b>…"
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">7 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:53.8%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 8 — LECTURA: "La rutina de Marco"
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s8">
+    <div class="slide-title">📖 Lectura: "La rutina de Marco"</div>
+    <div class="speak-badge">📖 ACTIVIDAD DE LECTURA — voz alta por turnos</div>
+
+    <div class="reading-box">
+        <p>
+            <em>Marco</em> es brasileño y <em>vive</em> en Santiago de Chile. Cada mañana, 
+            <span class="verb-hl">se levanta</span> a las siete y <span class="verb-hl">desayuna</span>: 
+            <em>pan tostado</em> y <em>café con leche</em>.
+        </p>
+        <p style="margin-top:12px;">
+            Después, <span class="verb-hl">camina</span> veinte minutos hasta su trabajo. 
+            En la oficina, <span class="verb-hl">usa</span> mucho el computador y 
+            <span class="verb-hl">habla</span> con sus colegas en español. A veces 
+            <span class="verb-hl">llama</span> a su familia en Brasil — ¡todavía 
+            <span class="verb-hl">extraña</span> la comida de su mamá!
+        </p>
+        <p style="margin-top:12px;">
+            Por la tarde, Marco <span class="verb-hl">almuerza</span> en un restaurante 
+            cercano. Le gusta la <em>cazuela</em>, que es una sopa chilena muy 
+            <em>sabrosa</em>. Por la noche, <span class="verb-hl">descansa</span>, 
+            <span class="verb-hl">escucha</span> música y <span class="verb-hl">practica</span> 
+            vocabulario en español. ¡<em>Aprende</em> rápido!
+        </p>
+    </div>
+
+    <div style="margin-top:10px; background:#fef3c7; border-radius:12px; padding:10px 18px;">
+        <p style="font-size:17px; color:#92400e; font-weight:600;">
+            🟢 = verbos -AR conjugados &nbsp;|&nbsp; Los <em style="color:#1e3a8a;">azules</em> = vocabulario clave &nbsp;|&nbsp; Lee en voz alta — fíjate en la S y en la RR de "extraña"
+        </p>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">8 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:61.5%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 9 — COMPRENSIÓN ORAL + MINI ESCRITURA
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s9">
+    <div class="slide-title">📝 Comprensión + Tu primera oración</div>
+    <div class="speak-badge">✍️ ACTIVIDAD DE ESCRITURA — 3 minutos</div>
+
+    <div class="grid2" style="flex:1; gap:16px;">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="font-weight:700; font-size:18px; color:#1e3a8a; margin-bottom:2px;">🧠 Preguntas sobre Marco:</div>
+            <div class="card" style="border-top-color:#059669; padding:12px 16px;">
+                <p style="font-size:17px;">1. ¿A qué hora se levanta Marco?</p>
+            </div>
+            <div class="card" style="border-top-color:#d97706; padding:12px 16px;">
+                <p style="font-size:17px;">2. ¿Cómo llega al trabajo?</p>
+            </div>
+            <div class="card" style="border-top-color:#1e3a8a; padding:12px 16px;">
+                <p style="font-size:17px;">3. ¿Qué come a mediodía? ¿Y qué es eso?</p>
+            </div>
+            <div class="card" style="border-top-color:#e11d48; padding:12px 16px;">
+                <p style="font-size:17px;">4. ¿Qué hace Marco por la noche?</p>
+            </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="font-weight:700; font-size:18px; color:#1e3a8a; margin-bottom:2px;">✍️ Escribe 2 oraciones sobre TU rutina:</div>
+            <textarea class="write-area" rows="5" placeholder="Ejemplo: Yo me levanto a las 6. Después desayuno y salgo de casa..."></textarea>
+            <div class="scaffold" style="font-size:16px;">
+                <strong>Recuerda:</strong> verbo conjugado en YO: levanto, desayuno, trabajo, llego, uso, camino, escucho…
+            </div>
+            <button class="btn btn-reveal" onclick="toggleAns('write-ans')" style="align-self:flex-start;">👁️ Ver respuestas del texto</button>
+            <div class="ans-box" id="write-ans" style="font-size:16px; text-align:left;">
+                1. Se levanta <b>a las siete</b>.<br>
+                2. <b>Camina</b> veinte minutos.<br>
+                3. Come <b>cazuela</b> — es una sopa chilena sabrosa.<br>
+                4. Descansa, escucha música y practica vocabulario.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">9 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:69.2%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 10 — PREGUNTAS ¿TÚ QUÉ HACES?
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s10">
+    <div class="slide-title">🗣️ Entrevista Exprés — ¿Y tú?</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — Pregunta y responde en pares</div>
+    <p style="margin-bottom:12px;">Uno pregunta, el otro responde con una frase completa. ¡Luego cambian! El dado genera la pregunta.</p>
+
+    <div class="iz" style="background:#1e293b; gap:14px;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('interv-ans')">💡 Modelo de respuesta</button>
+        <div style="text-align:center; margin-top:20px;">
+            <div class="iz-label">Pregunta para tu compañero:</div>
+            <div id="interv-q" style="font-size:30px; line-height:1.5; max-width:900px; color:#fbbf24; font-weight:700; margin-top:10px;">🎲</div>
+        </div>
+        <button class="btn" onclick="rollInterv()">🎲 Nueva Pregunta</button>
+        <div class="ans-box" id="interv-ans" style="font-size:17px; text-align:left;"></div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Tip para preguntar:</strong> &nbsp;¿A qué hora <b>+ verbo</b>? &nbsp;|&nbsp; ¿Dónde <b>+ trabajas / vives / almuerzas</b>? &nbsp;|&nbsp; ¿Qué <b>haces</b> por la tarde?
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">10 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:76.9%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 11 — FALSOS AMIGOS RONDA 3
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s11">
+    <div class="slide-title">⚠️ Falsos Amigos — Ronda 3</div>
+    <p style="margin-bottom:10px;">¡Nuevas palabras peligrosas! ¿Sabes qué significan en español?</p>
+
+    <div class="iz" style="background:#1e293b;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('fa3-ans')">👁️ Revelar Significado</button>
+        <div style="margin-top:30px; text-align:center;">
+            <div class="iz-label">Palabra en español:</div>
+            <div id="fa3-word" class="iz-big" style="font-size:68px;">ASISTIR</div>
+        </div>
+        <button class="btn" onclick="rollFA3()">🎲 Siguiente Palabra</button>
+        <div class="ans-box" id="fa3-ans" style="text-align:left; font-size:17px;"></div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">11 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:84.6%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 12 — PRODUCCIÓN FINAL: Describe tu día
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s12">
+    <div class="slide-title">🏆 Desafío Final — Describe tu día ideal</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — 2 minutos por persona</div>
+
+    <div class="grid2" style="flex:1; gap:16px;">
+        <div class="iz" style="background:#1e293b; padding:20px 24px;">
+            <div style="text-align:center; margin-top:10px;">
+                <div class="iz-label">Tu situación para hablar:</div>
+                <div id="final-sit" style="font-size:26px; line-height:1.5; max-width:450px; color:#fbbf24; font-weight:700; margin-top:10px;">🎲</div>
+            </div>
+            <div style="display:flex; gap:12px; margin-top:12px;">
+                <button class="btn" onclick="rollFinal()">🎲 Nueva Situación</button>
+                <button class="btn btn-reveal" onclick="toggleAns('final-ans')">💡 Vocabulario de apoyo</button>
+            </div>
+            <div class="ans-box" id="final-ans" style="font-size:16px; text-align:left; margin-top:8px;"></div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="scaffold">
+                <strong>Estructura para hablar:</strong><br>
+                "Por la mañana, yo <span style="color:#d97706;">___</span>…<br>
+                Después, <span style="color:#d97706;">___</span>…<br>
+                A mediodía, <span style="color:#d97706;">___</span>…<br>
+                Por la tarde, <span style="color:#d97706;">___</span>…<br>
+                Por la noche, <span style="color:#d97706;">___</span>…"
+            </div>
+            <div class="card" style="border-top-color:#d97706;">
+                <h3>🎯 Objetivo mínimo hoy:</h3>
+                <p style="font-size:16px;">✅ 5 oraciones con verbos -AR<br>✅ Usar al menos 2 conectores<br>✅ Pronunciar la S sin hacerla Z<br>✅ No mezclar portugués</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">12 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:92.3%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 13 — CIERRE
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s13" style="justify-content:center; align-items:center; text-align:center;">
+    <h2 style="font-family:'Poppins',sans-serif; font-size:76px; color:#1e3a8a; line-height:1.1;">¡Excelente<br>trabajo!</h2>
+    <div class="accent-bar"></div>
+    <p style="font-size:24px; font-weight:700; color:#475569; margin-bottom:18px;">Hoy aprendieron:</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <span class="pill p-blue" style="font-size:17px;">🎙️ La S sin Z</span>
+        <span class="pill p-green" style="font-size:17px;">⚙️ Verbos -AR</span>
+        <span class="pill p-amber" style="font-size:17px;">🕐 Rutinas diarias</span>
+        <span class="pill p-pink" style="font-size:17px;">✍️ Escritura propia</span>
+        <span class="pill p-purple" style="font-size:17px;">⚠️ Falsos amigos R3</span>
+    </div>
+    <div style="margin-top:24px; background:#eff6ff; border-radius:16px; padding:16px 28px; display:inline-block;">
+        <p style="font-size:18px; color:#1e40af; font-weight:600;">📌 Para la próxima clase — practica en casa:</p>
+        <p style="font-size:17px; color:#1e293b; margin-top:6px;">Escribe <b>5 oraciones</b> sobre tu rutina real usando verbos -AR.<br>¡Intenta no mirar la slide! Confía en tu memoria.</p>
+    </div>
+    <p style="font-size:56px; margin-top:20px;">🌟 👏 ✨</p>
+    <p style="margin-top:16px; font-weight:700; color:#1e3a8a; font-size:20px;">Aguirre Studio</p>
+    <div class="nav">
+        <span class="nav-counter">13 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" disabled>Fin 🎉</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+</div>
+
+<script>
+    const TOTAL = 13;
+    let cur = 1;
+
+    function go(n) {
+        document.getElementById('s' + cur).classList.remove('active');
+        cur = Math.max(1, Math.min(TOTAL, cur + n));
+        document.getElementById('s' + cur).classList.add('active');
+    }
+
+    function toggleAns(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    /* ── CHARLA RÁPIDA - REPASO CLASE 2 (slide 2) ── */
+    const reviewQs = [
+        {
+            q: '¿Puedes describir a alguien de esta clase? Usa al menos 2 adjetivos de personalidad y 1 físico. 🧍',
+            a: '<b>Cues:</b> Es [adjetivo físico] y muy [adjetivo personalidad].<br><i>Ej: "Carlos es alto y muy trabajador. También es simpático."</i>'
+        },
+        {
+            q: '🎲 Artículos trampa: ¿EL o LA? → "_____ mano" / "_____ día" / "_____ problema"',
+            a: '<b>LA</b> mano (excepción: termina en -o pero es femenino) · <b>EL</b> día (termina en -a pero es masculino) · <b>EL</b> problema (origen griego, masculino).'
+        },
+        {
+            q: '¿Cuál es la diferencia entre "pero" y "perro"? ¡Dilo en voz alta dos veces! 🐕',
+            a: '<b>pero</b> = /ˈpe.ɾo/ → R vibra <b>una vez</b> (significa "mas, porém")<br><b>perro</b> = /ˈpe.ro/ → RR vibra <b>varias veces</b> (significa "cachorro")'
+        },
+        {
+            q: '¿Cómo pronuncias correctamente la Ñ? Da un ejemplo con una palabra que tengas Ñ. 🇪🇸',
+            a: '<b>Ñ</b> = NH del portugués (mismo sonido).<br>Ejemplos: ma<u>ñ</u>ana, espa<u>ñ</u>ol, ba<u>ñ</u>o, ca<u>ñ</u>ón.'
+        },
+        {
+            q: '¿Qué significa "embarazada" en español? ¿Y cómo se dice "envergonhada"? ⚠️',
+            a: '<b>Embarazada</b> = grávida (en estado de gestación).<br>"Avergonzada / con vergüenza" = com vergonha.<br>¡Son falsos amigos!'
+        }
+    ];
+
+    function rollReview() {
+        const item = reviewQs[Math.floor(Math.random() * reviewQs.length)];
+        document.getElementById('r-q').textContent = item.q;
+        document.getElementById('r-ans').innerHTML = item.a;
+        document.getElementById('r-ans').style.display = 'none';
+    }
+    rollReview();
+
+    /* ── ICEBREAKER + TRABALENGUAS (slide 3) ── */
+    const iceQs = [
+        '¿Qué desayunaste hoy?',
+        '¿A qué hora te levantaste hoy?',
+        '¿Cómo estuvo tu dia?',
+       '¿Estas viendo el mundial de fútbol?',
+        '¿Cuál es tu comida favorita?',
+        '¿Qué música escuchas normalmente?',
+        '¿Trabajas desde casa o en oficina?'
+    ];
+    const twisters = [
+        '"Seis sillas solas.\nRosa sube, Susana baja.\nLa mesa está sucia, la sala está seca."',
+        '"Sara sale sola.\nSu sombrero es de seda.\nSe sienta, sonríe y saluda."',
+        '"El sol sale, la rosa se abre.\nSofia sueña, su gato duerme.\nSilencio en la casa."',
+        '"Susana usa su blusa.\nSalsa, sopa y ensalada.\nSu semana es suave y segura."'
+    ];
+
+    function rollIce() {
+        const q = iceQs[Math.floor(Math.random() * iceQs.length)];
+        document.getElementById('icebreaker-q').textContent = q;
+    }
+    function rollTwister() {
+        const t = twisters[Math.floor(Math.random() * twisters.length)];
+        document.getElementById('tongue-twister').style.whiteSpace = 'pre-line';
+        document.getElementById('tongue-twister').textContent = t;
+    }
+    rollIce();
+
+    /* ── COMPLETA LA FRASE (slide 5) ── */
+    const fillSentences = [
+        {
+            q: 'Yo _______ en una oficina del centro.',
+            a: '<b>Respuesta:</b> Yo <span style="color:#d97706; font-size:22px;">trabajo</span> en una oficina del centro.<br><span style="font-size:15px; color:#475569;">TRABAJAR → yo trabaj<b>o</b></span>'
+        },
+        {
+            q: 'Tú _______ muy bien el español, ¿lo sabías?',
+            a: '<b>Respuesta:</b> Tú <span style="color:#d97706; font-size:22px;">hablas</span> muy bien el español.<br><span style="font-size:15px; color:#475569;">HABLAR → tú habl<b>as</b></span>'
+        },
+        {
+            q: 'Ella _______ música mientras trabaja.',
+            a: '<b>Respuesta:</b> Ella <span style="color:#d97706; font-size:22px;">escucha</span> música mientras trabaja.<br><span style="font-size:15px; color:#475569;">ESCUCHAR → ella escuch<b>a</b></span>'
+        },
+        {
+            q: 'Nosotros _______ el computador todo el día.',
+            a: '<b>Respuesta:</b> Nosotros <span style="color:#d97706; font-size:22px;">usamos</span> el computador todo el día.<br><span style="font-size:15px; color:#475569;">USAR → nosotros us<b>amos</b></span>'
+        },
+        {
+            q: 'Ellos _______ al trabajo en metro, no en auto.',
+            a: '<b>Respuesta:</b> Ellos <span style="color:#d97706; font-size:22px;">llegan</span> al trabajo en metro.<br><span style="font-size:15px; color:#475569;">LLEGAR → ellos lleg<b>an</b></span>'
+        },
+        {
+            q: 'Por la tarde, Marco _______ en el parque cerca de su casa.',
+            a: '<b>Respuesta:</b> Por la tarde, Marco <span style="color:#d97706; font-size:22px;">descansa</span> en el parque.<br><span style="font-size:15px; color:#475569;">DESCANSAR → él descans<b>a</b></span>'
+        },
+        {
+            q: 'Tú _______ veinte minutos hasta tu trabajo cada mañana.',
+            a: '<b>Respuesta:</b> Tú <span style="color:#d97706; font-size:22px;">caminas</span> veinte minutos hasta tu trabajo.<br><span style="font-size:15px; color:#475569;">CAMINAR → tú camin<b>as</b></span>'
+        },
+        {
+            q: 'Yo _______ a las 7 y desayuno antes de salir.',
+            a: '<b>Respuesta:</b> Yo <span style="color:#d97706; font-size:22px;">llego</span>... espera — aquí lo correcto es: Yo <span style="color:#d97706;">me levanto</span> a las 7.<br><span style="font-size:15px; color:#475569;">LEVANTARSE → yo me levant<b>o</b></span>'
+        }
+    ];
+
+    function rollFill() {
+        const item = fillSentences[Math.floor(Math.random() * fillSentences.length)];
+        document.getElementById('fill-q').textContent = item.q;
+        document.getElementById('fill-ans').innerHTML = item.a;
+        document.getElementById('fill-ans').style.display = 'none';
+    }
+    rollFill();
+
+    /* ── RUTINA ORAL (slide 7) ── */
+    const rutinaQs = [
+        {
+            q: '¿A qué hora te levantas normalmente? ¿Qué haces primero por la mañana?',
+            a: 'Cues: "Me levanto a las ___. Primero desayuno / tomo un café / me ducho. Después…"'
+        },
+        {
+            q: '¿Cómo llegas normalmente a tu trabajo o a la universidad?',
+            a: 'Cues: "Camino / tomo el metro / uso el auto / llego en bus. Tardo ___ minutos."'
+        },
+        {
+            q: '¿Qué haces durante el almuerzo? ¿Almuerzas solo o con alguien?',
+            a: 'Cues: "A mediodía, almuerzo en ___. Como ___. Almuerzo con ___."'
+        },
+        {
+            q: '¿Qué actividades haces por la tarde después del trabajo?',
+            a: 'Cues: "Por la tarde, descanso / camino / escucho música / uso el teléfono / llamo a mi familia."'
+        },
+        {
+            q: '¿A qué hora cenas y qué comes normalmente por la noche?',
+            a: 'Cues: "Ceno a las ___. Como ___. Después descanso / escucho / miro televisión."'
+        },
+        {
+            q: '¿Qué es diferente en tu rutina los fines de semana?',
+            a: 'Cues: "Los sábados, me levanto más tarde. No trabajo. Camino / descanso / visito…"'
+        }
+    ];
+
+    function rollRutina() {
+        const item = rutinaQs[Math.floor(Math.random() * rutinaQs.length)];
+        document.getElementById('rut-q').textContent = item.q;
+        document.getElementById('rut-ans').innerHTML = item.a;
+        document.getElementById('rut-ans').style.display = 'none';
+    }
+    rollRutina();
+
+    /* ── ENTREVISTA EXPRÉS (slide 10) ── */
+    const intervQs = [
+        {
+            q: '¿A qué hora llegas normalmente al trabajo? ¿Cómo llegas?',
+            a: 'Modelo: "Llego a las ___ en ___. Tardo ___ minutos."'
+        },
+        {
+            q: '¿Usas mucho el teléfono durante el día? ¿Para qué lo usas?',
+            a: 'Modelo: "Uso el teléfono para ___. Lo uso ___ veces al día."'
+        },
+        {
+            q: '¿Escuchas música cuando trabajas o estudias? ¿Qué tipo de música escuchas?',
+            a: 'Modelo: "Escucho ___ cuando ___. Me gusta ___."'
+        },
+        {
+            q: '¿Hablas español fuera de esta clase? ¿Con quién y dónde?',
+            a: 'Modelo: "Hablo español con ___. Practico en ___."'
+        },
+        {
+            q: '¿Caminas mucho durante el día? ¿O prefieres el transporte?',
+            a: 'Modelo: "Camino ___ minutos al día. / Prefiero el metro porque ___."'
+        },
+        {
+            q: '¿A qué hora descansas o terminas de trabajar normalmente?',
+            a: 'Modelo: "Termino a las ___. Después, descanso / camino / escucho música."'
+        }
+    ];
+
+    function rollInterv() {
+        const item = intervQs[Math.floor(Math.random() * intervQs.length)];
+        document.getElementById('interv-q').textContent = item.q;
+        document.getElementById('interv-ans').innerHTML = '<b>Modelo:</b> ' + item.a;
+        document.getElementById('interv-ans').style.display = 'none';
+    }
+    rollInterv();
+
+    /* ── FALSOS AMIGOS RONDA 3 (slide 11) ── */
+    const fa3 = [
+        {
+            w: 'ESCRITORIO',
+            a: '<b>Significa:</b> Mesa de trabajo, donde pones el computador / mesa de trabalho.<br><i>Ej: "Mi escritorio está lleno de papeles y tazas."</i><br><span style="color:#991b1b;">⚠️ NO significa "escritório" como empresa u oficina. En español, la empresa es "oficina" o "empresa".</span>'
+        },
+        {
+            w: 'BORRAR',
+            a: '<b>Significa:</b> Eliminar, quitar algo escrito o digital / apagar, deletar.<br><i>Ej: "Borra ese mensaje, tiene un error."</i><br><span style="color:#059669;">✅ Parecido a "apagar" en portugués. ¡Pero cuidado! "Apagar" en español significa apagar la luz, no borrar texto.</span>'
+        },
+        {
+            w: 'ACORDAR',
+            a: '<b>Significa:</b> Llegar a un acuerdo, decidir algo en conjunto / combinar, chegar a um acordo.<br><i>Ej: "Acordamos reunirnos el lunes a las 10."</i><br><span style="color:#991b1b;">⚠️ NO significa "despertar". Despertar en español = despertar(se). ¡"Acordarse" significa recordar algo!</span>'
+        },
+        {
+            w: 'PRETENDER',
+            a: '<b>Significa:</b> Intentar o tener la intención de hacer algo / ter a intenção de.<br><i>Ej: "Pretendo aprender español este año."</i><br><span style="color:#991b1b;">⚠️ NO significa "fingir". Para fingir en español: "fingir" o "hacer como si".</span>'
+        },
+        {
+            w: 'POLICÍA',
+            a: '<b>Significa:</b> La institución o el/la agente de seguridad pública / polícia.<br><i>Ej: "Llama a la policía, hay un problema en la calle."</i><br><span style="color:#059669;">✅ Muy similar al portugués, pero el acento en español va al final: po-li-CÍ-a. No po-LÍ-cia.</span>'
+        },
+        {
+            w: 'ASISTIR',
+            a: '<b>Significa:</b> Ir o estar presente en un lugar o evento / comparecer, ir a.<br><i>Ej: "Mañana asisto a una reunión importante."</i><br><span style="color:#991b1b;">⚠️ NO significa "ayudar". Ayudar en español = ayudar. En inglés "assist" sí significa ayudar, pero en español no.</span>'
+        },
+        {
+            w: 'EXQUISITO',
+            a: '<b>Significa:</b> Muy rico, delicioso o de gran calidad / requintado, delicioso.<br><i>Ej: "La cazuela de este restaurante está exquisita."</i><br><span style="color:#991b1b;">⚠️ En portugués "esquisito" significa raro o extraño. ¡El significado es completamente opuesto!</span>'
+        }
+    ];
+
+    function rollFA3() {
+        const t = fa3[Math.floor(Math.random() * fa3.length)];
+        document.getElementById('fa3-word').textContent = t.w;
+        document.getElementById('fa3-ans').innerHTML = t.a;
+        document.getElementById('fa3-ans').style.display = 'none';
+    }
+    rollFA3();
+
+    /* ── DESAFÍO FINAL (slide 12) ── */
+    const finalSits = [
+        {
+            s: '🌅 Es lunes por la mañana. Explica tu rutina completa de hoy.',
+            a: 'Verbos útiles: levantarse, desayunar, salir, caminar, llegar, trabajar, almorzar, regresar, cenar, descansar.'
+        },
+        {
+            s: '📱 Un amigo hispanohablante te pregunta: "¿Qué haces normalmente los sábados?"',
+            a: 'Los sábados no trabajo. Me levanto tarde, desayuno tranquilo, camino, escucho música… ¿qué más?'
+        },
+        {
+            s: '💼 En una entrevista de trabajo en español te preguntan: "¿Cómo organiza su día laboral?"',
+            a: 'Habla en primera persona: "Llego a las 8. Primero reviso los correos. Después…" Usa: primero, luego, después, finalmente.'
+        },
+        {
+            s: 'Llegas a Chile y tu colega te pregunta: "¿Y en Brasil, cómo era tu rutina?"',
+            a: 'Usa el presente igual (rutina actual): "En Brasil, trabajo de 9 a 6. Almuerzo con mis colegas. Por la tarde…"'
+        },
+        {
+            s: '🤝 Preséntate brevemente y describe qué haces en tu vida cotidiana.',
+            a: 'Mi nombre es ___. Trabajo en ___. Por las mañanas, ___. Me gusta ___ porque…'
+        }
+    ];
+
+    function rollFinal() {
+        const item = finalSits[Math.floor(Math.random() * finalSits.length)];
+        document.getElementById('final-sit').textContent = item.s;
+        document.getElementById('final-ans').innerHTML = '<b>Vocabulario de apoyo:</b><br>' + item.a;
+        document.getElementById('final-ans').style.display = 'none';
+    }
+    rollFinal();
+</script>
+</body>
+</html>
