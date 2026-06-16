@@ -3,30 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aguirre English Studio | Portal de Clases</title>
+    <title>Aguirre Studio | Portal de Español</title>
 
-    <!-- Lexend: fuente con alto soporte de legibilidad para dislexia -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&swap" rel="stylesheet">
 
-    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
-            /* Paleta Deep Autumn / Oliva, ajustada para contraste AA+ */
-            --bg-color: #1e2219;
-            --bg-gradient: radial-gradient(circle at 15% 0%, #2a3325 0%, #1e2219 55%);
-            --card-bg: #2a2f24;
-            --card-bg-hover: #313828;
-            --text-main: #f7f5ef;
-            --text-muted: #c7c5bc;
-            --accent: #d4a373;
-            --accent-soft: #e9c46a;
-            --accent-strong: #f0b865;
-            --focus-ring: #8ecae6;
-            --border-soft: rgba(255, 255, 255, 0.06);
+            /* Nueva Paleta Warm Corporate / Minimalista Cálido - Contraste AA+ */
+            --bg-color: #FDFBF7;
+            --bg-gradient: linear-gradient(180deg, #FDFBF7 0%, #F5F1E9 100%);
+            --card-bg: #FFFFFF;
+            --card-bg-hover: #FDFBF9;
+            --text-main: #1D2433;
+            --text-muted: #5C6475;
+            --accent: #C96F53; /* Terracotta Amigable */
+            --accent-soft: #E09F67; /* Calidez Secundaria */
+            --accent-strong: #A85238; 
+            --focus-ring: #4A90E2;
+            --border-soft: rgba(29, 36, 51, 0.08);
 
             /* Tipografía */
             --font-display: 'Lexend', sans-serif;
@@ -96,13 +94,15 @@
             font-family: var(--font-body);
             font-size: 0.85rem;
             cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             transition: all 0.2s ease;
         }
 
         .a11y-btn:hover,
         .a11y-btn.active {
-            color: var(--accent-soft);
+            color: var(--accent);
             border-color: var(--accent);
+            background-color: var(--card-bg-hover);
         }
 
         /* Modo lectura cómoda: tipografía más grande y espaciada */
@@ -131,16 +131,13 @@
             gap: 0.5rem;
             background-color: var(--card-bg);
             border: 1px solid var(--border-soft);
-            color: var(--accent-soft);
+            color: var(--accent);
             padding: 0.4rem 1rem;
             border-radius: 999px;
             font-size: 0.85rem;
             font-weight: 500;
             margin-bottom: 1.25rem;
-        }
-
-        .badge i {
-            font-size: 0.8rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         header h1 {
@@ -160,7 +157,7 @@
             color: var(--text-muted);
             font-weight: 400;
             font-size: 1.1rem;
-            max-width: 480px;
+            max-width: 520px;
             margin: 0 auto;
         }
 
@@ -179,16 +176,19 @@
             font-family: var(--font-body);
             font-size: 1rem;
             padding: 0.85rem 1rem 0.85rem 2.8rem;
-            border-radius: 10px;
-            transition: border-color 0.2s ease;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .search-wrap input::placeholder {
             color: var(--text-muted);
+            opacity: 0.7;
         }
 
         .search-wrap input:focus {
             border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(201, 111, 83, 0.15);
             outline: none;
         }
 
@@ -200,16 +200,18 @@
             color: var(--text-muted);
         }
 
-        /* ===== Grid de clases ===== */
+        /* ===== Grid de clases / Secciones ===== */
         .section-title {
             font-family: var(--font-display);
             font-size: 1.3rem;
             font-weight: 600;
-            margin: 2.5rem 0 1.25rem;
+            margin: 3rem 0 1.25rem;
             color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 0.6rem;
+            border-bottom: 1px solid var(--border-soft);
+            padding-bottom: 0.5rem;
         }
 
         .section-title i {
@@ -227,20 +229,21 @@
             border-radius: 14px;
             padding: 1.8rem;
             border: 1px solid var(--border-soft);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
             transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             opacity: 0;
             animation: fadeUp 0.6s ease forwards;
-            animation-delay: var(--delay, 0s);
+            vertical-align: top;
         }
 
         .card:hover {
             transform: translateY(-4px);
-            border-color: rgba(212, 163, 115, 0.45);
+            border-color: rgba(201, 111, 83, 0.4);
             background-color: var(--card-bg-hover);
-            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
+            box-shadow: 0 12px 24px rgba(29, 36, 51, 0.08);
         }
 
         .card-top {
@@ -255,8 +258,8 @@
             font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 0.08em;
-            color: var(--accent-soft);
-            background-color: rgba(212, 163, 115, 0.12);
+            color: var(--accent);
+            background-color: rgba(201, 111, 83, 0.08);
             padding: 0.3rem 0.7rem;
             border-radius: 999px;
         }
@@ -265,11 +268,11 @@
             width: 38px;
             height: 38px;
             border-radius: 10px;
-            background-color: rgba(233, 196, 106, 0.1);
+            background-color: rgba(224, 159, 103, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent-soft);
+            color: var(--accent-strong);
             font-size: 1.1rem;
         }
 
@@ -299,7 +302,7 @@
             font-size: 0.75rem;
             font-weight: 500;
             color: var(--text-muted);
-            background-color: rgba(255, 255, 255, 0.04);
+            background-color: rgba(29, 36, 51, 0.03);
             border: 1px solid var(--border-soft);
             padding: 0.25rem 0.6rem;
             border-radius: 999px;
@@ -325,7 +328,7 @@
 
         .btn:hover {
             background-color: var(--accent);
-            color: var(--bg-color);
+            color: #FFFFFF;
         }
 
         .btn i {
@@ -344,6 +347,7 @@
             color: var(--text-muted);
             border: 1px dashed var(--border-soft);
             border-radius: 14px;
+            background-color: var(--card-bg);
         }
 
         .empty-state.visible {
@@ -360,14 +364,15 @@
         /* Próximamente */
         .card.coming-soon {
             border-style: dashed;
-            opacity: 0.55;
+            opacity: 0.65;
             animation: none;
-            opacity: 0.55;
         }
 
         .card.coming-soon:hover {
             transform: none;
-            box-shadow: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            background-color: var(--card-bg);
+            border-color: var(--border-soft);
         }
 
         .card.coming-soon .btn {
@@ -431,7 +436,6 @@
 
     <div class="container">
 
-        <!-- Barra de accesibilidad -->
         <div class="a11y-bar">
             <button class="a11y-btn" id="comfortToggle" type="button" aria-pressed="false">
                 <i class="fa-solid fa-text-height"></i>
@@ -440,8 +444,8 @@
         </div>
 
         <header>
-            <span class="badge"><i class="fa-solid fa-graduation-cap"></i> Portal del Estudiante</span>
-            <h1>Aguirre <span>English</span> Studio</h1>
+            <span class="badge"><i class="fa-solid fa-graduation-cap"></i> Portal de Español</span>
+            <h1>Aguirre <span>Studio</span></h1>
             <p>Tus clases interactivas y material de estudio, todo en un solo lugar.</p>
 
             <div class="search-wrap">
@@ -449,8 +453,8 @@
                 <input
                     type="text"
                     id="searchInput"
-                    placeholder="Buscar una clase (ej: fundamentos, fluidez...)"
-                    aria-label="Buscar clase"
+                    placeholder="Buscar una clase o recurso (ej: pronunciación, vocabulario...)"
+                    aria-label="Buscar clase o material"
                 >
             </div>
         </header>
@@ -460,7 +464,7 @@
 
             <div class="grid" id="classGrid">
 
-                <div class="card" data-keywords="introducción fundamentos vocabulario gramática estructuras" style="--delay: 0.05s">
+                <div class="card" data-keywords="introducción fundamentos vocabulario gramática estructuras" style="animation-delay: 0.05s">
                     <div>
                         <div class="card-top">
                             <span class="class-number">CLASE 01</span>
@@ -480,7 +484,7 @@
                     </a>
                 </div>
 
-                <div class="card" data-keywords="comprensión fluidez sonidos pronunciación describir personas artículos" style="--delay: 0.15s">
+                <div class="card" data-keywords="comprensión fluidez sonidos pronunciación describir personas artículos" style="animation-delay: 0.15s">
                     <div>
                         <div class="card-top">
                             <span class="class-number">CLASE 02</span>
@@ -500,7 +504,7 @@
                     </a>
                 </div>
 
-                <div class="card coming-soon" data-keywords="próxima clase futura" style="--delay: 0.25s">
+                <div class="card coming-soon" data-keywords="próxima clase futura" style="animation-delay: 0.25s">
                     <div>
                         <div class="card-top">
                             <span class="class-number">CLASE 03</span>
@@ -521,14 +525,40 @@
 
             </div>
 
+            <h2 class="section-title"><i class="fa-solid fa-folder-plus"></i> Recursos y Material Extra</h2>
+            
+            <div class="grid" id="extraGrid">
+                
+                <div class="card" data-keywords="material extra vocabulario recopilación repaso glosario palabras" style="animation-delay: 0.35s">
+                    <div>
+                        <div class="card-top">
+                            <span class="class-number">RECURSO</span>
+                            <span class="class-icon"><i class="fa-solid fa-file-lines"></i></span>
+                        </div>
+                        <div class="card-content">
+                            <h2>Lista de Vocabulario</h2>
+                            <p>Glosario y vocabulario acumulado clase por clase para repasar de forma extendida y autónoma.</p>
+                            <div class="tags">
+                                <span class="tag">Vocabulario</span>
+                                <span class="tag">Repaso interactivo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="material-extra/vocabulario/index.html" class="btn" target="_blank" rel="noopener noreferrer">
+                        Abrir material <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+            </div>
+
             <div class="empty-state" id="emptyState">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                No encontramos una clase con ese nombre. Prueba con otra palabra.
+                No encontramos clases ni recursos con ese nombre. Prueba con otra palabra.
             </div>
         </main>
 
         <footer>
-            <p>&copy; 2026 Aguirre English Studio. Hecho con <span class="heart">&#9825;</span> para nuestros estudiantes.</p>
+            <p>&copy; 2026 Aguirre Studio. Hecho con con <span class="heart">&#9825;</span> para nuestros estudiantes.</p>
         </footer>
     </div>
 
@@ -537,17 +567,15 @@
         const comfortToggle = document.getElementById('comfortToggle');
         const body = document.body;
 
-        const savedComfort = sessionStorage ? null : null; // sin uso de storage persistente entre sesiones
-
         comfortToggle.addEventListener('click', () => {
             const isActive = body.classList.toggle('comfort-mode');
             comfortToggle.classList.toggle('active', isActive);
             comfortToggle.setAttribute('aria-pressed', isActive);
         });
 
-        // Buscador en vivo de clases
+        // Buscador en vivo de clases y materiales extra
         const searchInput = document.getElementById('searchInput');
-        const cards = Array.from(document.querySelectorAll('#classGrid .card'));
+        const cards = Array.from(document.querySelectorAll('.grid .card'));
         const emptyState = document.getElementById('emptyState');
 
         searchInput.addEventListener('input', (e) => {
@@ -563,7 +591,15 @@
                 if (matches) visibleCount++;
             });
 
+            // Ocultar o mostrar el estado vacío
             emptyState.classList.toggle('visible', visibleCount === 0);
+
+            // Ocultar los títulos de sección si no hay tarjetas visibles en ellos
+            document.querySelectorAll('.section-title').forEach(title => {
+                const associatedGrid = title.nextElementSibling;
+                const dynamicVisibleInGrid = Array.from(associatedGrid.querySelectorAll('.card')).some(c => c.style.display !== 'none');
+                title.style.display = dynamicVisibleInGrid ? '' : 'none';
+            });
         });
     </script>
 
