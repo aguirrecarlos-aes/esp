@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Español Práctico: Desactiva el Portuñol - Aguirre Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .flashcard {
+            perspective: 1000px;
+        }
+        .flashcard-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+        .flashcard-front, .flashcard-back {
+            backface-visibility: hidden;
+        }
+        .flashcard-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-600 text-white p-2.5 rounded-xl shadow-md shadow-amber-100">
+                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-xl text-slate-900 tracking-tight">Aguirre Studio</h1>
+                    <p class="text-xs text-amber-600 font-medium tracking-wide uppercase">Español para Lusohablantes</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 bg-rose-50 border border-rose-200 px-4 py-2 rounded-full text-rose-800 text-sm font-medium">
+                <i data-lucide="shield-alert" class="w-4 h-4 text-rose-600"></i>
+                <span>Laboratorio de Vocabulario y Fonética</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+        
+        <section class="bg-gradient-to-br from-slate-900 via-amber-950 to-slate-900 rounded-2xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="relative z-10 max-w-2xl">
+                <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Desafío Inmersivo</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight leading-tight">Antídotos contra el Portuñol</h2>
+                <p class="text-slate-300 mt-3 text-base sm:text-lg leading-relaxed">
+                    Ajusta esos pequeños detalles automáticos que delatan tu lengua materna. ¡Suena más natural y seguro desde el primer día!
+                </p>
+                
+                <div class="mt-6 flex gap-4 bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-xl items-start">
+                    <div class="bg-amber-400 text-slate-950 p-2 rounded-lg shrink-0 shadow-md">
+                        <i data-lucide="zap" class="w-5 h-5 fill-current"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-amber-400 text-sm uppercase tracking-wide">Pro-Tip: ¡Cuidado con el piloto automático!</h4>
+                        <p class="text-sm text-slate-200 mt-1 leading-relaxed">
+                            Como el español y el portugués se parecen mucho, tu cerebro intentará usarlos igual. La clave para hablar un español limpio es pausar un segundo y recordar que algunas palabras <span class="underline decoration-amber-400 font-semibold text-white">cambian de género (masculino/femenino)</span> o significan algo totalmente diferente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="border-b border-slate-200">
+            <nav class="flex space-x-8" aria-label="Tabs">
+                <button onclick="switchTab('study')" id="tab-study" class="border-b-2 border-amber-600 py-4 px-1 text-sm font-medium text-amber-600 flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> 1. Palabras con Género Cruzado
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-flashcards" class="border-b-2 border-transparent py-4 px-1 text-sm font-medium text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4"></i> 2. Falsos Amigos
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="border-b-2 border-transparent py-4 px-1 text-sm font-medium text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center gap-2">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i> 3. Desafío Práctico
+                </button>
+            </nav>
+        </div>
+
+        <!-- SECCIÓN 1: ESTUDIO (GÉNERO CRUZADO CON SCAFFOLDING) -->
+        <section id="section-study" class="space-y-12 block">
+            
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex items-center gap-3">
+                    <div class="bg-amber-100 text-amber-800 p-2 rounded-lg">
+                        <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">El juego del Masculino y Femenino</h3>
+                        <p class="text-xs text-slate-500">Palabras idénticas que cambian de género entre ambos idiomas</p>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/50 text-xs font-semibold uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                                <th class="px-6 py-3 w-1/5">Em Português</th>
+                                <th class="px-6 py-3 w-1/4">Español Correcto</th>
+                                <th class="px-6 py-3 w-2/5">Frase de Práctica + Andamiaje (Scaffolding)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm">
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="px-6 py-4 font-medium text-rose-600 line-through">O leite</td>
+                                <td class="px-6 py-4 font-bold text-amber-700 text-base flex items-center gap-2">
+                                    <span class="bg-pink-100 text-pink-800 text-xs px-2 py-0.5 rounded">LA</span> leche
+                                </td>
+                                <td class="px-6 py-4 bg-amber-50/20 space-y-2">
+                                    <div class="flex items-center justify-between group text-slate-600 italic">
+                                        <span>"¿Prefieres el café con <strong>la leche</strong> desnatada o entera?"</span>
+                                        <button onclick="simulateAudio('¿Prefieres el café con la leche desnatada o entera?')" class="text-amber-700 hover:bg-amber-100 p-1.5 rounded-lg transition opacity-60 group-hover:opacity-100">
+                                            <i data-lucide="volume-2" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                    <div class="text-xs text-slate-500 bg-white p-2 rounded border border-slate-100 font-sans">
+                                        <span class="font-bold text-blue-600">🇧🇷 Tradução:</span> "Você prefere o café com leite desnatado ou integral?"<br>
+                                        <span class="font-bold text-amber-600">💡 Pista:</span> Lembre-se: Alimentos líquidos e brancos mudam com frequência!
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="px-6 py-4 font-medium text-rose-600 line-through">O sal</td>
+                                <td class="px-6 py-4 font-bold text-amber-700 text-base flex items-center gap-2">
+                                    <span class="bg-pink-100 text-pink-800 text-xs px-2 py-0.5 rounded">LA</span> sal
+                                </td>
+                                <td class="px-6 py-4 bg-amber-50/20 space-y-2">
+                                    <div class="flex items-center justify-between group text-slate-600 italic">
+                                        <span>"Por favor, pásame <strong>la sal</strong>, la comida está un poco sosa."</span>
+                                        <button onclick="simulateAudio('Por favor, pásame la sal, la comida está un poco sosa.')" class="text-amber-700 hover:bg-amber-100 p-1.5 rounded-lg transition opacity-60 group-hover:opacity-100">
+                                            <i data-lucide="volume-2" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                    <div class="text-xs text-slate-500 bg-white p-2 rounded border border-slate-100">
+                                        <span class="font-bold text-blue-600">🇧🇷 Tradução:</span> "Por favor, me passe o sal, a comida está um pouco sem graça."<br>
+                                        <span class="font-bold text-amber-600">💡 Pista:</span> Diga "la sal" pensando em "a substância salgada".
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="px-6 py-4 font-medium text-rose-600 line-through">A viagem</td>
+                                <td class="px-6 py-4 font-bold text-amber-700 text-base flex items-center gap-2">
+                                    <span class="bg-sky-100 text-sky-800 text-xs px-2 py-0.5 rounded">EL</span> viaje
+                                </td>
+                                <td class="px-6 py-4 bg-amber-50/20 space-y-2">
+                                    <div class="flex items-center justify-between group text-slate-600 italic">
+                                        <span>"Espero que <strong>el viaje</strong> de negocios sea un éxito."</span>
+                                        <button onclick="simulateAudio('Espero que el viaje de negocios sea un éxito.')" class="text-amber-700 hover:bg-amber-100 p-1.5 rounded-lg transition opacity-60 group-hover:opacity-100">
+                                            <i data-lucide="volume-2" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                    <div class="text-xs text-slate-500 bg-white p-2 rounded border border-slate-100">
+                                        <span class="font-bold text-blue-600">🇧🇷 Tradução:</span> "Espero que a viagem de negócios seja um sucesso."<br>
+                                        <span class="font-bold text-amber-600">💡 Pista regra de ouro:</span> Palavras que terminam em <span class="underline font-mono">-AJES</span> são sempre masculinas (el viaje, el equipaje).
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="px-6 py-4 font-medium text-rose-600 line-through">A cor</td>
+                                <td class="px-6 py-4 font-bold text-amber-700 text-base flex items-center gap-2">
+                                    <span class="bg-sky-100 text-sky-800 text-xs px-2 py-0.5 rounded">EL</span> color
+                                </td>
+                                <td class="px-6 py-4 bg-amber-50/20 space-y-2">
+                                    <div class="flex items-center justify-between group text-slate-600 italic">
+                                        <span>"Me encanta <strong>el color</strong> corporativo de tu marca."</span>
+                                        <button onclick="simulateAudio('Me encanta el color corporativo de tu marca.')" class="text-amber-700 hover:bg-amber-100 p-1.5 rounded-lg transition opacity-60 group-hover:opacity-100">
+                                            <i data-lucide="volume-2" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                    <div class="text-xs text-slate-500 bg-white p-2 rounded border border-slate-100">
+                                        <span class="font-bold text-blue-600">🇧🇷 Tradução:</span> "Adoro a cor corporativa da sua marca."<br>
+                                        <span class="font-bold text-amber-600">💡 Pista:</span> Pense em "O Colorido" para lembrar que é masculino!
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- BLOQUE FONÉTICO CON TEXTOS CUE EN PORTUGUÉS -->
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex items-center gap-3">
+                    <div class="bg-rose-100 text-rose-700 p-2 rounded-lg">
+                        <i data-lucide="mic" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">Guia de Pronúncia: Evite o sotaque automático</h3>
+                        <p class="text-xs text-slate-500">Ajustes directos en la boca para sonar limpio y claro</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 bg-slate-50/30">
+                    
+                    <div class="bg-white border border-slate-200 p-4 rounded-xl flex flex-col justify-between shadow-sm">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="bg-rose-100 text-rose-700 font-mono font-bold text-lg px-3 py-1 rounded-lg">A letra "CH"</span>
+                                <span class="text-xs font-semibold text-rose-500 uppercase tracking-wider">Atenção! ⚠️</span>
+                            </div>
+                            <p class="text-sm font-semibold text-slate-800 mt-3">Regra: Som curto e seco, como "TCH"</p>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                <span class="text-rose-700 font-bold">🇧🇷 Dica:</span> Não fale suave como o "CH" de <em>"Chuva"</em>. Tem que soar como o som de <strong>"Tchau"</strong>. Corte o ar rápido ao falar palavras como: <strong class="text-slate-900">Escuchar</strong> ou <strong class="text-slate-900">Chile</strong>.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-xs text-amber-700 font-medium">Clique para ouvir o golpe seco:</span>
+                            <button onclick="simulateAudio('Escuchar el choque en Chile')" class="text-slate-500 hover:bg-slate-100 p-1.5 rounded-lg transition"><i data-lucide="volume-2" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 p-4 rounded-xl flex flex-col justify-between shadow-sm">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="bg-amber-100 text-amber-800 font-mono font-bold text-lg px-3 py-1 rounded-lg">A letra "R" inicial</span>
+                                <span class="text-xs font-semibold text-amber-600 uppercase tracking-wider">Segredo da língua 👅</span>
+                            </div>
+                            <p class="text-sm font-semibold text-slate-800 mt-3">Regra: Fazer vibrar a ponta da língua</p>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                <span class="text-amber-700 font-bold">🇧🇷 Dica:</span> Nunca arranhe a garganta como no nome <em>"Ronaldo"</em> em português. O som deve ser feito na parte da frente da boca, fazendo a língua tremer no céu da boca.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-xs text-amber-700 font-medium">Ouça a vibração frontal:</span>
+                            <button onclick="simulateAudio('Ramón rompió la rueda')" class="text-slate-500 hover:bg-slate-100 p-1.5 rounded-lg transition"><i data-lucide="volume-2" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: FLASHCARDS (FALSOS AMIGOS CON AYUDAS COGNITIVAS) -->
+        <section id="section-flashcards" class="space-y-6 hidden">
+            <div class="text-center max-w-md mx-auto">
+                <h3 class="font-bold text-xl text-slate-900">Detector de Falsos Amigos</h3>
+                <p class="text-sm text-slate-500 mt-1">Clique no cartão para descobrir o significado real e não cair na armadilha da tradução direta.</p>
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-6 max-w-md mx-auto py-4">
+                <div id="flashcard-element" onclick="toggleFlashcard()" class="flashcard w-full h-64 cursor-pointer">
+                    <div class="flashcard-inner w-full h-full relative rounded-2xl shadow-md border border-slate-200 bg-white transition-all duration-300 hover:shadow-lg">
+                        <div class="flashcard-front absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-white rounded-2xl">
+                            <span class="text-xs uppercase tracking-wider font-semibold text-rose-500 mb-2 bg-rose-50 px-2 py-1 rounded">⚠️ Alerta de Confusão</span>
+                            <h4 class="text-4xl font-extrabold text-slate-900 tracking-tight" id="fc-front-text">Palabra</h4>
+                            <p class="text-xs text-slate-400 mt-6 flex items-center gap-1"><i data-lucide="rotate-cw" class="w-3 h-3"></i> Clique para virar o cartão</p>
+                        </div>
+                        <div class="flashcard-back absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-slate-950 text-white rounded-2xl">
+                            <span class="text-xs uppercase tracking-wider font-semibold text-amber-400 mb-2">Significado Real em Espanhol</span>
+                            <h4 class="text-2xl font-bold mb-4 text-amber-300" id="fc-back-translation">Traducción</h4>
+                            <div class="bg-white/10 p-3 rounded-lg text-xs italic text-slate-300 max-w-xs" id="fc-back-example">
+                                "Sentencia de ejemplo"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6 w-full justify-between px-2">
+                    <button onclick="prevFlashcard()" class="flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-amber-600 transition">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Anterior
+                    </button>
+                    <span class="text-xs font-mono font-bold bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full" id="fc-counter">1 / 5</span>
+                    <button onclick="nextFlashcard()" class="flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-amber-600 transition">
+                        Próximo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: QUIZ PEDAGÓGICO -->
+        <section id="section-quiz" class="space-y-6 hidden">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 sm:p-8 max-w-2xl mx-auto">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-4 mb-6">
+                    <div>
+                        <h3 class="font-bold text-xl text-slate-900">Eliminador de Portuñol</h3>
+                        <p class="text-xs text-slate-500">Teste de reter atenção em casos práticos</p>
+                    </div>
+                    <span id="quiz-progress" class="text-xs font-bold font-mono bg-amber-50 text-amber-700 border border-amber-100 px-3 py-1 rounded-full">Pregunta 1 de 4</span>
+                </div>
+
+                <div id="quiz-content" class="space-y-6"></div>
+
+                <div id="quiz-actions" class="mt-8 pt-4 border-t border-slate-100 flex justify-between items-center hidden">
+                    <p id="quiz-feedback-text" class="text-sm font-medium"></p>
+                    <button onclick="nextQuizQuestion()" id="quiz-next-btn" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-md transition flex items-center gap-2">
+                        Siguiente <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <div id="quiz-results" class="text-center py-6 space-y-4 hidden">
+                    <div class="inline-flex bg-emerald-100 text-emerald-800 p-4 rounded-full mx-auto" id="result-icon-box">
+                        <i data-lucide="award" class="w-10 h-10"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-slate-900" id="result-title">¡Excelente nivel!</h4>
+                    <p class="text-sm text-slate-600 max-w-md mx-auto" id="result-desc">Parabéns! Você conseguiu identificar as principais armadilhas iniciais do espanhol.</p>
+                    <button onclick="restartQuiz()" class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-amber-600 hover:text-amber-700 transition">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Repetir test
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 mt-24 py-8">
+        <div class="max-w-5xl mx-auto px-4 text-center text-xs text-slate-400 space-y-2">
+            <p class="font-semibold text-slate-500">Aguirre Studio &copy; 2026</p>
+            <p>Metodología y Materiales 100% personalizado para nuestros estudiantes</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tabId) {
+            const tabs = ['study', 'flashcards', 'quiz'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                const sec = document.getElementById(`section-${t}`);
+                if (t === tabId) {
+                    btn.classList.add('border-amber-600', 'text-amber-600');
+                    btn.classList.remove('border-transparent', 'text-slate-500');
+                    sec.classList.remove('hidden');
+                    sec.classList.add('block');
+                } else {
+                    btn.classList.remove('border-amber-600', 'text-amber-600');
+                    btn.classList.add('border-transparent', 'text-slate-500');
+                    sec.classList.remove('block');
+                    sec.classList.add('hidden');
+                }
+            });
+            if(tabId === 'flashcards') updateFlashcardUI();
+            if(tabId === 'quiz' && currentQuizIndex === 0) loadQuizQuestion();
+        }
+
+        function simulateAudio(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'es-ES'; 
+                utterance.rate = 0.85; 
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Seu navegador não suporta áudio nativo.");
+            }
+        }
+
+        const vocabularyDataset = [
+            { term: 'Aceitar', spanish: 'Lubrificar / Colocar óleo ou graxa', category: 'Falso Amigo Mecânico', example: 'Debo aceitar la cadena de mi bicicleta.' },
+            { term: 'Exquisito', spanish: 'Sabor delicioso / Muito gostoso', category: 'Gastronomia', example: 'Este plato que preparaste está exquisito, ¡gracias!' },
+            { term: 'Cuello', spanish: 'Pescoço (Parte do corpo)', category: 'Corpo Humano', example: 'Me duele el cuello por trabajar frente a la pantalla.' },
+            { term: 'Salada', spanish: 'Comida com excesso de sal (Salgada)', category: 'Gastronomia', example: 'La sopa quedó muy salada, no le agregues más sal.' },
+            { term: 'Criatura', spanish: 'Criança pequena / Bebê', category: 'Palavra Cotidiana', example: '¡Qué criatura tan hermosa! ¿Cuántos meses tiene?' }
+        ];
+
+        let currentFcIndex = 0;
+        function toggleFlashcard() {
+            document.getElementById('flashcard-element').classList.toggle('flipped');
+        }
+        function updateFlashcardUI() {
+            document.getElementById('flashcard-element').classList.remove('flipped');
+            const card = vocabularyDataset[currentFcIndex];
+            document.getElementById('fc-front-text').innerText = card.term;
+            document.getElementById('fc-back-translation').innerText = card.spanish;
+            document.getElementById('fc-back-example').innerText = card.example;
+            document.getElementById('fc-counter').innerText = `${currentFcIndex + 1} / ${vocabularyDataset.length}`;
+        }
+        function nextFlashcard() {
+            currentFcIndex = (currentFcIndex + 1) % vocabularyDataset.length;
+            updateFlashcardUI();
+        }
+        function prevFlashcard() {
+            currentFcIndex = (currentFcIndex - 1 + vocabularyDataset.length) % vocabularyDataset.length;
+            updateFlashcardUI();
+        }
+
+        const quizQuestions = [
+            {
+                scenario: "Você quer elogiar o jantar na casa de um cliente hispânico e dizer que a comida está muito gostosa. Qual palavra você usa?",
+                options: ["Esta comida está exquisita.", "Esta comida está esquisita.", "Esta comida está muy salada.", "Esta comida está perversa."],
+                correct: 0,
+                explanation: "¡Eso es! 'Exquisito' significa delicioso. Se disser 'esquisita', vai parecer que a comida está estranha ou ruim."
+            },
+            {
+                scenario: "Como você pede corretamente o leite para o café da manhã em um hotel respeitando o gênero correto em espanhol?",
+                options: ["Me gustaría pedir el leche.", "Me gustaría pedir un leche.", "Me gustaría pedir la leche.", "Me gustaría pedir lo leite."],
+                correct: 2,
+                explanation: "¡Perfecto! Em espanhol dizemos 'LA leche' (feminino), ao contrário do português 'o leite'."
+            },
+            {
+                scenario: "Um mecânico ou colega de trabalho lhe diz: 'Tengo que aceitar los engranajes'. O que ele vai fazer?",
+                options: ["Vai aceitar as regras do jogo.", "Vai lubrificar ou colocar óleo nas engrenagens.", "Vai preparar uma salada de alface.", "Vai concordar com o chefe."],
+                correct: 1,
+                explanation: "¡Muy bien! 'Aceitar' vem de 'aceite' (óleo). Significa lubrificar."
+            },
+            {
+                scenario: "Você quer falar sobre o percurso que fez de avião até aqui. Qual é a estrutura limpa e correta?",
+                options: ["La viaje fue muy productiva.", "El viaje fue muy productivo.", "Lo viaje fue muy largo.", "El viaje fue muy productiva."],
+                correct: 1,
+                explanation: "¡Excelente! Palavras terminadas em '-aje' são sempre masculinas em espanhol: EL viaje, EL equipaje."
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let score = 0;
+
+        function loadQuizQuestion() {
+            if(currentQuizIndex >= quizQuestions.length) {
+                showQuizResults();
+                return;
+            }
+
+            document.getElementById('quiz-progress').innerText = `Pregunta ${currentQuizIndex + 1} de ${quizQuestions.length}`;
+            document.getElementById('quiz-actions').classList.add('hidden');
+            
+            const q = quizQuestions[currentQuizIndex];
+            let html = `
+                <div class="space-y-4">
+                    <p class="text-base text-slate-800 font-medium leading-relaxed bg-slate-50 border border-slate-100 p-4 rounded-xl shadow-inner">
+                        <span class="block text-xs uppercase tracking-wider text-amber-600 font-bold mb-1">Caso de Análise:</span>
+                        ${q.scenario}
+                    </p>
+                    <div class="grid grid-cols-1 gap-3 pt-2">
+            `;
+
+            q.options.forEach((opt, idx) => {
+                html += `
+                    <button onclick="submitAnswer(${idx})" id="opt-${idx}" class="w-full text-left p-4 rounded-xl border border-slate-200 hover:bg-amber-50/50 hover:border-amber-200 transition text-sm font-medium flex items-center justify-between group">
+                        <span>${opt}</span>
+                        <div class="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center group-hover:border-amber-500 bg-white text-white text-xs font-bold"></div>
+                    </button>
+                `;
+            });
+
+            html += `</div></div>`;
+            document.getElementById('quiz-content').innerHTML = html;
+        }
+
+        function submitAnswer(selectedIndex) {
+            const q = quizQuestions[currentQuizIndex];
+            
+            q.options.forEach((_, idx) => {
+                const btn = document.getElementById(`opt-${idx}`);
+                btn.disabled = true;
+                if(idx === q.correct) {
+                    btn.classList.remove('hover:bg-amber-50/50', 'border-slate-200');
+                    btn.classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-900');
+                    btn.querySelector('div').classList.add('bg-emerald-500', 'border-emerald-500');
+                    btn.querySelector('div').innerHTML = '✓';
+                } else if(idx === selectedIndex) {
+                    btn.classList.remove('hover:bg-amber-50/50', 'border-slate-200');
+                    btn.classList.add('bg-rose-50', 'border-rose-300', 'text-rose-900');
+                    btn.querySelector('div').classList.add('bg-rose-500', 'border-rose-500');
+                    btn.querySelector('div').innerHTML = '✕';
+                }
+            });
+
+            const feedbackText = document.getElementById('quiz-feedback-text');
+            if(selectedIndex === q.correct) {
+                score++;
+                feedbackText.innerText = q.explanation;
+                feedbackText.className = "text-sm font-semibold text-emerald-700 max-w-md";
+            } else {
+                feedbackText.innerText = `Cuidado! Resposta correta: ${q.options[q.correct]}.`;
+                feedbackText.className = "text-sm font-semibold text-rose-600 max-w-md";
+            }
+
+            document.getElementById('quiz-actions').classList.remove('hidden');
+        }
+
+        function nextQuizQuestion() {
+            currentQuizIndex++;
+            loadQuizQuestion();
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-content').innerHTML = "";
+            document.getElementById('quiz-progress').classList.add('hidden');
+            document.getElementById('quiz-actions').classList.add('hidden');
+            
+            const resultsDiv = document.getElementById('quiz-results');
+            const iconBox = document.getElementById('result-icon-box');
+            const title = document.getElementById('result-title');
+            const desc = document.getElementById('result-desc');
+            
+            resultsDiv.classList.remove('hidden');
+            
+            if(score === quizQuestions.length) {
+                iconBox.className = "inline-flex bg-emerald-100 text-emerald-800 p-4 rounded-full mx-auto";
+                title.innerText = "¡Portuñol Desactivado! 🇧🇷 ✈️ 🇪🇸";
+                desc.innerText = `Excelente! Você acertou ${score}/${quizQuestions.length}. Tem total controle sobre as pegadinhas automáticas.`;
+            } else {
+                iconBox.className = "inline-flex bg-amber-100 text-amber-800 p-4 rounded-full mx-auto";
+                title.innerText = "Bom progresso, continue praticando!";
+                desc.innerText = `Você acertou ${score} de ${quizQuestions.length}. Dê mais uma olhada nas dicas de scaffolding antes de avançar.`;
+            }
+        }
+
+        function restartQuiz() {
+            currentQuizIndex = 0;
+            score = 0;
+            document.getElementById('quiz-progress').classList.remove('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+            loadQuizQuestion();
+        }
+    </script>
+</body>
+</html>
