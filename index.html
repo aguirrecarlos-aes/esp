@@ -7,27 +7,27 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght=300;400;500;600;700&family=Atkinson+Hyperlegible:wght=400;700&swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
-            /* Nueva Paleta: Deep Slate & Ochre (Clean, Profesional y Llamativo) */
-            --bg-color: #F4F6F9; /* Gris azulado muy suave, limpio y alejado del blanco puro */
-            --bg-gradient: linear-gradient(180deg, #F4F6F9 0%, #E9EDF2 100%);
-            --card-bg: #FFFFFF;
-            --card-bg-hover: #FAFBFD;
-            --text-main: #1E293B; /* Pizarra oscuro para máxima legibilidad */
-            --text-muted: #64748B; /* Slate secundario */
+            /* Paleta Modo Oscuro Premium - Inspirada en image_65dac1.png */
+            --bg-color: #1A1A1A; /* Fondo oscuro profundo */
+            --bg-gradient: linear-gradient(180deg, #1A1A1A 0%, #151515 100%);
+            --card-bg: #222222;  /* Tarjetas ligeramente más claras para dar contraste */
+            --card-bg-hover: #262626;
+            --text-main: #E2E8F0; /* Blanco suave/gris claro para lectura cómoda */
+            --text-muted: #94A3B8; /* Gris medio para textos secundarios y placeholders */
             
-            /* Acentos llamativos pero corporativos */
-            --accent: #D97706; /* Ocre / Ámbar enérgico y profesional */
-            --accent-soft: #FBBF24; /* Calidez secundaria */
-            --accent-strong: #B45309; /* Variación oscura para elementos pequeños o iconos */
+            /* Acentos Naranja / Ocre según la captura */
+            --accent: #F97316; /* Naranja enérgico de los títulos y botones */
+            --accent-soft: rgba(249, 115, 22, 0.1); /* Fondo sutil para badges e iconos */
+            --accent-strong: #EA580C; /* Variación para hovers */
             
-            --focus-ring: #3B82F6; /* Azul limpio para enfoque */
-            --border-soft: rgba(30, 41, 59, 0.08);
+            --focus-ring: #F97316;
+            --border-soft: rgba(255, 255, 255, 0.05); /* Bordes muy finos y oscuros */
 
             /* Tipografía */
             --font-display: 'Lexend', sans-serif;
@@ -97,7 +97,7 @@
             font-family: var(--font-body);
             font-size: 0.85rem;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             transition: all 0.2s ease;
         }
 
@@ -132,7 +132,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background-color: var(--card-bg);
+            background-color: #262626;
             border: 1px solid var(--border-soft);
             color: var(--accent);
             padding: 0.4rem 1rem;
@@ -140,7 +140,6 @@
             font-size: 0.85rem;
             font-weight: 500;
             margin-bottom: 1.25rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         header h1 {
@@ -149,7 +148,7 @@
             font-size: 2.4rem;
             letter-spacing: -0.5px;
             margin-bottom: 0.6rem;
-            color: var(--text-main);
+            color: #FFFFFF;
         }
 
         header h1 span {
@@ -173,25 +172,25 @@
 
         .search-wrap input {
             width: 100%;
-            background-color: var(--card-bg);
+            background-color: #222222;
             border: 1px solid var(--border-soft);
-            color: var(--text-main);
+            color: #FFFFFF;
             font-family: var(--font-body);
             font-size: 1rem;
             padding: 0.85rem 1rem 0.85rem 2.8rem;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .search-wrap input::placeholder {
             color: var(--text-muted);
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
         .search-wrap input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
             outline: none;
         }
 
@@ -209,7 +208,7 @@
             font-size: 1.3rem;
             font-weight: 600;
             margin: 3rem 0 1.25rem;
-            color: var(--text-main);
+            color: #FFFFFF;
             display: flex;
             align-items: center;
             gap: 0.6rem;
@@ -232,7 +231,7 @@
             border-radius: 14px;
             padding: 1.8rem;
             border: 1px solid var(--border-soft);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
             display: flex;
             flex-direction: column;
@@ -244,9 +243,9 @@
 
         .card:hover {
             transform: translateY(-4px);
-            border-color: rgba(217, 119, 6, 0.4);
+            border-color: rgba(249, 115, 22, 0.4);
             background-color: var(--card-bg-hover);
-            box-shadow: 0 12px 24px rgba(30, 41, 59, 0.08);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
         }
 
         .card-top {
@@ -262,7 +261,7 @@
             font-weight: 600;
             letter-spacing: 0.08em;
             color: var(--accent);
-            background-color: rgba(217, 119, 6, 0.08);
+            background-color: rgba(249, 115, 22, 0.12);
             padding: 0.3rem 0.7rem;
             border-radius: 999px;
         }
@@ -271,11 +270,11 @@
             width: 38px;
             height: 38px;
             border-radius: 10px;
-            background-color: rgba(251, 191, 36, 0.12);
+            background-color: rgba(249, 115, 22, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent-strong);
+            color: var(--accent);
             font-size: 1.1rem;
         }
 
@@ -284,7 +283,7 @@
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            color: var(--text-main);
+            color: #FFFFFF;
         }
 
         .card-content p {
@@ -305,7 +304,7 @@
             font-size: 0.75rem;
             font-weight: 500;
             color: var(--text-muted);
-            background-color: rgba(30, 41, 59, 0.04);
+            background-color: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-soft);
             padding: 0.25rem 0.6rem;
             border-radius: 999px;
@@ -364,22 +363,32 @@
             display: block;
         }
 
-        /* Próximamente */
+        /* Próximamente (Clase Deshabilitada/Bloqueada) */
         .card.coming-soon {
             border-style: dashed;
-            opacity: 0.65;
+            opacity: 0.4;
             animation: none;
         }
 
         .card.coming-soon:hover {
             transform: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             background-color: var(--card-bg);
             border-color: var(--border-soft);
         }
 
+        .card.coming-soon .class-number {
+            color: var(--text-muted);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .card.coming-soon .class-icon {
+            color: var(--text-muted);
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
         .card.coming-soon .btn {
-            border-color: var(--text-muted);
+            border-color: rgba(255, 255, 255, 0.1);
             color: var(--text-muted);
             pointer-events: none;
         }
@@ -561,7 +570,7 @@
         </main>
 
         <footer>
-            <p>&copy; 2026 Aguirre Studio. Hecho con con <span class="heart">&#9825;</span> para nuestros estudiantes.</p>
+            <p>&copy; 2026 Aguirre Studio. Hecho con <span class="heart">&#9825;</span> para nuestros estudiantes.</p>
         </footer>
     </div>
 
