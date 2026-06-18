@@ -13,21 +13,21 @@
 
     <style>
         :root {
-            /* Paleta Modo Oscuro Premium - Inspirada en image_65dac1.png */
-            --bg-color: #1A1A1A; /* Fondo oscuro profundo */
+            /* Paleta Modo Oscuro Premium */
+            --bg-color: #1A1A1A; 
             --bg-gradient: linear-gradient(180deg, #1A1A1A 0%, #151515 100%);
-            --card-bg: #222222;  /* Tarjetas ligeramente más claras para dar contraste */
+            --card-bg: #222222;  
             --card-bg-hover: #262626;
-            --text-main: #E2E8F0; /* Blanco suave/gris claro para lectura cómoda */
-            --text-muted: #94A3B8; /* Gris medio para textos secundarios y placeholders */
+            --text-main: #E2E8F0; 
+            --text-muted: #94A3B8; 
             
-            /* Acentos Naranja / Ocre según la captura */
-            --accent: #F97316; /* Naranja enérgico de los títulos y botones */
-            --accent-soft: rgba(249, 115, 22, 0.1); /* Fondo sutil para badges e iconos */
-            --accent-strong: #EA580C; /* Variación para hovers */
+            /* Acentos Naranja / Ocre */
+            --accent: #F97316; 
+            --accent-soft: rgba(249, 115, 22, 0.1); 
+            --accent-strong: #EA580C; 
             
             --focus-ring: #F97316;
-            --border-soft: rgba(255, 255, 255, 0.05); /* Bordes muy finos y oscuros */
+            --border-soft: rgba(255, 255, 255, 0.05); 
 
             /* Tipografía */
             --font-display: 'Lexend', sans-serif;
@@ -60,7 +60,6 @@
             padding: 2rem 1.25rem;
         }
 
-        /* Foco visible accesible para teclado */
         a:focus-visible,
         button:focus-visible,
         .lang-btn:focus-visible {
@@ -108,7 +107,6 @@
             background-color: var(--card-bg-hover);
         }
 
-        /* Modo lectura cómoda */
         body.comfort-mode {
             font-size: 1.15rem;
             line-height: 2;
@@ -163,7 +161,7 @@
             margin: 0 auto;
         }
 
-        /* ===== Buscador de clases ===== */
+        /* ===== Buscador ===== */
         .search-wrap {
             max-width: 480px;
             margin: 2rem auto 0;
@@ -202,7 +200,7 @@
             color: var(--text-muted);
         }
 
-        /* ===== Grid de clases / Secciones ===== */
+        /* ===== Grid de secciones ===== */
         .section-title {
             font-family: var(--font-display);
             font-size: 1.3rem;
@@ -238,7 +236,6 @@
             justify-content: space-between;
             opacity: 0;
             animation: fadeUp 0.6s ease forwards;
-            vertical-align: top;
         }
 
         .card:hover {
@@ -363,36 +360,6 @@
             display: block;
         }
 
-        /* Próximamente (Clase Deshabilitada/Bloqueada) */
-        .card.coming-soon {
-            border-style: dashed;
-            opacity: 0.4;
-            animation: none;
-        }
-
-        .card.coming-soon:hover {
-            transform: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            background-color: var(--card-bg);
-            border-color: var(--border-soft);
-        }
-
-        .card.coming-soon .class-number {
-            color: var(--text-muted);
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .card.coming-soon .class-icon {
-            color: var(--text-muted);
-            background-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .card.coming-soon .btn {
-            border-color: rgba(255, 255, 255, 0.1);
-            color: var(--text-muted);
-            pointer-events: none;
-        }
-
         /* ===== Footer ===== */
         footer {
             text-align: center;
@@ -428,7 +395,6 @@
             }
         }
 
-        /* ===== Responsive ===== */
         @media (max-width: 480px) {
             header h1 {
                 font-size: 1.9rem;
@@ -515,19 +481,20 @@
                         Acceder a la clase <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
- <div class="card" data-keywords="comprensión pronunciación  rutinas verbos fluidez sonidos pronunciación describir personas artículos" style="animation-delay: 0.15s">
+
+                <div class="card" data-keywords="comprensión pronunciación rutinas verbos fluidez sonidos pronunciación describir personas artículos" style="animation-delay: 0.25s">
                     <div>
                         <div class="card-top">
                             <span class="class-number">CLASE 3</span>
                             <span class="class-icon"><i class="fa-solid fa-comments"></i></span>
                         </div>
                         <div class="card-content">
-                            <h2>¿Que haces cada día?</h2>
-                            <p> Verbos -AR, Sonido /s/,  rutinas y conversaciones diarias </p>
+                            <h2>¿Qué haces cada día?</h2>
+                            <p>Verbos -AR, Sonido /s/, rutinas y conversaciones diarias.</p>
                             <div class="tags">
                                 <span class="tag">Rutinas</span>
-                                     <span class="tag">Verbos</span>
-                                     <span class="tag">Sonidos y pronunciación</span>
+                                <span class="tag">Verbos</span>
+                                <span class="tag">Sonidos y pronunciación</span>
                                 <span class="tag">Vocabulario</span>
                             </div>
                         </div>
@@ -536,23 +503,24 @@
                         Acceder a la clase <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
-                
-                <div class="card coming-soon" data-keywords="próxima clase futura" style="animation-delay: 0.25s">
+
+                <div class="card" data-keywords="clase 4 conversación intermedia gramática práctica fluidez" style="animation-delay: 0.35s">
                     <div>
                         <div class="card-top">
                             <span class="class-number">CLASE 4</span>
-                            <span class="class-icon"><i class="fa-solid fa-hourglass-half"></i></span>
+                            <span class="class-icon"><i class="fa-solid fa-book-bookmark"></i></span>
                         </div>
                         <div class="card-content">
-                            <h2>Próxima clase</h2>
-                            <p>Este espacio se habilitará pronto con nuevo material y actividades.</p>
+                            <h2>Clase 4</h2>
+                            <p>Continúa avanzando con nuevas dinámicas, ejercicios prácticos y desarrollo de la fluidez.</p>
                             <div class="tags">
-                                <span class="tag">Próximamente</span>
+                                <span class="tag">Gramática</span>
+                                <span class="tag">Interactivo</span>
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="btn" aria-disabled="true">
-                        Disponible pronto <i class="fa-solid fa-lock"></i>
+                    <a href="clase4/index.html" class="btn">
+                        Acceder a la clase <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
 
@@ -562,7 +530,7 @@
             
             <div class="grid" id="extraGrid">
                 
-                <div class="card" data-keywords="material extra vocabulario recopilación repaso glosario palabras" style="animation-delay: 0.35s">
+                <div class="card" data-keywords="material extra vocabulario recopilación repaso glosario palabras" style="animation-delay: 0.45s">
                     <div>
                         <div class="card-top">
                             <span class="class-number">RECURSO</span>
@@ -579,6 +547,26 @@
                     </div>
                     <a href="material-extra/vocabulario/index.html" class="btn" target="_blank" rel="noopener noreferrer">
                         Abrir material <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="card" data-keywords="material extra ejercicios práctica cuestionario tareas actividades interactivo" style="animation-delay: 0.55s">
+                    <div>
+                        <div class="card-top">
+                            <span class="class-number">RECURSO</span>
+                            <span class="class-icon"><i class="fa-solid fa-pen-to-square"></i></span>
+                        </div>
+                        <div class="card-content">
+                            <h2>Ejercicios Prácticos</h2>
+                            <p>Actividades interactivas y guías de desarrollo para poner a prueba tus conocimientos y consolidar lo aprendido.</p>
+                            <div class="tags">
+                                <span class="tag">Práctica</span>
+                                <span class="tag">Ejercicios</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="material-extra/Ejercicios/index.html" class="btn" target="_blank" rel="noopener noreferrer">
+                        Abrir ejercicios <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
                 
