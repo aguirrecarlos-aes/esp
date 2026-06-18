@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Español en Acción · Clase 04 – Aguirre Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* ─── RESET & BASE ─────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #cbd5e1;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            font-family: 'Lexend', sans-serif;
+            overflow: hidden;
+        }
+
+        /* ─── SLIDE SHELL ──────────────────────────────────────── */
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: #fff9e6;
+            display: none;
+            flex-direction: column;
+            padding: 36px 56px 90px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,.22);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .slide.active { display: flex; }
+
+        /* ─── TYPOGRAPHY ───────────────────────────────────────── */
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #1e3a8a;
+            border-left: 12px solid #d97706;
+            padding-left: 18px;
+            margin-bottom: 16px;
+            line-height: 1.15;
+        }
+        .sub { font-size: 20px; color: #475569; font-weight: 600; margin-bottom: 10px; }
+        p, li { font-size: 22px; color: #1e293b; line-height: 1.5; }
+
+        /* ─── PILLS & HIGHLIGHTS ───────────────────────────────── */
+        .pill { padding: 6px 16px; border-radius: 8px; font-weight: 700; display: inline-block; margin: 4px; font-size: 20px; }
+        .p-blue  { background: #dbeafe; color: #1e40af; }
+        .p-pink  { background: #fce7f3; color: #9d174d; }
+        .p-green { background: #dcfce7; color: #14532d; }
+        .p-amber { background: #fef3c7; color: #92400e; }
+        .p-red   { background: #fee2e2; color: #991b1b; }
+        .p-purple{ background: #ede9fe; color: #5b21b6; }
+        .under { text-decoration: underline; text-decoration-thickness: 3px; }
+
+        /* ─── GRID CARDS ───────────────────────────────────────── */
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; }
+        .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; flex: 1; }
+        .card {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 18px;
+            border-top: 6px solid #1e3a8a;
+            box-shadow: 0 4px 10px rgba(0,0,0,.06);
+        }
+        .card h3 { font-size: 19px; color: #1e293b; margin-bottom: 8px; }
+        .card p  { font-size: 16px; color: #475569; }
+
+        /* ─── INTERACTIVE ZONE ─────────────────────────────────── */
+        .iz {
+            background: #0f172a;
+            border-radius: 26px;
+            padding: 22px 28px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+        .iz-big   { font-size: 68px; color: #fbbf24; font-weight: 700; }
+        .iz-label { font-size: 22px; color: #94a3b8; font-weight: 600; }
+
+        /* ─── BUTTONS ──────────────────────────────────────────── */
+        .btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 12px 26px;
+            font-size: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Lexend', sans-serif;
+            transition: background .2s, transform .15s;
+        }
+        .btn:hover { background: #2563eb; transform: translateY(-2px); }
+        .btn-reveal { background: #059669; }
+        .btn-reveal:hover { background: #10b981; }
+        .btn-abs { position: absolute; top: 16px; right: 22px; }
+
+        /* ─── ANSWER BOX ───────────────────────────────────────── */
+        .ans-box {
+            background: #f0fdf4;
+            color: #14532d;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 19px;
+            font-weight: 700;
+            width: 100%;
+            border: 3px dashed #16a34a;
+            display: none;
+            text-align: center;
+        }
+
+        /* ─── SCAFFOLD STRIP ───────────────────────────────────── */
+        .scaffold {
+            background: #eff6ff;
+            border-left: 8px solid #1e3a8a;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 19px;
+            color: #1e3a8a;
+            line-height: 1.7;
+        }
+        .scaffold strong { color: #d97706; }
+
+        /* ─── SPEAK BADGE ──────────────────────────────────────── */
+        .speak-badge {
+            display: inline-block;
+            background: #d97706;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 4px 12px;
+            margin-bottom: 8px;
+            letter-spacing: .5px;
+        }
+
+        /* ─── VERB TABLE ───────────────────────────────────────── */
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+            margin-top: 8px;
+        }
+        .verb-table tr.head-row { background: #f1f5f9; }
+        .verb-table td { padding: 5px 8px; color: #1e293b; }
+        .verb-table tr:nth-child(even):not(.head-row) { background: #f8fafc; }
+
+        /* ─── TIMELINE / ROUTINE ───────────────────────────────── */
+        .timeline {
+            display: flex;
+            gap: 0;
+            align-items: stretch;
+            flex: 1;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0,0,0,.08);
+        }
+        .tl-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 16px 10px;
+            border-right: 2px solid #e2e8f0;
+            background: white;
+            text-align: center;
+            gap: 6px;
+        }
+        .tl-item:last-child { border-right: none; }
+        .tl-item.active-tl { background: #1e3a8a; }
+        .tl-item.active-tl .tl-time,
+        .tl-item.active-tl .tl-verb,
+        .tl-item.active-tl .tl-pt { color: white !important; }
+        .tl-emoji { font-size: 30px; }
+        .tl-time  { font-size: 15px; color: #64748b; font-weight: 700; }
+        .tl-verb  { font-size: 17px; color: #1e293b; font-weight: 700; }
+        .tl-pt    { font-size: 13px; color: #94a3b8; }
+
+        /* ─── READING TEXT ─────────────────────────────────────── */
+        .reading-box {
+            background: white;
+            border-radius: 18px;
+            padding: 20px 26px;
+            border-left: 10px solid #1e3a8a;
+            box-shadow: 0 4px 14px rgba(0,0,0,.07);
+            font-size: 19px;
+            line-height: 1.85;
+            color: #1e293b;
+            flex: 1;
+            overflow-y: auto;
+        }
+        .reading-box em { color: #1e3a8a; font-style: normal; font-weight: 700; }
+        .reading-box .verb-hl { color: #059669; font-weight: 700; }
+        .reading-q { background: #fef3c7; border-radius: 10px; padding: 10px 16px; font-size: 18px; color: #92400e; margin-top: 6px; font-weight: 600; }
+
+        /* ─── WRITE ZONE ───────────────────────────────────────── */
+        .write-area {
+            width: 100%;
+            border: 3px solid #1e3a8a;
+            border-radius: 14px;
+            padding: 14px 18px;
+            font-size: 19px;
+            font-family: 'Lexend', sans-serif;
+            resize: none;
+            background: #f8fafc;
+            color: #1e293b;
+            outline: none;
+            transition: border-color .2s;
+        }
+        .write-area:focus { border-color: #d97706; }
+        .write-area::placeholder { color: #94a3b8; }
+
+        /* ─── FOOTER NAV ───────────────────────────────────────── */
+        .nav {
+            position: absolute;
+            bottom: 22px;
+            left: 56px;
+            right: 56px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 12px;
+            background: #fff9e6;
+            z-index: 10;
+        }
+        .nav-counter { font-weight: 700; color: #94a3b8; font-size: 17px; }
+        .nav-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 18px;
+            font-family: 'Lexend', sans-serif;
+            transition: background .18s, color .18s;
+        }
+        .nav-btn:hover:not(:disabled) { background: #1e3a8a; color: white; }
+        .nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+        /* ─── DIVIDER ACCENT ───────────────────────────────────── */
+        .accent-bar { width: 120px; height: 8px; background: #d97706; border-radius: 4px; margin: 22px auto; }
+
+        /* ─── PROGRESS BAR ─────────────────────────────────────── */
+        .progress-track {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 0 0 24px 24px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #d97706;
+            border-radius: 0 0 24px 24px;
+            transition: width .4s ease;
+        }
+
+        /* ─── CONJUGATION HIGHLIGHT ─────────────────────────────── */
+        .conj-ending { color: #d97706; font-weight: 900; }
+
+        /* ─── BLANK FILL ────────────────────────────────────────── */
+        .blank {
+            display: inline-block;
+            min-width: 90px;
+            border-bottom: 3px solid #1e3a8a;
+            margin: 0 4px;
+            font-weight: 700;
+            color: #1e3a8a;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 1 — PORTADA
+═══════════════════════════════════════════════════ -->
+<div class="slide active" id="s1" style="justify-content:center; align-items:center; text-align:center;">
+    <p style="font-size:20px; font-weight:700; color:#d97706; letter-spacing:2px; text-transform:uppercase;">Clase 04</p>
+    <h1 style="font-family:'Poppins',sans-serif; font-size:72px; color:#1e3a8a; line-height:1.1; margin-top:10px;">¿Qué haces<br>durante la semana?</h1>
+    <div class="accent-bar"></div>
+    <p style="font-size:24px; color:#64748b; font-weight:600;">Verbos -ER / -IR · Días de la semana · Tu turno de hablar</p>
+    <p style="margin-top:35px; font-weight:700; color:#1e3a8a; font-size:20px;">Aguirre Studio</p>
+    <div class="nav">
+        <span class="nav-counter">1 / 13</span>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog" style="width:7.7%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 2 — CHARLA RELÁMPAGO (repaso Clase 03)
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s2">
+    <div class="slide-title">⚡ Charla Relámpago — Repaso</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — ¿Qué recuerdas de la clase anterior?</div>
+    <p style="margin-bottom:14px;">Gira la pregunta y responde con confianza. ¡Usa lo que aprendiste en la Clase 03!</p>
+
+    <div class="iz" style="background:#1e293b; gap:14px;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('r-ans')">👁️ Ver ayuda</button>
+        <div style="margin-top:30px; text-align:center;">
+            <div class="iz-label">Tu pregunta es:</div>
+            <div id="r-q" style="font-size:32px; line-height:1.5; max-width:900px; color:#fbbf24; font-weight:700; margin-top:10px;">🎲</div>
+        </div>
+        <button class="btn" onclick="rollReview()">🎲 Girar Pregunta</button>
+        <div class="ans-box" id="r-ans" style="font-size:17px; text-align:left;"></div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">2 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:15.4%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 3 — FONÉTICA: B y V (mismo sonido) + Icebreaker + Trabalenguas
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s3">
+    <div class="slide-title">🎙️ Gimnasia Fonética — Calentando la voz</div>
+
+    <div class="grid2" style="flex:1; gap:10px;">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="card" style="border-top-color:#1e3a8a; padding:12px 16px;">
+                <h3 style="font-size:17px; margin-bottom:6px;">🧊 Icebreaker — Pregunta exprés</h3>
+                <p style="font-size:14px; color:#475569; margin-bottom:6px;">Antes de empezar, respondan en español en 20 segundos:</p>
+                <p style="font-size:16px; color:#1e3a8a; font-weight:700;" id="icebreaker-q">🎲 Presiona para ver la pregunta</p>
+                <button class="btn" onclick="rollIce()" style="margin-top:8px; padding:7px 16px; font-size:14px;">🎲 Cambiar pregunta</button>
+            </div>
+            <div class="card" style="border-top-color:#d97706; padding:12px 16px;">
+                <h3 style="font-size:17px; margin-bottom:6px;">🔊 La B y la V — ¡el mismo sonido!</h3>
+                <p style="font-size:14px; color:#475569; margin-bottom:6px;">En español, <b>B y V suenan igual</b>: ambas son /b/.</p>
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin:4px 0;">
+                    <span class="pill p-green" style="font-size:15px; padding:4px 10px;"><b>b</b>eber</span>
+                    <span class="pill p-green" style="font-size:15px; padding:4px 10px;"><b>v</b>ivir</span>
+                    <span class="pill p-green" style="font-size:15px; padding:4px 10px;">nue<b>v</b>o</span>
+                </div>
+                <p style="font-size:13px; background:#fef3c7; padding:7px; border-radius:8px; color:#92400e; margin-top:4px;">
+                    En portugués, "viver" y "beber" suenan distinto. En español, ¡los dos son /b/!
+                </p>
+            </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="card" style="border-top-color:#059669; flex:1; padding:12px 16px;">
+                <h3 style="font-size:17px; margin-bottom:6px;">👅 Trabalenguas — repite 3 veces</h3>
+                <div id="tongue-twister" style="font-size:17px; color:#1e293b; font-weight:700; line-height:1.55; background:#f0fdf4; padding:10px; border-radius:10px; margin:6px 0;">
+                    "Juan tuvo un tubo, y el tubo que tuvo se le rompió; para recuperar el tubo que tuvo, tuvo que comprar un tubo igual al tubo que tuvo."
+                </div>
+                <button class="btn btn-reveal" onclick="rollTwister()" style="padding:7px 16px; font-size:14px;">🎲 Otro trabalenguas</button>
+                <p style="font-size:13px; color:#475569; margin-top:6px;">Trabalenguas tradicionales — fíjate cómo "tuvo" (V) y "tubo" (B) suenan exactamente igual.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="scaffold" style="margin-top:8px; padding:10px 16px; font-size:17px;">
+        <strong>Puente PT → ES:</strong> &nbsp;en portugués B y V suenan distinto; en español, siempre /b/ — no aprietes los labios para la V.
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">3 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:23.1%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 4 — VERBOS -ER e -IR: INTRODUCCIÓN
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s4">
+    <div class="slide-title">🔑 Verbos -ER e -IR — Los otros dos grupos</div>
+    <p style="margin-bottom:10px;">Ya dominas los verbos <b>-AR</b>. Ahora completamos el sistema: los verbos <b>-ER</b> y <b>-IR</b> usan terminaciones muy parecidas entre sí.</p>
+
+    <div class="grid2" style="flex:1; gap:12px;">
+        <div class="card" style="border-top-color:#1e3a8a;">
+            <h3>⚙️ Verbos -ER → COMER</h3>
+            <table class="verb-table">
+                <tr class="head-row"><td style="font-weight:700; color:#64748b;">Pronombre</td><td style="font-weight:700; color:#64748b;">Terminación</td><td style="font-weight:700; color:#d97706;">COMER</td></tr>
+                <tr><td>Yo</td><td style="color:#d97706; font-weight:700;">-o</td><td>com<b style="color:#d97706;">o</b></td></tr>
+                <tr><td>Tú</td><td style="color:#d97706; font-weight:700;">-es</td><td>com<b style="color:#d97706;">es</b></td></tr>
+                <tr><td>Él/Ella</td><td style="color:#d97706; font-weight:700;">-e</td><td>com<b style="color:#d97706;">e</b></td></tr>
+                <tr><td>Nosotros</td><td style="color:#d97706; font-weight:700;">-emos</td><td>com<b style="color:#d97706;">emos</b></td></tr>
+                <tr><td>Ellos</td><td style="color:#d97706; font-weight:700;">-en</td><td>com<b style="color:#d97706;">en</b></td></tr>
+            </table>
+        </div>
+        <div class="card" style="border-top-color:#059669;">
+            <h3>⚙️ Verbos -IR → VIVIR</h3>
+            <table class="verb-table">
+                <tr class="head-row"><td style="font-weight:700; color:#64748b;">Pronombre</td><td style="font-weight:700; color:#64748b;">Terminación</td><td style="font-weight:700; color:#059669;">VIVIR</td></tr>
+                <tr><td>Yo</td><td style="color:#059669; font-weight:700;">-o</td><td>viv<b style="color:#059669;">o</b></td></tr>
+                <tr><td>Tú</td><td style="color:#059669; font-weight:700;">-es</td><td>viv<b style="color:#059669;">es</b></td></tr>
+                <tr><td>Él/Ella</td><td style="color:#059669; font-weight:700;">-e</td><td>viv<b style="color:#059669;">e</b></td></tr>
+                <tr><td>Nosotros</td><td style="color:#059669; font-weight:700;">-imos</td><td>viv<b style="color:#059669;">imos</b></td></tr>
+                <tr><td>Ellos</td><td style="color:#059669; font-weight:700;">-en</td><td>viv<b style="color:#059669;">en</b></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Truco:</strong> -ER e -IR son casi idénticos — solo cambia <b>nosotros</b> (-emos / -imos). &nbsp;|&nbsp; Puente portugués: "comer" → como, comes, come, comemos, comem · "viver" → vivo, vives, vive, vivemos, vivem. ¡Casi igual!
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">4 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:30.8%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 5 — ACTIVIDAD: COMPLETA LA FRASE
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s5">
+    <div class="slide-title">🧩 ¿Qué falta? — Completa la oración</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — Lee la frase y completa el verbo</div>
+    <p style="margin-bottom:12px;">Aparece una oración incompleta. Elijan juntos qué verbo -ER o -IR va en el espacio. ¡Luego díganla en voz alta!</p>
+
+    <div class="iz" style="background:#1e293b; gap:14px;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('fill-ans')">👁️ Ver Respuesta</button>
+        <div style="text-align:center; margin-top:20px; padding:0 20px;">
+            <div class="iz-label">Completa la oración:</div>
+            <div id="fill-q" style="font-size:30px; line-height:1.6; color:white; font-weight:700; margin-top:14px; max-width:900px;">🎲</div>
+        </div>
+        <button class="btn" onclick="rollFill()">🎲 Nueva Oración</button>
+        <div class="ans-box" id="fill-ans" style="font-size:18px; text-align:left;"></div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Verbos del banco:</strong> &nbsp;
+        <span class="pill p-blue" style="font-size:16px;">como</span>
+        <span class="pill p-blue" style="font-size:16px;">bebes</span>
+        <span class="pill p-blue" style="font-size:16px;">lee</span>
+        <span class="pill p-blue" style="font-size:16px;">vivimos</span>
+        <span class="pill p-blue" style="font-size:16px;">escriben</span>
+        <span class="pill p-blue" style="font-size:16px;">asisto</span>
+        <span class="pill p-blue" style="font-size:16px;">abre</span>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">5 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:38.5%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 6 — MI SEMANA: VOCABULARIO
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s6">
+    <div class="slide-title">📅 Mi Semana — Vocabulario</div>
+    <p style="margin-bottom:10px;">Estos verbos describen lo que hacemos en distintos días de la semana. Fíjate en las actividades y en cómo conectar los días.</p>
+
+    <div class="timeline">
+        <div class="tl-item" style="background:#fef3c7;">
+            <div class="tl-emoji">💼</div>
+            <div class="tl-time">LUNES</div>
+            <div class="tl-verb"><b>Trabajo</b> todo el día</div>
+            <div class="tl-verb" style="color:#059669; font-size:15px;">Como en la oficina</div>
+            <div class="tl-pt" style="color:#92400e;">trabalho / como</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-emoji">📚</div>
+            <div class="tl-time">MIÉRCOLES</div>
+            <div class="tl-verb"><b>Asisto</b> a clase</div>
+            <div class="tl-verb" style="color:#059669; font-size:15px;">Leo en la noche</div>
+            <div class="tl-pt">assisto / leio</div>
+        </div>
+        <div class="tl-item active-tl">
+            <div class="tl-emoji">🎉</div>
+            <div class="tl-time" style="color:#93c5fd;">VIERNES</div>
+            <div class="tl-verb" style="color:white;"><b>Salgo</b> con amigos</div>
+            <div class="tl-verb" style="color:#86efac; font-size:15px;">Bebemos algo rico</div>
+            <div class="tl-pt" style="color:#94a3b8;">saio / bebemos</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-emoji">🛒</div>
+            <div class="tl-time">SÁBADO</div>
+            <div class="tl-verb"><b>Hago</b> las compras</div>
+            <div class="tl-verb" style="color:#059669; font-size:15px;">Limpio la casa</div>
+            <div class="tl-pt">faço / limpo</div>
+        </div>
+        <div class="tl-item" style="background:#fce7f3;">
+            <div class="tl-emoji">😌</div>
+            <div class="tl-time">DOMINGO</div>
+            <div class="tl-verb"><b>Descanso</b></div>
+            <div class="tl-verb" style="color:#059669; font-size:15px;">Escribo a mi familia</div>
+            <div class="tl-pt" style="color:#9d174d;">descanso / escrevo</div>
+        </div>
+    </div>
+
+    <div class="scaffold" style="margin-top:12px;">
+        <strong>Conectores clave:</strong> &nbsp;
+        <span class="pill p-amber" style="font-size:16px;">los lunes</span>
+        <span class="pill p-amber" style="font-size:16px;">entre semana</span>
+        <span class="pill p-amber" style="font-size:16px;">el fin de semana</span>
+        <span class="pill p-amber" style="font-size:16px;">todos los días</span>
+        <span class="pill p-amber" style="font-size:16px;">los fines de semana</span>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">6 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:46.2%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 7 — ACTIVIDAD ORAL: CUÉNTAME TU SEMANA
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s7">
+    <div class="slide-title">🎤 Cuéntame tu semana</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — 2 minutos cada uno</div>
+    <p style="margin-bottom:12px;">El dado muestra una pregunta sobre tu semana. ¡Responde con al menos <b>3 oraciones completas</b>! Usa los conectores de la página anterior.</p>
+
+    <div class="iz" style="background:#1e293b; gap:14px;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('sem-ans')">💡 Ver frases de apoyo</button>
+        <div style="text-align:center; margin-top:20px;">
+            <div class="iz-label">Tu pregunta:</div>
+            <div id="sem-q" style="font-size:30px; line-height:1.5; max-width:900px; color:#fbbf24; font-weight:700; margin-top:10px;">🎲</div>
+        </div>
+        <button class="btn" onclick="rollSemana()">🎲 Nueva Pregunta</button>
+        <div class="ans-box" id="sem-ans" style="font-size:16px; text-align:left;"></div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Recuerda:</strong> Yo com<span style="color:#d97706; font-weight:900;">o</span> / vivo / Yo viv<span style="color:#d97706; font-weight:900;">o</span> &nbsp;|&nbsp; "Los lunes, <b>yo</b>… Entre semana, <b>yo</b>… El fin de semana, <b>yo</b>…"
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">7 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:53.8%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 8 — LECTURA: "La semana de Camila"
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s8">
+    <div class="slide-title">📖 Lectura: "La semana de Camila"</div>
+    <div class="speak-badge">📖 ACTIVIDAD DE LECTURA — voz alta por turnos</div>
+
+    <div class="reading-box">
+        <p>
+            <em>Camila</em> es chilena y <em>vive</em> en Valparaíso. Entre semana, Camila
+            <span class="verb-hl">trabaja</span> en una librería del centro. Los lunes y
+            miércoles, después del trabajo, <span class="verb-hl">asiste</span> a un curso de
+            inglés — ¡ella también está aprendiendo un idioma nuevo! <span class="verb-hl">Lee</span>
+            mucho, sobre todo novelas, y <span class="verb-hl">escribe</span> pequeñas reseñas en
+            su cuaderno.
+        </p>
+        <p style="margin-top:12px;">
+            Los viernes son especiales: Camila <span class="verb-hl">sale</span> con sus amigas
+            a comer algo rico en el Cerro Concepción. <span class="verb-hl">Comen</span> empanadas
+            o pasteles, y <span class="verb-hl">beben</span> jugo natural mientras conversan y
+            miran el mar. A veces <span class="verb-hl">beben</span> un <em>mote con huesillos</em>,
+            una bebida típica chilena, ¡muy refrescante en verano!
+        </p>
+        <p style="margin-top:12px;">
+            El fin de semana, Camila <span class="verb-hl">descansa</span>. Los sábados hace las
+            compras de la semana y limpia su departamento. Los domingos no trabaja: se levanta
+            tarde, <span class="verb-hl">lee</span> tranquila en su balcón y
+            <span class="verb-hl">escribe</span> cartas a su familia en el sur de Chile. ¡Camila
+            <em>vive</em> una vida ocupada pero feliz!
+        </p>
+    </div>
+
+    <div style="margin-top:10px; background:#fef3c7; border-radius:12px; padding:10px 18px;">
+        <p style="font-size:17px; color:#92400e; font-weight:600;">
+            🟢 = verbos -ER / -IR conjugados &nbsp;|&nbsp; Los <em style="color:#1e3a8a;">azules</em> = vocabulario clave &nbsp;|&nbsp; Lee en voz alta — recuerda que B y V suenan igual
+        </p>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">8 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:61.5%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 9 — COMPRENSIÓN ORAL + MINI ESCRITURA
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s9">
+    <div class="slide-title">📝 Comprensión + Tu primera oración</div>
+    <div class="speak-badge">✍️ ACTIVIDAD DE ESCRITURA — 3 minutos</div>
+
+    <div class="grid2" style="flex:1; gap:16px;">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="font-weight:700; font-size:18px; color:#1e3a8a; margin-bottom:2px;">🧠 Preguntas sobre Camila:</div>
+            <div class="card" style="border-top-color:#059669; padding:12px 16px;">
+                <p style="font-size:17px;">1. ¿Dónde vive Camila?</p>
+            </div>
+            <div class="card" style="border-top-color:#d97706; padding:12px 16px;">
+                <p style="font-size:17px;">2. ¿Qué hace los lunes y miércoles después del trabajo?</p>
+            </div>
+            <div class="card" style="border-top-color:#1e3a8a; padding:12px 16px;">
+                <p style="font-size:17px;">3. ¿Qué hacen Camila y sus amigas los viernes?</p>
+            </div>
+            <div class="card" style="border-top-color:#e11d48; padding:12px 16px;">
+                <p style="font-size:17px;">4. ¿Qué hace Camila los domingos?</p>
+            </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="font-weight:700; font-size:18px; color:#1e3a8a; margin-bottom:2px;">✍️ Escribe 2 oraciones sobre TU semana:</div>
+            <textarea class="write-area" rows="5" placeholder="Ejemplo: Yo vivo cerca de mi trabajo. Los viernes salgo con amigos..."></textarea>
+            <div class="scaffold" style="font-size:16px;">
+                <strong>Recuerda:</strong> verbo conjugado en YO: vivo, como, bebo, leo, escribo, asisto, salgo…
+            </div>
+            <button class="btn btn-reveal" onclick="toggleAns('write-ans')" style="align-self:flex-start;">👁️ Ver respuestas del texto</button>
+            <div class="ans-box" id="write-ans" style="font-size:16px; text-align:left;">
+                1. Vive en <b>Valparaíso</b>.<br>
+                2. <b>Asiste</b> a un curso de inglés.<br>
+                3. Salen a comer y <b>beben</b> jugo natural o mote con huesillos.<br>
+                4. Se levanta tarde, lee tranquila y escribe cartas a su familia.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">9 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:69.2%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 10 — ENTREVISTA EXPRÉS ¿TÚ QUÉ HACES?
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s10">
+    <div class="slide-title">🗣️ Entrevista Exprés — ¿Y tú?</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — Pregunta y responde en pares</div>
+    <p style="margin-bottom:12px;">Uno pregunta, el otro responde con una frase completa. ¡Luego cambian! El dado genera la pregunta.</p>
+
+    <div class="iz" style="background:#1e293b; gap:14px;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('interv-ans')">💡 Modelo de respuesta</button>
+        <div style="text-align:center; margin-top:20px;">
+            <div class="iz-label">Pregunta para tu compañero:</div>
+            <div id="interv-q" style="font-size:30px; line-height:1.5; max-width:900px; color:#fbbf24; font-weight:700; margin-top:10px;">🎲</div>
+        </div>
+        <button class="btn" onclick="rollInterv()">🎲 Nueva Pregunta</button>
+        <div class="ans-box" id="interv-ans" style="font-size:17px; text-align:left;"></div>
+    </div>
+
+    <div class="scaffold" style="margin-top:10px;">
+        <strong>Tip para preguntar:</strong> &nbsp;¿Con quién <b>+ vives</b>? &nbsp;|&nbsp; ¿Qué <b>lees / escribes</b>? &nbsp;|&nbsp; ¿A qué clases <b>asistes</b>?
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">10 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:76.9%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 11 — FALSOS AMIGOS RONDA 4
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s11">
+    <div class="slide-title">⚠️ Falsos Amigos — Ronda 4</div>
+    <p style="margin-bottom:10px;">¡Nuevas palabras peligrosas! ¿Sabes qué significan en español?</p>
+
+    <div class="iz" style="background:#1e293b;">
+        <button class="btn btn-reveal btn-abs" onclick="toggleAns('fa4-ans')">👁️ Revelar Significado</button>
+        <div style="margin-top:30px; text-align:center;">
+            <div class="iz-label">Palabra en español:</div>
+            <div id="fa4-word" class="iz-big" style="font-size:68px;">RATO</div>
+        </div>
+        <button class="btn" onclick="rollFA4()">🎲 Siguiente Palabra</button>
+        <div class="ans-box" id="fa4-ans" style="text-align:left; font-size:17px;"></div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">11 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:84.6%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 12 — PRODUCCIÓN FINAL: Describe tu semana
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s12">
+    <div class="slide-title">🏆 Desafío Final — Describe tu semana típica</div>
+    <div class="speak-badge">🎙️ ACTIVIDAD ORAL — 2 minutos por persona</div>
+
+    <div class="grid2" style="flex:1; gap:16px;">
+        <div class="iz" style="background:#1e293b; padding:20px 24px;">
+            <div style="text-align:center; margin-top:10px;">
+                <div class="iz-label">Tu situación para hablar:</div>
+                <div id="final-sit" style="font-size:24px; line-height:1.5; max-width:450px; color:#fbbf24; font-weight:700; margin-top:10px;">🎲</div>
+            </div>
+            <div style="display:flex; gap:12px; margin-top:12px;">
+                <button class="btn" onclick="rollFinal()">🎲 Nueva Situación</button>
+                <button class="btn btn-reveal" onclick="toggleAns('final-ans')">💡 Vocabulario de apoyo</button>
+            </div>
+            <div class="ans-box" id="final-ans" style="font-size:16px; text-align:left; margin-top:8px;"></div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="scaffold">
+                <strong>Estructura para hablar:</strong><br>
+                "Los lunes, yo <span style="color:#d97706;">___</span>…<br>
+                Entre semana, <span style="color:#d97706;">___</span>…<br>
+                Los viernes, <span style="color:#d97706;">___</span>…<br>
+                El sábado, <span style="color:#d97706;">___</span>…<br>
+                Los domingos, <span style="color:#d97706;">___</span>…"
+            </div>
+            <div class="card" style="border-top-color:#d97706;">
+                <h3>🎯 Objetivo mínimo hoy:</h3>
+                <p style="font-size:16px;">✅ 5 oraciones con verbos -ER/-IR<br>✅ Mencionar al menos 2 días de la semana<br>✅ Pronunciar B y V igual, sin apretar los labios<br>✅ Usar "todavía" correctamente</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">12 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:92.3%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 13 — CIERRE
+═══════════════════════════════════════════════════ -->
+<div class="slide" id="s13" style="justify-content:center; align-items:center; text-align:center;">
+    <h2 style="font-family:'Poppins',sans-serif; font-size:76px; color:#1e3a8a; line-height:1.1;">¡Excelente<br>trabajo!</h2>
+    <div class="accent-bar"></div>
+    <p style="font-size:24px; font-weight:700; color:#475569; margin-bottom:18px;">Hoy aprendieron:</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <span class="pill p-blue" style="font-size:17px;">🎙️ B y V — mismo sonido</span>
+        <span class="pill p-green" style="font-size:17px;">⚙️ Verbos -ER / -IR</span>
+        <span class="pill p-amber" style="font-size:17px;">📅 Mi semana</span>
+        <span class="pill p-pink" style="font-size:17px;">✍️ Escritura propia</span>
+        <span class="pill p-purple" style="font-size:17px;">⚠️ Falsos amigos R4</span>
+    </div>
+    <div style="margin-top:24px; background:#eff6ff; border-radius:16px; padding:16px 28px; display:inline-block;">
+        <p style="font-size:18px; color:#1e40af; font-weight:600;">📌 Para la próxima clase — practica en casa:</p>
+        <p style="font-size:17px; color:#1e293b; margin-top:6px;">Escribe <b>5 oraciones</b> sobre tu semana real usando verbos -ER e -IR.<br>¡Intenta no mirar la slide! Confía en tu memoria.</p>
+    </div>
+    <p style="font-size:56px; margin-top:20px;">🌟 👏 ✨</p>
+    <p style="margin-top:16px; font-weight:700; color:#1e3a8a; font-size:20px;">Aguirre Studio</p>
+    <div class="nav">
+        <span class="nav-counter">13 / 13</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" disabled>Fin 🎉</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+</div>
+
+<script>
+    const TOTAL = 13;
+    let cur = 1;
+
+    function go(n) {
+        document.getElementById('s' + cur).classList.remove('active');
+        cur = Math.max(1, Math.min(TOTAL, cur + n));
+        document.getElementById('s' + cur).classList.add('active');
+    }
+
+    function toggleAns(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    /* ── MAZO SIN REPETICIÓN: evita que salga la misma opción dos veces
+         seguidas, mostrando todas las opciones antes de reiniciar ── */
+    function makePicker(arr) {
+        let order = [];
+        let pos = 0;
+        function reshuffle() {
+            order = arr.map((_, i) => i);
+            for (let i = order.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [order[i], order[j]] = [order[j], order[i]];
+            }
+            pos = 0;
+        }
+        reshuffle();
+        return function next() {
+            if (pos >= order.length) reshuffle();
+            return arr[order[pos++]];
+        };
+    }
+
+    /* ── CHARLA RÁPIDA - REPASO CLASE 3 (slide 2) ── */
+    const reviewQs = [
+        {
+            q: 'Conjuga el verbo TRABAJAR para YO, TÚ y ELLA. ¡Dilo en voz alta! 💼',
+            a: '<b>Trabajo</b> (yo) · <b>trabajas</b> (tú) · <b>trabaja</b> (ella). Recuerda: quita -AR, añade -o / -as / -a.'
+        },
+        {
+            q: '¿Cómo se pronuncia la S en español latinoamericano? Da un ejemplo. 🔊',
+            a: 'Siempre suena <b>/s/</b>, nunca como Z. Ej: ca<u>s</u>a, me<u>s</u>a, ro<u>s</u>a — todas con sonido /s/ claro.'
+        },
+        {
+            q: '¿Qué significa "asistir" en español? ¿Es lo mismo que "ayudar"? ⚠️',
+            a: '<b>Asistir</b> = ir o estar presente en un lugar/evento. <b>NO</b> significa ayudar. "Ayudar" en español = ayudar.'
+        },
+        {
+            q: 'Describe tu rutina matutina en una oración usando un verbo -AR. ☀️',
+            a: 'Cues: "Me levanto a las ___ y desayuno / trabajo / camino..." Usa la terminación -o para YO.'
+        },
+        {
+            q: '¿Qué significa "exquisito" en español? ¿Es igual que en portugués? 😋',
+            a: '<b>Exquisito</b> = muy rico, delicioso. En portugués "esquisito" significa raro o extraño — ¡significado opuesto!'
+        }
+    ];
+
+    const nextReview = makePicker(reviewQs);
+    function rollReview() {
+        const item = nextReview();
+        document.getElementById('r-q').textContent = item.q;
+        document.getElementById('r-ans').innerHTML = item.a;
+        document.getElementById('r-ans').style.display = 'none';
+    }
+    rollReview();
+
+    /* ── ICEBREAKER + TRABALENGUAS (slide 3) ── */
+    const iceQs = [
+        '¿Cuál es tu día favorito de la semana? ¿Por qué?',
+        '¿Qué bebes normalmente en la mañana?',
+        '¿Lees algo en español? ¿Qué lees?',
+        '¿A qué hora sales de tu casa normalmente?',
+        '¿Vives cerca o lejos de tu trabajo?',
+        '¿Qué haces los domingos?',
+        '¿Escribes mensajes en español a tus amigos?'
+    ];
+    const twisters = [
+        '"Juan tuvo un tubo, y el tubo que tuvo se le rompió; para recuperar el tubo que tuvo, tuvo que comprar un tubo igual al tubo que tuvo."',
+        '"La bloguera Begoña tiene globos de Boloña en su blog."',
+        '"Un burro comía berros y el perro se los robó; el burro lanzó un rebuzno y el perro al barro cayó."',
+        '"Bebe el brebaje de brevas la bruja, que brebaje de brevas bebe la bruja, que nunca se embruja."'
+    ];
+
+    const nextIce = makePicker(iceQs);
+    const nextTwister = makePicker(twisters);
+    function rollIce() {
+        document.getElementById('icebreaker-q').textContent = nextIce();
+    }
+    function rollTwister() {
+        const t = nextTwister();
+        document.getElementById('tongue-twister').style.whiteSpace = 'pre-line';
+        document.getElementById('tongue-twister').textContent = t;
+    }
+    rollIce();
+
+    /* ── COMPLETA LA FRASE (slide 5) ── */
+    const fillSentences = [
+        {
+            q: 'Yo _______ pollo con arroz todos los días.',
+            a: '<b>Respuesta:</b> Yo <span style="color:#d97706; font-size:22px;">como</span> pollo con arroz todos los días.<br><span style="font-size:15px; color:#475569;">COMER → yo com<b>o</b></span>'
+        },
+        {
+            q: 'Tú _______ mucha agua, ¿verdad?',
+            a: '<b>Respuesta:</b> Tú <span style="color:#d97706; font-size:22px;">bebes</span> mucha agua.<br><span style="font-size:15px; color:#475569;">BEBER → tú beb<b>es</b></span>'
+        },
+        {
+            q: 'Ella _______ el periódico por la mañana.',
+            a: '<b>Respuesta:</b> Ella <span style="color:#d97706; font-size:22px;">lee</span> el periódico.<br><span style="font-size:15px; color:#475569;">LEER → ella le<b>e</b></span>'
+        },
+        {
+            q: 'Nosotros _______ en un departamento pequeño.',
+            a: '<b>Respuesta:</b> Nosotros <span style="color:#d97706; font-size:22px;">vivimos</span> en un departamento pequeño.<br><span style="font-size:15px; color:#475569;">VIVIR → nosotros viv<b>imos</b></span>'
+        },
+        {
+            q: 'Ellos _______ correos en inglés y español.',
+            a: '<b>Respuesta:</b> Ellos <span style="color:#d97706; font-size:22px;">escriben</span> correos en inglés y español.<br><span style="font-size:15px; color:#475569;">ESCRIBIR → ellos escrib<b>en</b></span>'
+        },
+        {
+            q: 'Yo _______ a clases de español los martes.',
+            a: '<b>Respuesta:</b> Yo <span style="color:#d97706; font-size:22px;">asisto</span> a clases de español los martes.<br><span style="font-size:15px; color:#475569;">ASISTIR → yo asist<b>o</b></span>'
+        },
+        {
+            q: 'Tú _______ rápido las instrucciones, ¡muy bien!',
+            a: '<b>Respuesta:</b> Tú <span style="color:#d97706; font-size:22px;">comprendes</span> rápido las instrucciones.<br><span style="font-size:15px; color:#475569;">COMPRENDER → tú comprend<b>es</b></span>'
+        },
+        {
+            q: 'Ella _______ la ventana porque hace calor.',
+            a: '<b>Respuesta:</b> Ella <span style="color:#d97706; font-size:22px;">abre</span> la ventana porque hace calor.<br><span style="font-size:15px; color:#475569;">ABRIR → ella abr<b>e</b></span>'
+        }
+    ];
+
+    const nextFill = makePicker(fillSentences);
+    function rollFill() {
+        const item = nextFill();
+        document.getElementById('fill-q').textContent = item.q;
+        document.getElementById('fill-ans').innerHTML = item.a;
+        document.getElementById('fill-ans').style.display = 'none';
+    }
+    rollFill();
+
+    /* ── MI SEMANA — ORAL (slide 7) ── */
+    const semanaQs = [
+        {
+            q: '¿Qué haces los lunes normalmente?',
+            a: 'Cues: "Los lunes, yo trabajo / estudio / asisto a ___. Primero ___, después ___."'
+        },
+        {
+            q: '¿Lees en español o en tu idioma? ¿Qué lees normalmente?',
+            a: 'Cues: "Leo ___ (noticias / novelas / redes sociales) en ___ (español / portugués)."'
+        },
+        {
+            q: '¿Sales con amigos durante la semana o solo el fin de semana?',
+            a: 'Cues: "Salgo con amigos ___ (los viernes / el fin de semana). Vamos a ___."'
+        },
+        {
+            q: '¿Qué comes normalmente al mediodía entre semana?',
+            a: 'Cues: "Entre semana, como ___ al mediodía. Como en ___ (casa / la oficina / un restaurante)."'
+        },
+        {
+            q: '¿Escribes correos o mensajes en español en tu trabajo?',
+            a: 'Cues: "Escribo ___ en español. Lo hago ___ (todos los días / a veces)."'
+        },
+        {
+            q: '¿Qué haces diferente los fines de semana comparado con los días de semana?',
+            a: 'Cues: "El fin de semana, no trabajo. Descanso, leo, salgo con ___. Entre semana, en cambio, ___."'
+        }
+    ];
+
+    const nextSemana = makePicker(semanaQs);
+    function rollSemana() {
+        const item = nextSemana();
+        document.getElementById('sem-q').textContent = item.q;
+        document.getElementById('sem-ans').innerHTML = item.a;
+        document.getElementById('sem-ans').style.display = 'none';
+    }
+    rollSemana();
+
+    /* ── ENTREVISTA EXPRÉS (slide 10) ── */
+    const intervQs = [
+        {
+            q: '¿Con quién vives? ¿Vives cerca o lejos de tu trabajo?',
+            a: 'Modelo: "Vivo con ___ / solo/a. Vivo ___ (cerca / lejos) de mi trabajo."'
+        },
+        {
+            q: '¿Qué lees normalmente: noticias, libros o redes sociales?',
+            a: 'Modelo: "Leo ___ casi todos los días. Me gusta leer sobre ___."'
+        },
+        {
+            q: '¿A qué clases o reuniones importantes asistes durante la semana?',
+            a: 'Modelo: "Asisto a ___ los días ___. Es importante porque ___."'
+        },
+        {
+            q: '¿Sales mucho los fines de semana? ¿A dónde?',
+            a: 'Modelo: "Salgo ___ veces al mes. Normalmente voy a ___."'
+        },
+        {
+            q: '¿Escribes en español fuera de esta clase? ¿Dónde?',
+            a: 'Modelo: "Escribo en español en ___ (mensajes / trabajo / redes sociales)."'
+        },
+        {
+            q: '¿Comes en casa o fuera durante la semana de trabajo?',
+            a: 'Modelo: "Entre semana, como en ___. Los fines de semana, en cambio, ___."'
+        }
+    ];
+
+    const nextInterv = makePicker(intervQs);
+    function rollInterv() {
+        const item = nextInterv();
+        document.getElementById('interv-q').textContent = item.q;
+        document.getElementById('interv-ans').innerHTML = '<b>Modelo:</b> ' + item.a;
+        document.getElementById('interv-ans').style.display = 'none';
+    }
+    rollInterv();
+
+    /* ── FALSOS AMIGOS RONDA 4 (slide 11) ── */
+    const fa4 = [
+        {
+            w: 'RATO',
+            a: '<b>Significa:</b> Un momento o un período corto de tiempo / um momento, um tempinho.<br><i>Ej: "Espera un rato, ya vuelvo."</i><br><span style="color:#991b1b;">⚠️ En portugués "rato" es un animal (ratón). En español, el animal se llama "ratón".</span>'
+        },
+        {
+            w: 'PRESUNTO',
+            a: '<b>Significa:</b> Alegado o supuesto, no confirmado / suposto.<br><i>Ej: "El presunto culpable fue detenido ayer."</i><br><span style="color:#991b1b;">⚠️ En portugués "presunto" es el jamón (el embutido de cerdo). ¡Nada que ver con sospechar de alguien!</span>'
+        },
+        {
+            w: 'CONTESTAR',
+            a: '<b>Significa:</b> Responder a una pregunta / responder.<br><i>Ej: "Por favor, contesta el teléfono."</i><br><span style="color:#991b1b;">⚠️ En portugués "contestar" significa cuestionar o discutir algo. Para responder en portugués se usa "responder".</span>'
+        },
+        {
+            w: 'APELLIDO',
+            a: '<b>Significa:</b> El nombre de familia, como Aguirre o Pérez / sobrenome.<br><i>Ej: "Mi apellido es Aguirre."</i><br><span style="color:#991b1b;">⚠️ En portugués "apelido" significa apodo cariñoso. En español, eso se llama "apodo".</span>'
+        },
+        {
+            w: 'BOLSO',
+            a: '<b>Significa:</b> Cartera o bolsa de mano que se lleva normalmente / bolsa de mão.<br><i>Ej: "Dejé las llaves en mi bolso."</i><br><span style="color:#991b1b;">⚠️ En portugués "bolso" es el bolsillo del pantalón. En español, eso se llama "bolsillo".</span>'
+        },
+        {
+            w: 'LARGO',
+            a: '<b>Significa:</b> Que tiene mucha extensión, lo opuesto a corto / longo (extensão).<br><i>Ej: "Tiene el cabello muy largo."</i><br><span style="color:#991b1b;">⚠️ En portugués "largo" significa ancho. En español, "ancho" es lo opuesto a "angosto/estrecho".</span>'
+        },
+        {
+            w: 'TODAVÍA',
+            a: '<b>Significa:</b> Aún, hasta este momento / ainda.<br><i>Ej: "Todavía vivo en Antofagasta."</i><br><span style="color:#991b1b;">⚠️ En portugués "todavia" significa "sin embargo, pero" — ¡significados completamente diferentes!</span>'
+        }
+    ];
+
+    const nextFA4 = makePicker(fa4);
+    function rollFA4() {
+        const t = nextFA4();
+        document.getElementById('fa4-word').textContent = t.w;
+        document.getElementById('fa4-ans').innerHTML = t.a;
+        document.getElementById('fa4-ans').style.display = 'none';
+    }
+    rollFA4();
+
+    /* ── DESAFÍO FINAL (slide 12) ── */
+    const finalSits = [
+        {
+            s: '📅 Es domingo por la noche. Cuéntale a un amigo cómo fue tu semana completa.',
+            a: 'Verbos útiles: trabajar, asistir, leer, escribir, salir, comer, beber, descansar, vivir.'
+        },
+        {
+            s: '💬 Un compañero te pregunta: "¿Qué haces normalmente los fines de semana?"',
+            a: 'Los fines de semana no trabajo. Salgo, leo, descanso, escribo… ¿qué más?'
+        },
+        {
+            s: '🎉 Conoces a alguien nuevo en una fiesta. Te pregunta sobre tu rutina semanal en Chile.',
+            a: 'Habla en primera persona: "Vivo en ___. Entre semana, ___. Los fines de semana, ___."'
+        },
+        {
+            s: '📚 Tu profesor te pregunta: "¿Cuándo practicas español durante la semana?"',
+            a: 'Usa días específicos: "Practico los ___ y los ___. Leo / escribo / hablo con ___."'
+        },
+        {
+            s: '🏠 Describe las diferencias entre tu semana de trabajo y tu fin de semana.',
+            a: 'Compara: "Entre semana, trabajo y como rápido. El fin de semana, en cambio, descanso y salgo más."'
+        }
+    ];
+
+    const nextFinal = makePicker(finalSits);
+    function rollFinal() {
+        const item = nextFinal();
+        document.getElementById('final-sit').textContent = item.s;
+        document.getElementById('final-ans').innerHTML = '<b>Vocabulario de apoyo:</b><br>' + item.a;
+        document.getElementById('final-ans').style.display = 'none';
+    }
+    rollFinal();
+</script>
+</body>
+</html>
