@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuaderno de Práctica · Clases 03-04 – Aguirre Español Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & BASE ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #cbd5e1; font-family: 'Lexend', sans-serif; color: #1e293b; }
+
+/* ─── TOP NAV ──────────────────────────────────────────── */
+.topnav {
+    position: sticky; top: 0; z-index: 100; background: #1e3a8a; padding: 14px 18px;
+    display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,.25);
+}
+.topnav a {
+    color: #cbd5e1; text-decoration: none; font-size: 14px; font-weight: 700; padding: 7px 14px;
+    border-radius: 20px; transition: background .15s, color .15s; white-space: nowrap;
+}
+.topnav a:hover, .topnav a.active { background: #fbbf24; color: #1e293b; }
+
+/* ─── LAYOUT WRAP ──────────────────────────────────────── */
+.wrap { max-width: 1080px; margin: 0 auto; padding: 40px 20px 110px; display: flex; flex-direction: column; gap: 38px; }
+.panel { background: #fff9e6; border-radius: 24px; box-shadow: 0 16px 44px rgba(0,0,0,.18); padding: 44px 50px; scroll-margin-top: 90px; }
+
+/* ─── TYPOGRAPHY ───────────────────────────────────────── */
+.slide-title {
+    font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: #1e3a8a;
+    border-left: 12px solid #d97706; padding-left: 18px; margin-bottom: 18px; line-height: 1.15;
+}
+.section-sub { font-size: 17px; color: #475569; font-weight: 600; margin-bottom: 22px; line-height: 1.6; }
+p, li { font-size: 17px; color: #1e293b; line-height: 1.55; }
+
+/* ─── PILLS & HIGHLIGHTS ───────────────────────────────── */
+.pill { padding: 6px 16px; border-radius: 8px; font-weight: 700; display: inline-block; margin: 4px; font-size: 16px; text-decoration: none; }
+.p-blue { background: #dbeafe; color: #1e40af; } .p-amber { background: #fef3c7; color: #92400e; }
+.p-green { background: #dcfce7; color: #14532d; } .p-pink { background: #fce7f3; color: #9d174d; }
+.p-purple { background: #ede9fe; color: #5b21b6; } .p-red { background: #fee2e2; color: #991b1b; }
+
+/* ─── GRID CARDS ───────────────────────────────────────── */
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 16px; margin-bottom: 16px; }
+.card { background: white; padding: 18px 22px; border-radius: 18px; border-top: 6px solid #1e3a8a; box-shadow: 0 4px 10px rgba(0,0,0,.06); }
+.card h3 { font-size: 19px; color: #1e293b; margin-bottom: 8px; }
+.card p { font-size: 15.5px; color: #475569; }
+
+/* ─── BUTTONS & ACTIONS ────────────────────────────────── */
+.btn {
+    background: #1e3a8a; color: white; border: none; padding: 12px 26px; font-size: 16px;
+    border-radius: 12px; cursor: pointer; font-weight: 700; font-family: 'Lexend', sans-serif; transition: background .2s, transform .15s;
+}
+.btn:hover { background: #2563eb; transform: translateY(-2px); }
+.btn-action { background: #d97706; } .btn-action:hover { background: #f59e0b; }
+.btn-reset { background: #64748b; } .btn-reset:hover { background: #94a3b8; }
+.section-footer-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 24px; border-top: 2px solid #e2e8f0; padding-top: 20px; }
+.score-badge { background: #1e3a8a; color: white; padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+/* ─── EXERCISE ITEMS ───────────────────────────────────── */
+.ex-item { background: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 16px; border-top: 5px solid #1e3a8a; box-shadow: 0 4px 10px rgba(0,0,0,.05); }
+.ex-num { display: inline-block; background: #1e3a8a; color: white; font-size: 12px; font-weight: 700; padding: 3px 11px; border-radius: 20px; margin-bottom: 10px; }
+.ex-q { font-size: 17px; color: #1e293b; font-weight: 600; margin-bottom: 12px; }
+
+/* OPTIONS (MCQ) */
+.opt-container { display: flex; flex-direction: column; gap: 8px; }
+.opt-btn {
+    background: #fff; border: 2px solid #cbd5e1; color: #1e293b; padding: 12px 18px; text-align: left;
+    border-radius: 10px; font-family: 'Lexend', sans-serif; font-weight: 600; font-size: 15.5px; cursor: pointer; transition: .15s;
+}
+.opt-btn:hover:not(.selected):not(:disabled) { border-color: #1e3a8a; background: #eff6ff; }
+.opt-btn.selected { background: #3b82f6; color: white; border-color: #1d4ed8; }
+.opt-btn.correct-visual { background: #dcfce7 !important; color: #14532d !important; border-color: #16a34a !important; }
+.opt-btn.wrong-visual { background: #fee2e2 !important; color: #991b1b !important; border-color: #dc2626 !important; }
+
+/* TEXT FEEDBACK COMPONENT */
+.text-status { font-weight: 700; font-size: 15px; margin-top: 8px; display: none; }
+.text-status.correct { color: #16a34a; }
+.text-status.wrong { color: #dc2626; }
+
+/* INPUTS (WRITING) */
+.write-input {
+    width: 100%; max-width: 400px; border: 2px solid #cbd5e1; border-radius: 10px; padding: 10px 14px;
+    font-size: 16px; font-family: 'Lexend', sans-serif; color: #1e293b; outline: none; transition: border-color .2s;
+}
+.write-input:focus { border-color: #1e3a8a; }
+.write-input.correct-input { background: #dcfce7; border-color: #16a34a; color: #14532d; font-weight: 700; }
+.write-input.wrong-input { background: #fee2e2; border-color: #dc2626; color: #991b1b; font-weight: 700; }
+
+.ex-feedback { margin-top: 12px; background: #eff6ff; border-left: 6px solid #1e3a8a; padding: 9px 16px; border-radius: 8px; font-size: 15px; color: #1e3a8a; display: none; }
+
+/* ─── OTHERS ───────────────────────────────────────────── */
+.reading-box { background: white; border-radius: 18px; padding: 24px 28px; border-left: 10px solid #1e3a8a; box-shadow: 0 4px 14px rgba(0,0,0,.07); font-size: 17px; line-height: 1.85; margin-bottom: 20px; }
+.reading-box em { color: #1e3a8a; font-style: normal; font-weight: 700; }
+.timeline { display: flex; gap: 0; align-items: stretch; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,.08); margin: 20px 0; }
+.tl-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 16px 8px; border-right: 2px solid #e2e8f0; background: white; text-align: center; gap: 6px; }
+.tl-item:last-child { border-right: none; }
+.tl-emoji { font-size: 26px; } .tl-time { font-size: 13px; color: #64748b; font-weight: 700; } .tl-verb { font-size: 14.5px; color: #1e293b; font-weight: 700; }
+.accent-bar { width: 110px; height: 8px; background: #d97706; border-radius: 4px; margin: 20px auto; }
+.fab-top { position: fixed; bottom: 26px; right: 26px; background: #1e3a8a; color: white; border: none; width: 52px; height: 52px; border-radius: 50%; font-size: 20px; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,.3); z-index: 90; }
+
+@media (max-width: 760px) {
+    .panel { padding: 30px 24px; } .grid3 { grid-template-columns: 1fr; } .timeline { flex-direction: column; } .tl-item { border-right: none; border-bottom: 2px solid #e2e8f0; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav" id="topnav">
+    <a href="#portada">Inicio</a>
+    <a href="#verbos">⚙️ Verbos</a>
+    <a href="#rutina">🕐 Rutina</a>
+    <a href="#semana">📅 Semana</a>
+    <a href="#falsos">⚠️ Falsos amigos</a>
+    <a href="#lectura">📖 Lectura</a>
+    <a href="#escritura">✍️ Escritura</a>
+</nav>
+
+<div class="wrap">
+
+<!-- ═══════════════════════════════════════════════════
+     PORTADA (Fiel a image_9e23ac.png)
+═══════════════════════════════════════════════════ -->
+<section class="panel" id="portada" style="text-align:center;">
+    <p style="font-size:17px; font-weight:700; color:#d97706; letter-spacing:2px; text-transform:uppercase;">Aguirre Español Studio</p>
+    <h1 style="font-family:'Poppins',sans-serif; font-size:48px; color:#1e3a8a; line-height:1.15; margin-top:10px;">Cuaderno de Práctica<br>Clases 03 y 04</h1>
+    <div class="accent-bar"></div>
+    
+    <p style="font-size:18px; color:#64748b; font-weight:600; max-width:780px; margin:0 auto; line-height: 1.6;">
+        Verbos -AR / -ER / -IR · Rutina diaria · Días de la semana · Pronunciación S / B-V · Falsos amigos
+    </p>
+
+    <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:24px;">
+        <span class="pill p-blue">⚙️ Conjugación verbal</span>
+        <span class="pill p-amber">🕐 Rutina diaria</span>
+        <span class="pill p-green">📅 Mi semana</span>
+        <span class="pill p-pink">⚙️ Pronunciación</span>
+        <span class="pill p-purple">⚠️ Falsos amigos</span>
+        <span class="pill p-red">📖 Lectura y escritura</span>
+    </div>
+
+    <div class="card" style="margin-top:28px; text-align:left; max-width:840px; margin-left:auto; margin-right:auto; border-top: 6px solid #d97706;">
+        <h3 style="font-size:19px; margin-bottom:8px; color: #1e3a8a;">📌 Instrucciones para el alumno lusohablante</h3>
+        <p style="color: #475569; font-size: 16.5px;">Avanza por las secciones para consolidar tu español. Este cuaderno contiene alertas específicas para evitar errores de interferencia con el portugués (*portuñol*). Recuerda que cada ejercicio interactivo te dará corrección inmediata al hacer clic.</p>
+    </div>
+    
+    <p style="margin-top:26px; font-weight:700; color:#1e3a8a; font-size:18px;">Aguirre Español Studio</p>
+</section>
+
+<!-- VERBOS -->
+<section class="panel" id="verbos">
+    <h2 class="slide-title">⚙️ Conjugación de Verbos Regulares</h2>
+    <p class="section-sub">Fijación del presente de indicativo (-AR, -ER, -IR) enfocado en variantes latinoamericanas.</p>
+    
+    <div id="verbos-box"></div>
+    
+    <div class="section-footer-flex">
+        <div>
+            <button class="btn btn-action" onclick="gradeSection('verbos')">Corregir Sección</button>
+            <button class="btn btn-reset" onclick="resetSection('verbos')">Reiniciar</button>
+        </div>
+        <div class="score-badge" id="score-verbos">Puntaje: 0 / 10</div>
+    </div>
+</section>
+
+<!-- RUTINA DIARIA -->
+<section class="panel" id="rutina">
+    <h2 class="slide-title">🕐 Rutina Diaria</h2>
+    <p class="section-sub">Estructuras cotidianas en primera persona y uso de verbos reflexivos comunes.</p>
+    
+    <div class="timeline">
+        <div class="tl-item"><span class="tl-emoji">⏰</span><span class="tl-time">07:00</span><span class="tl-verb">Despertarse</span></div>
+        <div class="tl-item"><span class="tl-emoji">☕</span><span class="tl-time">08:00</span><span class="tl-verb">Desayunar</span></div>
+        <div class="tl-item"><span class="tl-emoji">💻</span><span class="tl-time">09:00</span><span class="tl-verb">Trabajar</span></div>
+        <div class="tl-item"><span class="tl-emoji">🍽️</span><span class="tl-time">13:00</span><span class="tl-verb">Almorzar</span></div>
+    </div>
+    
+    <div id="rutina-box"></div>
+    
+    <div class="section-footer-flex">
+        <div>
+            <button class="btn btn-action" onclick="gradeSection('rutina')">Corregir Sección</button>
+            <button class="btn btn-reset" onclick="resetSection('rutina')">Reiniciar</button>
+        </div>
+        <div class="score-badge" id="score-rutina">Puntaje: 0 / 10</div>
+    </div>
+</section>
+
+<!-- SEMANA -->
+<section class="panel" id="semana">
+    <h2 class="slide-title">📅 Los Días de la Semana</h2>
+    <p class="section-sub">Aprende a usar los nombres correctos eliminando las estructuras del portugués.</p>
+    
+    <div class="grid3">
+        <div class="card"><h3>Masculinos</h3><p>Todos los días son masculinos: <strong>el lunes</strong>, <strong>los martes</strong>.</p></div>
+        <div class="card"><h3>Sin usar "En"</h3><p>Para agendar no usamos <em>en</em> (ej: "El jueves tengo clases").</p></div>
+        <div class="card"><h3>Fin de semana</h3><p>Se dice de forma fija: <strong>el fin de semana</strong>.</p></div>
+    </div>
+    
+    <div id="semana-box"></div>
+    
+    <div class="section-footer-flex">
+        <div>
+            <button class="btn btn-action" onclick="gradeSection('semana')">Corregir Sección</button>
+            <button class="btn btn-reset" onclick="resetSection('semana')">Reiniciar</button>
+        </div>
+        <div class="score-badge" id="score-semana">Puntaje: 0 / 10</div>
+    </div>
+</section>
+
+<!-- FALSOS AMIGOS -->
+<section class="panel" id="falsos">
+    <h2 class="slide-title">⚠️ Falsos Amigos Esenciales</h2>
+    <p class="section-sub">Domina el uso real y cotidiano de palabras que cambian drásticamente entre idiomas.</p>
+    
+    <div id="falsos-box"></div>
+    
+    <div class="section-footer-flex">
+        <div>
+            <button class="btn btn-action" onclick="gradeSection('falsos')">Corregir Sección</button>
+            <button class="btn btn-reset" onclick="resetSection('falsos')">Reiniciar</button>
+        </div>
+        <div class="score-badge" id="score-falsos">Puntaje: 0 / 10</div>
+    </div>
+</section>
+
+<!-- LECTURA -->
+<section class="panel" id="lectura">
+    <h2 class="slide-title">📖 Comprensión de Lectura</h2>
+    <p class="section-sub">Analiza el texto cotidiano para responder las siguientes preguntas.</p>
+    
+    <div class="reading-box">
+        "Beatriz es una ejecutiva que vive en una hermosa ciudad. Los <em>lunes</em> y <em>miércoles</em> viaja temprano a la oficina central. Siempre <em>desayuna</em> un café con pan de camino al trabajo. Durante el día, ella <em>escribe</em> correos y <em>habla</em> con los clientes de la empresa. Los fines de semana prefiere descansar en casa y <em>cocina</em> almuerzos exquisitos para su familia."
+    </div>
+    
+    <div id="lectura-box"></div>
+    
+    <div class="section-footer-flex">
+        <div>
+            <button class="btn btn-action" onclick="gradeSection('lectura')">Corregir Sección</button>
+            <button class="btn btn-reset" onclick="resetSection('lectura')">Reiniciar</button>
+        </div>
+        <div class="score-badge" id="score-lectura">Puntaje: 0 / 10</div>
+    </div>
+</section>
+
+<!-- ESCRITURA -->
+<section class="panel" id="escritura">
+    <h2 class="slide-title">✍ Presione abajo para evaluar su escritura</h2>
+    <p class="section-sub">Escribe la palabra correcta en minúsculas en cada espacio en blanco.</p>
+    
+    <div id="escritura-box"></div>
+    
+    <div class="section-footer-flex">
+        <div>
+            <button class="btn btn-action" onclick="gradeSection('escritura')">Corregir Sección</button>
+            <button class="btn btn-reset" onclick="resetSection('escritura')">Reiniciar</button>
+        </div>
+        <div class="score-badge" id="score-escritura">Puntaje: 0 / 10</div>
+    </div>
+</section>
+
+</div>
+
+<button class="fab-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+<script>
+/* ─────────────────────────────────────────────────────────
+   BASE DE DATOS EN ESPAÑOL LATINOAMERICANO NEUTRO
+───────────────────────────────────────────────────────── */
+const db = {
+    verbos: [
+        { q: "Ellos ________ (escribir) un correo largo a la oficina.", o: ["escribem", "escriben", "escribe"], c: 1, n: "En español, los verbos para 'ellos/ustedes' terminan en N, nunca en M." },
+        { q: "Nosotros ________ (hablar) español en la clase.", o: ["hablamos", "hablamo", "hablan"], c: 0, n: "La terminación para nosotros siempre es -amos en verbos terminados en -AR." },
+        { q: "Tú ________ (vivir) en una ciudad muy bonita.", o: ["vives", "vive", "vivi"], c: 0, n: "La conjugación neutra para 'tú' en verbos -IR termina en -es." },
+        { q: "Ustedes ________ (comer) ensalada todos los días.", o: ["comem", "comen", "comemos"], c: 1, n: "Ustedes comparte conjugación con ellos y termina en N." },
+        { q: "Yo ________ (abrir) la oficina temprano por la mañana.", o: ["abro", "abre", "abrí"], c: 0, n: "La primera persona (yo) en presente regular termina en -o." },
+        { q: "Ella ________ (aprender) rápido en sus clases en línea.", o: ["aprende", "aprendes", "aprendem"], c: 0, n: "Tercera persona singular (él/ella) para verbos -ER termina en -e." },
+        { q: "Ustedes ________ (discutir) los puntos clave del proyecto.", o: ["discuten", "discutimos", "discuter"], c: 0, n: "En Latinoamérica usamos 'ustedes' en lugar de 'vosotros'." },
+        { q: "Juan y Pedro ________ (correr) por el parque en las mañanas.", o: ["correm", "corren", "corres"], c: 1, n: "Sujeto plural equivalente a ellos: termina en N." },
+        { q: "Nosotras ________ (comprender) el ejercicio perfectamente.", o: ["comprendemos", "comprenden", "comprendamos"], c: 0, n: "Terminación estándar -emos para la primera persona plural." },
+        { q: "Tú ________ (decidir) a qué hora empezamos el trabajo.", o: ["decides", "decide", "decidís"], c: 0, n: "Segunda persona singular estándar (tú): -es." }
+    ],
+    rutina: [
+        { q: "Por las mañanas, yo siempre ________ a las 7:00 AM.", o: ["despierto me", "me despierto", "despierto"], c: 1, n: "El pronombre 'me' va antes del verbo en las rutinas en primera persona." },
+        { q: "Después de levantarme de la cama, yo ________.", o: ["almuerzo", "desayuno", "ceno"], c: 1, n: "La comida de la mañana se llama desayuno." },
+        { q: "A la 1:30 PM, mi equipo de trabajo ________ en el comedor.", o: ["desayuna", "almuerza", "cena"], c: 1, n: "Almorzar es la acción de comer al mediodía." },
+        { q: "Carlos ________ los dientes después de comer.", o: ["se lava", "lava se", "se lave"], c: 0, n: "Uso correcto del pronombre reflexivo en tercera persona: 'se lava'." },
+        { q: "Nosotros ________ la jornada de trabajo a las 6:00 PM.", o: ["regresamos", "terminamos", "despertamos"], c: 1, n: "Terminar marca el fin de la actividad diaria." },
+        { q: "Por la noche, yo siempre ________ temprano para descansar bien.", o: ["me acuesto", "me despierto", "me almuerzo"], c: 0, n: "Acostarse es irse a la cama a dormir." },
+        { q: "Tú ________ de la casa rumbo a la oficina en micro o metro.", o: ["sales", "entras", "duermes"], c: 0, n: "Salir de un lugar." },
+        { q: "Los empleados ________ a sus casas al terminar el turno.", o: ["regresas", "regresam", "regresan"], c: 2, n: "Ellos regresan (terminación en N)." },
+        { q: "Antes de dormir, yo ________ un rato en la cama.", o: ["almuerzo", "leo", "desayuno"], c: 1, n: "Leer es una actividad común al final del día." },
+        { q: "Mis hijos ________ al colegio a las 8:00 AM.", o: ["entran", "salen", "cenan"], c: 0, n: "Entrar al colegio inicia la rutina del estudiante." }
+    ],
+    semana: [
+        { q: "Traduce de forma natural: 'Na segunda-feira tenho una reunión.'", o: ["En el lunes tengo una reunión.", "El lunes tengo una reunión.", "En la segunda feria tengo una reunión."], c: 1, n: "Para indicar el día usamos el artículo 'El' directo, sin la preposición 'en'." },
+        { q: "No tengo planes para salir los ________.", o: ["en los sábados", "nos sábados", "sábados"], c: 2, n: "Usamos el artículo plural directamente: 'los sábados'." },
+        { q: "El día después del martes es el ________.", o: ["miércoles", "jueves", "viernes"], c: 0, n: "Lunes, martes, miércoles." },
+        { q: "El día antes del sábado es el ________.", o: ["jueves", "viernes", "domingo"], c: 1, n: "El viernes está justo antes del fin de semana." },
+        { q: "Mis clases son los ________.", o: ["jueves", "en los jueves", "no jueves"], c: 0, n: "Uso correcto del artículo plural sin añadidos innecesarios." },
+        { q: "Los ________ son ideales para levantarse tarde.", o: ["Los domingos", "En los domingos", "Nos domingos"], c: 0, n: "Artículo plural masculino para empezar la frase." },
+        { q: "Tengo una cita médica el ________ por la tarde.", o: ["en el martes", "martes", "un martes"], c: 1, n: "Decimos directamente 'el martes' o 'este martes'." },
+        { q: "La forma correcta para hablar del sábado y domingo juntos es:", o: ["la fin de semana", "el final de semana", "el fin de semana"], c: 2, n: "Es una expresión fija y es de género masculino." },
+        { q: "El orden de los días hábiles es: lunes, martes, miércoles, ________ y viernes.", o: ["viernes", "jueves", "sábado"], c: 1, n: "El jueves precede al viernes." },
+        { q: "Voy al supermercado el ________.", o: ["lunes", "en lunes", "no lunes"], c: 0, n: "Estructura natural en español latino." }
+    ],
+    falsos: [
+        { q: "Fuiste a cenar a la casa de un amigo y dices que la comida estuvo 'exquisita'. Esto significa que:", o: ["La comida tenía un sabor raro o extraño.", "La comida estuvo deliciosa y de excelente calidad.", "La comida estaba fría."], c: 1, n: "'Exquisito' se usa de forma común para elogiar sabores ricos, no significa extraño." },
+        { q: "La palabra 'Embarazada' se usa para describir a:", o: ["Una mujer que siente mucha vergüenza.", "Una mujer que va a tener un hijo.", "Una persona que está muy ocupada."], c: 1, n: "Significa gestando o encinta. Avergonzada se dice 'con vergüenza' o 'penada'." },
+        { q: "El término 'Oficina' significa de forma cotidiana:", o: ["Un taller donde se arreglan autos.", "El lugar administrativo o cuarto donde trabajas con la computadora.", "Una bodega."], c: 1, n: "Oficina es el lugar de trabajo (escritório)." },
+        { q: "Si estás en un restaurante y pides un 'Vaso' de agua, te van a traer:", o: ["Una taza para café.", "Un recipiente común y normal para tomar líquidos.", "Una botella cerrada."], c: 1, n: "Un vaso es lo que usas para beber agua o jugos." },
+        { q: "La palabra 'Apellido' en un documento oficial se refiere a:", o: ["Tu primer nombre.", "Tu nombre de familia (como Rodríguez, Aguirre).", "Tu apodo."], c: 1, n: "Apellido es el nombre familiar (sobrenome)." },
+        { q: "La mesa de trabajo donde pones tus cuadernos o la computadora se llama:", o: ["Escritorio", "Oficina", "Taller"], c: 0, n: "El mueble físico es el escritorio." },
+        { q: "La palabra 'Cachorro' se usa de manera habitual para referirse a:", o: ["Un niño chiquito.", "La cría de un animal, normalmente de un perro.", "Un tipo de comida."], c: 1, n: "Cachorro solo se usa para crías de animales en español." },
+        { q: "Si la repisa de tu sala tiene mucho 'Polvo', significa que:", o: ["Tiene tierra seca acumulada por no limpiar.", "Está muy limpia.", "Está rota."], c: 0, n: "Polvo es la suciedad gris volátil que se acumula en los muebles." },
+        { q: "Cuando alguien te dice '¡Ojo!' en una conversación común, te está queriendo decir:", o: ["Que mires sus ojos.", "¡Cuidado! o ¡Presta atención!", "Que tienes algo en la cara."], c: 1, n: "Es una advertencia típica e informal." },
+        { q: "La palabra 'Saco' en el contexto de vestimenta casual o formal significa:", o: ["Una bolsa grande para papas o cemento.", "Una chaqueta o americana que se usa sobre la camisa.", "Una camisa de manga corta."], c: 1, n: "En gran parte de Latinoamérica se le dice 'saco' a la chaqueta del traje." }
+    ],
+    lectura: [
+        { q: "¿En qué tipo de días viaja Beatriz a la oficina central?", o: ["Los martes y jueves", "Los lunes y miércoles", "Los fines de semana"], c: 1, n: "El texto dice explícitamente: 'Los lunes y miércoles viaja'." },
+        { q: "¿Qué come o toma Beatriz de camino a su trabajo?", o: ["Un jugo de frutas", "Un café con pan", "Un almuerzo completo"], c: 1, n: "El texto indica: 'Siempre desayuna un café con pan'." },
+        { q: "¿Con quiénes habla Beatriz durante sus horas laborales?", o: ["Con sus amigos de la infancia", "Con los clientes de la empresa", "Con sus familiares"], c: 1, n: "El fragmento dice: 'habla con los clientes de la empresa'." },
+        { q: "¿Qué hace Beatriz los fines de semana?", o: ["Viaja a otra ciudad", "Prefiere descansar en su casa", "Trabaja horas extras"], c: 1, n: "Texto: 'Los fines de semana prefiere descansar en casa'." },
+        { q: "Cuando se menciona que cocina almuerzos 'exquisitos', significa que la comida es:", o: ["Rara y exótica", "Muy sabrosa y bien preparada", "Poco saludable"], c: 1, n: "Aplicación del falso amigo en contexto gastronómico real." },
+        { q: "¿Cuál es el sujeto que realiza las acciones en el texto?", o: ["Un director de empresa", "Beatriz", "La familia de Beatriz"], c: 1, n: "Todo el texto describe la rutina de Beatriz." },
+        { q: "El verbo 'escribe' nos indica una acción realizada en:", o: ["El pasado", "El presente", "El futuro"], c: 1, n: "Es presente regular del verbo escribir." },
+        { q: "Los días de la semana mencionados en el texto van precedidos por el artículo:", o: ["Las", "Los", "En"], c: 1, n: "Se usa el artículo masculino plural 'Los lunes y miércoles'." },
+        { q: "¿Para quiénes cocina Beatriz los fines de semana?", o: ["Para sus clientes", "Para su familia", "Para sus compañeros de oficina"], c: 1, n: "Texto: 'cocina platos exquisitos para su familia'." },
+        { q: "La palabra 'mañana' en la frase 'viaja temprano a la oficina' denota:", o: ["Una comida", "Una parte del día", "Un objeto de oficina"], c: 1, n: "Indica tiempo matutino." }
+    ],
+    escritura: [
+        { q: "Completa el espacio con el artículo adecuado: 'Mi clase de español es ____ viernes.'", a: "el" },
+        { q: "Conjuga en presente: 'Ellos ________ (comprender) las palabras nuevas.'", a: "comprenden" },
+        { q: "Escribe el pronombre reflexivo: 'Yo siempre ____ levanto contento.'", a: "me" },
+        { q: "Escribe el nombre del día que falta: lunes, martes, miércoles, ________, viernes.", a: "jueves" },
+        { q: "Si te piden tu 'sobrenome' familiar en el registro, debes poner tu ________.", a: "apellido" },
+        { q: "Conjuga en presente: 'Ustedes ________ (hablar) muy bien.'", a: "hablan" },
+        { q: "Completa la comida de la noche: 'Yo siempre ________ (cenar) a las 8 PM.'", a: "ceno" },
+        { q: "Completa con el artículo en plural: 'No trabajo ____ sábados.'", a: "los" },
+        { q: "Escribe el término correcto: 'María va a tener un hijo; ella está ________.'", a: "embarazada" },
+        { q: "Conjuga en presente: 'Nosotros ________ (vivir) en Latinoamérica.'", a: "vivimos" }
+    ]
+};
+
+/* ─────────────────────────────────────────────────────────
+   SISTEMA INTERACTIVO DE EVALUACIÓN Y CONTROL
+───────────────────────────────────────────────────────── */
+let userSelections = {};
+
+function renderSections() {
+    // Render de opciones múltiples
+    ['verbos', 'rutina', 'semana', 'falsos', 'lectura'].forEach(sec => {
+        const container = document.getElementById(`${sec}-box`);
+        if (!container) return;
+        userSelections[sec] = Array(db[sec].length).fill(null);
+        
+        let html = '';
+        db[sec].forEach((item, index) => {
+            html += `
+                <div class="ex-item" id="ex-${sec}-${index}">
+                    <div class="ex-num">Ejercicio ${index + 1}</div>
+                    <p class="ex-q">${item.q}</p>
+                    <div class="opt-container">
+                        ${item.o.map((option, oIdx) => `
+                            <button class="opt-btn" id="btn-${sec}-${index}-${oIdx}" onclick="selectOption('${sec}', ${index}, ${oIdx})">
+                                ${option}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div class="text-status" id="status-${sec}-${index}"></div>
+                    <div class="ex-feedback" id="feed-${sec}-${index}">${item.n}</div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    });
+
+    // Render de Escritura
+    const escContainer = document.getElementById('escritura-box');
+    let escHtml = '';
+    db.escritura.forEach((item, index) => {
+        escHtml += `
+            <div class="ex-item" id="ex-escritura-${index}">
+                <div class="ex-num">Ejercicio ${index + 1}</div>
+                <p class="ex-q">${item.q}</p>
+                <input type="text" class="write-input" id="input-escritura-${index}" placeholder="Escribe aquí tu respuesta...">
+                <div class="text-status" id="status-escritura-${index}"></div>
+                <div class="ex-feedback" id="feed-escritura-${index}">Respuesta esperada: <strong>${item.a}</strong></div>
+            </div>
+        `;
+    });
+    escContainer.innerHTML = escHtml;
+}
+
+function selectOption(sec, exIdx, oIdx) {
+    db[sec][exIdx].o.forEach((_, i) => {
+        document.getElementById(`btn-${sec}-${exIdx}-${i}`).classList.remove('selected');
+    });
+    document.getElementById(`btn-${sec}-${exIdx}-${oIdx}`).classList.add('selected');
+    userSelections[sec][exIdx] = oIdx;
+}
+
+function gradeSection(sec) {
+    let score = 0;
+    const total = db[sec].length;
+
+    if (sec === 'escritura') {
+        db.escritura.forEach((item, index) => {
+            const inputEl = document.getElementById(`input-escritura-${index}`);
+            const statusEl = document.getElementById(`status-escritura-${index}`);
+            const feedbackEl = document.getElementById(`feed-escritura-${index}`);
+            const val = inputEl.value.trim().toLowerCase();
+            
+            inputEl.classList.remove('correct-input', 'wrong-input');
+            statusEl.classList.remove('correct', 'wrong');
+            statusEl.style.display = 'block';
+
+            if (val === item.a.toLowerCase()) {
+                score++;
+                inputEl.classList.add('correct-input');
+                statusEl.textContent = "✅ ¡Correcto!";
+                statusEl.classList.add('correct');
+            } else {
+                inputEl.classList.add('wrong-input');
+                statusEl.textContent = "❌ Incorrecto. Revisa abajo:";
+                statusEl.classList.add('wrong');
+            }
+            feedbackEl.style.display = 'block';
+            inputEl.disabled = true;
+        });
+    } else {
+        db[sec].forEach((item, exIdx) => {
+            const selectedIdx = userSelections[sec][exIdx];
+            const statusEl = document.getElementById(`status-${sec}-${exIdx}`);
+            const feedbackEl = document.getElementById(`feed-${sec}-${exIdx}`);
+            
+            statusEl.classList.remove('correct', 'wrong');
+            statusEl.style.display = 'block';
+
+            item.o.forEach((_, oIdx) => {
+                const btn = document.getElementById(`btn-${sec}-${exIdx}-${oIdx}`);
+                btn.disabled = true;
+                if (oIdx === item.c) {
+                    btn.classList.add('correct-visual');
+                } else if (oIdx === selectedIdx) {
+                    btn.classList.add('wrong-visual');
+                }
+            });
+
+            if (selectedIdx === item.c) {
+                score++;
+                statusEl.textContent = "✅ ¡Correcto!";
+                statusEl.classList.add('correct');
+            } else {
+                statusEl.textContent = "❌ Incorrecto. Revisa la opción pintada en verde:";
+                statusEl.classList.add('wrong');
+            }
+            feedbackEl.style.display = 'block';
+        });
+    }
+
+    document.getElementById(`score-${sec}`).textContent = `Puntaje: ${score} / ${total}`;
+}
+
+function resetSection(sec) {
+    const total = db[sec].length;
+    document.getElementById(`score-${sec}`).textContent = `Puntaje: 0 / ${total}`;
+
+    if (sec === 'escritura') {
+        db.escritura.forEach((_, index) => {
+            const inputEl = document.getElementById(`input-escritura-${index}`);
+            const statusEl = document.getElementById(`status-escritura-${index}`);
+            const feedbackEl = document.getElementById(`feed-escritura-${index}`);
+            inputEl.value = '';
+            inputEl.disabled = false;
+            inputEl.classList.remove('correct-input', 'wrong-input');
+            statusEl.style.display = 'none';
+            feedbackEl.style.display = 'none';
+        });
+    } else {
+        userSelections[sec] = Array(total).fill(null);
+        db[sec].forEach((item, exIdx) => {
+            const statusEl = document.getElementById(`status-${sec}-${exIdx}`);
+            const feedbackEl = document.getElementById(`feed-${sec}-${exIdx}`);
+            statusEl.style.display = 'none';
+            feedbackEl.style.display = 'none';
+            
+            item.o.forEach((_, oIdx) => {
+                const btn = document.getElementById(`btn-${sec}-${exIdx}-${oIdx}`);
+                btn.disabled = false;
+                btn.classList.remove('selected', 'correct-visual', 'wrong-visual');
+            });
+        });
+    }
+}
+
+/* INTERSECTION OBSERVER */
+const navLinks = document.querySelectorAll('.topnav a');
+const sections = document.querySelectorAll('.panel');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            const match = document.querySelector('.topnav a[href="#' + entry.target.id + '"]');
+            if (match) match.classList.add('active');
+        }
+    });
+}, { rootMargin: '-40% 0px -50% 0px' });
+sections.forEach(s => observer.observe(s));
+
+document.addEventListener("DOMContentLoaded", renderSections);
+</script>
+</body>
+</html>
