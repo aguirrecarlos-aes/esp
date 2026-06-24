@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Español en Acción · Clase 05 – Aguirre Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ─── RESET & BASE ─────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #cbd5e1;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            font-family: 'Lexend', sans-serif;
+            overflow: hidden;
+        }
+
+        /* ─── SLIDE SHELL ──────────────────────────────────────── */
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: #fff9e6;
+            display: none;
+            flex-direction: column;
+            padding: 28px 56px 85px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,.22);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .slide.active { display: flex; }
+
+        /* ─── TYPOGRAPHY ───────────────────────────────────────── */
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: #1e3a8a;
+            border-left: 12px solid #d97706;
+            padding-left: 18px;
+            margin-bottom: 10px;
+            line-height: 1.15;
+        }
+        .sub { font-size: 18px; color: #475569; font-weight: 600; margin-bottom: 8px; }
+        p, li { font-size: 20px; color: #1e293b; line-height: 1.45; }
+
+        /* ─── PILLS & HIGHLIGHTS ───────────────────────────────── */
+        .pill { padding: 4px 12px; border-radius: 8px; font-weight: 700; display: inline-block; margin: 3px; font-size: 18px; }
+        .p-blue   { background: #dbeafe; color: #1e40af; }
+        .p-pink   { background: #fce7f3; color: #9d174d; }
+        .p-green  { background: #dcfce7; color: #14532d; }
+        .p-amber  { background: #fef3c7; color: #92400e; }
+        .p-red    { background: #fee2e2; color: #991b1b; }
+        .p-purple { background: #ede9fe; color: #5b21b6; }
+        .p-teal   { background: #ccfbf1; color: #134e4a; }
+        .under { text-decoration: underline; text-decoration-thickness: 3px; }
+
+        /* ─── GRID CARDS ───────────────────────────────────────── */
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; min-height: 0; }
+        .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; flex: 1; min-height: 0; }
+        
+        .card {
+            background: white;
+            padding: 14px 18px;
+            border-radius: 18px;
+            border-top: 6px solid #1e3a8a;
+            box-shadow: 0 4px 10px rgba(0,0,0,.06);
+        }
+        .card h3 { font-size: 18px; color: #1e293b; margin-bottom: 6px; }
+        .card p  { font-size: 15px; color: #475569; }
+
+        /* ─── INTERACTIVE ZONE ─────────────────────────────────── */
+        .iz {
+            background: #0f172a;
+            border-radius: 26px;
+            padding: 18px 24px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            position: relative;
+            min-height: 0;
+        }
+
+        /* ─── BUTTONS ──────────────────────────────────────────── */
+        .btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            font-size: 17px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Lexend', sans-serif;
+            transition: background .2s, transform .15s;
+        }
+        .btn:hover { background: #2563eb; transform: translateY(-2px); }
+        .btn-reveal { background: #059669; }
+        .btn-reveal:hover { background: #10b981; }
+        .btn-amber  { background: #d97706; }
+        .btn-amber:hover { background: #f59e0b; }
+
+        /* ─── ANSWER BOX ───────────────────────────────────────── */
+        .ans-box {
+            background: #f0fdf4;
+            color: #14532d;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            width: 100%;
+            border: 3px dashed #16a34a;
+            display: none;
+            text-align: center;
+        }
+
+        /* ─── SCAFFOLD STRIP ───────────────────────────────────── */
+        .scaffold {
+            background: #eff6ff;
+            border-left: 8px solid #1e3a8a;
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 17px;
+            color: #1e3a8a;
+            line-height: 1.5;
+        }
+        .scaffold strong { color: #d97706; }
+
+        /* ─── BADGES ───────────────────────────────────────────── */
+        .speak-badge, .badge-blue, .badge-red {
+            display: inline-block;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 4px 12px;
+            margin-bottom: 6px;
+            letter-spacing: .5px;
+        }
+        .speak-badge { background: #d97706; }
+        .badge-blue { background: #1e3a8a; }
+        .badge-red { background: #be123c; }
+
+        /* ─── VERB TABLE ───────────────────────────────────────── */
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+            margin-top: 4px;
+        }
+        .verb-table tr.head-row { background: #f1f5f9; font-weight: 700; }
+        .verb-table td { padding: 6px 8px; color: #1e293b; border-bottom: 1px solid #e2e8f0; }
+
+        /* ─── WRITE ZONE ───────────────────────────────────────── */
+        .write-area {
+            width: 100%;
+            border: 3px solid #1e3a8a;
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 18px;
+            font-family: 'Lexend', sans-serif;
+            resize: none;
+            background: #f8fafc;
+            color: #1e293b;
+            outline: none;
+        }
+
+        /* ─── FOOTER NAV ───────────────────────────────────────── */
+        .nav {
+            position: absolute;
+            bottom: 18px;
+            left: 56px;
+            right: 56px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 10px;
+            background: #fff9e6;
+            z-index: 10;
+        }
+        .nav-counter { font-weight: 700; color: #94a3b8; font-size: 16px; }
+        .nav-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            font-family: 'Lexend', sans-serif;
+            transition: background .18s, color .18s;
+        }
+        .nav-btn:hover:not(:disabled) { background: #1e3a8a; color: white; }
+        .nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+        .accent-bar { width: 120px; height: 6px; background: #d97706; border-radius: 4px; margin: 16px auto; }
+
+        /* ─── PROGRESS BAR ─────────────────────────────────────── */
+        .progress-track {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 0 0 24px 24px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #d97706;
+            border-radius: 0 0 24px 24px;
+            transition: width .4s ease;
+        }
+
+        /* ─── NEW ELEMENTS (SLIDE 2) ───────────────────────────── */
+        .race-card {
+            background: #0f172a;
+            border-radius: 20px;
+            padding: 16px 22px;
+            color: white;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            min-height: 0;
+        }
+        .race-category { font-family: 'Poppins', sans-serif; font-size: 24px; color: #fff; text-align: center; font-weight: 700; line-height: 1.2; margin-top: 5px; }
+        .race-letter { font-size: 64px; color: #fbbf24; font-weight: 900; text-align: center; line-height: 1; background: #1e293b; padding: 4px 28px; border-radius: 16px; border: 2px dashed #d97706; }
+        .scoreboard { display: flex; gap: 14px; justify-content: center; margin-bottom: 4px; }
+        .score-player { background: white; border-radius: 14px; padding: 8px 18px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,.1); min-width: 120px; }
+        .score-name { font-size: 13px; color: #64748b; font-weight: 700; }
+        .score-num  { font-size: 34px; color: #1e3a8a; font-weight: 700; line-height: 1; }
+
+        /* ─── FONÉTICA ─────────────────────────────────────────── */
+        .sound-box { background: #fef3c7; border: 3px solid #d97706; border-radius: 14px; padding: 8px 14px; text-align: center; }
+        .sound-big { font-size: 38px; font-weight: 900; color: #1e3a8a; letter-spacing: 2px; line-height: 1; }
+        .sound-label { font-size: 14px; color: #92400e; font-weight: 700; margin-top: 2px; }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1 — PORTADA -->
+<div class="slide active" id="s1" style="justify-content:center; align-items:center; text-align:center;">
+    <p style="font-size:20px; font-weight:700; color:#d97706; letter-spacing:2px; text-transform:uppercase;">Clase 05</p>
+    <h1 style="font-family:'Poppins',sans-serif; font-size:68px; color:#1e3a8a; line-height:1.1; margin-top:10px;">¡Quiero, puedo,<br>tengo que ir!</h1>
+    <div class="accent-bar"></div>
+    <p style="font-size:24px; color:#64748b; font-weight:600;">Verbos irregulares · La R y RR · Planes y deseos</p>
+    <p style="margin-top:35px; font-weight:700; color:#1e3a8a; font-size:20px;">Aguirre Español Studio</p>
+    <div class="nav">
+        <span class="nav-counter">1 / 14</span>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:7.1%"></div></div>
+</div>
+
+<!-- SLIDE 2 — ICE BREAKER: ¡MANO RÁPIDA! -->
+<div class="slide" id="s2">
+    <div class="slide-title">⚡ ¡Mano Rápida! — Ice Breaker</div>
+    <div class="speak-badge">🎙️ COMPETENCIA EN TIEMPO REAL — ¡Piensa y habla rápido!</div>
+    <p style="margin-bottom:10px; font-size:17px;">Gira el dado para obtener una categoría y una letra. El primer alumno en decir una palabra válida que comience con esa letra gana el punto. <span style="color:#be123c; font-weight:700;">¡Prohibido dudar!</span></p>
+
+    <div class="grid2">
+        <div class="race-card">
+            <div style="color:#94a3b8; font-size:12px; font-weight:700; letter-spacing:1px;">CATEGORÍA DE LA RONDA</div>
+            <div class="race-category" id="race-cat">🎲 Haz clic abajo para empezar</div>
+            <div class="race-letter" id="race-let">?</div>
+            <button class="btn btn-amber" onclick="rollRace()">🎲 ¡Nueva Ronda!</button>
+        </div>
+        
+        <div style="display:flex; flex-direction:column; gap:8px; min-height:0;">
+            <div class="scoreboard">
+                <div class="score-player">
+                    <div class="score-name">ALUMNO 1</div>
+                    <div class="score-num" id="score1">0</div>
+                    <button onclick="addScore(1)" style="background:#dcfce7; border:none; border-radius:6px; padding:2px 10px; cursor:pointer; font-weight:700; color:#14532d; font-size:12px; margin-top:2px;">+1 pt</button>
+                </div>
+                <div class="score-player">
+                    <div class="score-name">ALUMNO 2</div>
+                    <div class="score-num" id="score2">0</div>
+                    <button onclick="addScore(2)" style="background:#dbeafe; border:none; border-radius:6px; padding:2px 10px; cursor:pointer; font-weight:700; color:#1e40af; font-size:12px; margin-top:2px;">+1 pt</button>
+                </div>
+            </div>
+            <div class="card" style="border-top-color:#d97706; flex:1; padding:10px 16px; min-height:0; overflow-y:auto;">
+                <h3 style="font-size:16px; margin-bottom:4px;">📋 Reglas del juego:</h3>
+                <ol style="padding-left:16px; font-size:14px; color:#475569; line-height:1.6;">
+                    <li>Se revela el desafío (Categoría + Letra).</li>
+                    <li>Debes decir una palabra en español de inmediato.</li>
+                    <li>No se valen nombres propios a menos que se especifique.</li>
+                    <li>¡Suma un punto en el marcador del ganador de la ronda!</li>
+                </ol>
+            </div>
+            <div class="scaffold" style="font-size:14px; padding:8px 12px;">
+                <strong>Objetivo:</strong> Despertar la agilidad mental y activar el vocabulario pasivo en español de forma competitiva.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">2 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:14.3%"></div></div>
+</div>
+
+<!-- SLIDE 3 — OBJETIVOS DE LA CLASE -->
+<div class="slide" id="s3">
+    <div class="slide-title">🎯 Objetivos de la sesión</div>
+    <div class="badge-blue">📋 BITÁCORA DE APRENDIZAJE</div>
+    <p style="margin-bottom:20px;">Hoy estructuraremos tus herramientas de comunicación para que puedas expresar intenciones con total fluidez.</p>
+    
+    <div class="grid3">
+        <div class="card" style="border-top-color: #1e3a8a;">
+            <span class="pill p-blue">01</span>
+            <h3 style="margin-top:10px;">Dominar los Irregulares</h3>
+            <p>Aprender las alteraciones de raíz en los verbos de deseo, habilidad y obligación indispensable.</p>
+        </div>
+        <div class="card" style="border-top-color: #d97706;">
+            <span class="pill p-amber">02</span>
+            <h3 style="margin-top:10px;">Enlazar Ideas</h3>
+            <p>Construir cadenas verbales directas sin interferencias estructurales del portugués de forma automática.</p>
+        </div>
+        <div class="card" style="border-top-color: #be123c;">
+            <span class="pill p-red">03</span>
+            <h3 style="margin-top:10px;">Control Fonético</h3>
+            <p>Diferenciar y pronunciar correctamente los fonemas vibrantes simples y múltiples (R / RR).</p>
+        </div>
+    </div>
+    
+    <div class="nav">
+        <span class="nav-counter">3 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:21.4%"></div></div>
+</div>
+
+<!-- SLIDE 4 — FONÉTICA: LA R y RR -->
+<div class="slide" id="s4">
+    <div class="slide-title">👅 Sonidos peligrosos: La R y la RR</div>
+    <div class="badge-red">🔊 FONÉTICA — ¡El mayor desafío para tu pronunciación!</div>
+
+    <div class="grid2" style="margin-top:4px;">
+        <div style="display:flex; flex-direction:column; gap:8px;">
+            <div class="card" style="border-top-color:#059669; padding:10px 14px;">
+                <h3 style="color:#059669; font-size:16px; margin-bottom:2px;">🟢 R suave — una sola R en medio</h3>
+                <div class="sound-box" style="background:#f0fdf4; border-color:#059669; margin:4px 0;">
+                    <div class="sound-big" style="color:#059669;">r</div>
+                    <div class="sound-label" style="color:#14532d;">vibrante simple — sonido suave</div>
+                </div>
+                <div style="display:flex; gap:4px; flex-wrap:wrap;">
+                    <span class="pill p-green" style="font-size:15px;">caro</span>
+                    <span class="pill p-green" style="font-size:15px;">aros</span>
+                    <span class="pill p-green" style="font-size:15px;">quiere</span>
+                </div>
+            </div>
+            <div class="card" style="border-top-color:#be123c; padding:10px 14px;">
+                <h3 style="color:#be123c; font-size:16px; margin-bottom:2px;">🔴 RR fuerte — inicio o doble RR</h3>
+                <div class="sound-box" style="background:#fff1f2; border-color:#be123c; margin:4px 0;">
+                    <div class="sound-big" style="color:#be123c;">rr</div>
+                    <div class="sound-label" style="color:#9f1239;">vibrante múltiple — ¡lengua vibrando rápido!</div>
+                </div>
+                <div style="display:flex; gap:4px; flex-wrap:wrap;">
+                    <span class="pill p-red" style="font-size:15px;">rico</span>
+                    <span class="pill p-red" style="font-size:15px;">perro</span>
+                    <span class="pill p-red" style="font-size:15px;">rápido</span>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+            <div class="card" style="border-top-color:#d97706; padding:10px 14px; flex:1;">
+                <h3 style="font-size:16px; margin-bottom:4px;">⚠️ Pares mínimos — ¡El sonido cambia el significado!</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; font-size:15px; line-height:1.4;">
+                    <div style="background:#f0fdf4; padding:6px; border-radius:8px; text-align:center; font-weight:700; color:#059669;">caro<br><span style="font-size:12px; color:#475569; font-weight:400;">costoso</span></div>
+                    <div style="background:#fff1f2; padding:6px; border-radius:8px; text-align:center; font-weight:700; color:#be123c;">carro<br><span style="font-size:12px; color:#475569; font-weight:400;">auto</span></div>
+                    <div style="background:#f0fdf4; padding:6px; border-radius:8px; text-align:center; font-weight:700; color:#059669;">pero<br><span style="font-size:12px; color:#475569; font-weight:400;">conjunción</span></div>
+                    <div style="background:#fff1f2; padding:6px; border-radius:8px; text-align:center; font-weight:700; color:#be123c;">perro<br><span style="font-size:12px; color:#475569; font-weight:400;">mascota</span></div>
+                </div>
+            </div>
+            <div class="scaffold" style="font-size:14px; padding:8px 12px;">
+                <strong>Truco fonético:</strong> Para la RR, posiciona la lengua arriba en el paladar y sopla con fuerza para que vibre de inmediato.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">4 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:28.6%"></div></div>
+</div>
+
+<!-- SLIDE 5 — VERBO QUERER -->
+<div class="slide" id="s5">
+    <div class="slide-title">💭 Verbo: Querer (Deseos y Planes)</div>
+    <div class="badge-blue">🔧 IRREGULARIDAD: E ➔ IE</div>
+    <p style="margin-bottom:12px;">Este verbo cambia su raíz en todas las personas, excepto en *nosotros*. ¡Ojo con la pronunciación!</p>
+    
+    <div class="grid2">
+        <div class="card" style="border-top-color: #1e3a8a;">
+            <table class="verb-table">
+                <tr class="head-row"><td>Persona</td><td>Forma Conjugada</td></tr>
+                <tr><td>Yo</td><td><span class="pill p-red">quiero</span></td></tr>
+                <tr><td>Tú</td><td><span class="pill p-red">quieres</span></td></tr>
+                <tr><td>Él / Ella / Ud.</td><td><span class="pill p-red">quiere</span></td></tr>
+                <tr><td>Nosotros</td><td><span class="pill p-blue">queremos</span> (Regular)</td></tr>
+                <tr><td>Ellos / Ellas / Uds.</td><td><span class="pill p-red">quieren</span></td></tr>
+            </table>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="iz">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; align-self:flex-start;">💡 INTERACTIVO</div>
+                <p style="color:white; font-size:16px;">¿Cómo dirías: "Ellos desean comprar una casa nueva"?</p>
+                <div id="ans-s5" class="ans-box">Ellos quieren comprar una casa nueva.</div>
+                <button class="btn btn-reveal" onclick="document.getElementById('ans-s5').style.display='block'; this.style.display='none';">Revelar Respuesta</button>
+            </div>
+            <div class="scaffold">
+                <strong>Uso práctico:</strong> Úsalo para manifestar proyectos futuros de forma directa sin sonar demasiado formal.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">5 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:35.7%"></div></div>
+</div>
+
+<!-- SLIDE 6 — VERBO PODER -->
+<div class="slide" id="s6">
+    <div class="slide-title">💪 Verbo: Poder (Habilidades y Posibilidades)</div>
+    <div class="badge-blue">🔧 IRREGULARIDAD: O ➔ UE</div>
+    <p style="margin-bottom:12px;">Al igual que el verbo anterior, la raíz cambia por completo en casi todas sus formas. Veamos la tabla:</p>
+
+    <div class="grid2">
+        <div class="card" style="border-top-color: #d97706;">
+            <table class="verb-table">
+                <tr class="head-row"><td>Persona</td><td>Forma Conjugada</td></tr>
+                <tr><td>Yo</td><td><span class="pill p-amber">puedo</span></td></tr>
+                <tr><td>Tú</td><td><span class="pill p-amber">puedes</span></td></tr>
+                <tr><td>Él / Ella / Ud.</td><td><span class="pill p-amber">puede</span></td></tr>
+                <tr><td>Nosotros</td><td><span class="pill p-blue">podemos</span> (Regular)</td></tr>
+                <tr><td>Ellos / Ellas / Uds.</td><td><span class="pill p-amber">pueden</span></td></tr>
+            </table>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="iz">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; align-self:flex-start;">💡 INTERACTIVO</div>
+                <p style="color:white; font-size:16px;">Traduce mentalmente: "Nosotros tenemos la capacidad de hablar hoy."</p>
+                <div id="ans-s6" class="ans-box" style="background:#fff3c7; border-color:#d97706; color:#92400e;">Nosotros podemos hablar hoy.</div>
+                <button class="btn btn-reveal" style="background:#d97706;" onclick="document.getElementById('ans-s6').style.display='block'; this.style.display='none';">Revelar Respuesta</button>
+            </div>
+            <div class="scaffold">
+                <strong>Estructura útil:</strong> Ideal para ofrecer ayuda inmediata o para negociar tiempos de entrega en el ámbito laboral.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">6 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:42.8%"></div></div>
+</div>
+
+<!-- SLIDE 7 — VERBO TENER QUE -->
+<div class="slide" id="s7">
+    <div class="slide-title">⚠️ Verbo: Tener que (Obligaciones Fuertes)</div>
+    <div class="badge-blue">🔧 IRREGULARIDAD MIXTA: GO / E ➔ IE</div>
+    <p style="margin-bottom:12px;">Este verbo combina un cambio radical en la primera persona con la alteración de raíz en las demás.</p>
+
+    <div class="grid2">
+        <div class="card" style="border-top-color: #be123c;">
+            <table class="verb-table">
+                <tr class="head-row"><td>Persona</td><td>Forma Conjugada</td></tr>
+                <tr><td>Yo</td><td><span class="pill p-pink">tengo</span> que</td></tr>
+                <tr><td>Tú</td><td><span class="pill p-red">tienes</span> que</td></tr>
+                <tr><td>Él / Ella / Ud.</td><td><span class="pill p-red">tiene</span> que</td></tr>
+                <tr><td>Nosotros</td><td><span class="pill p-blue">tenemos</span> que</td></tr>
+                <tr><td>Ellos / Ellas / Uds.</td><td><span class="pill p-red">tienen</span> que</td></tr>
+            </table>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="iz">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; align-self:flex-start;">💡 INTERACTIVO</div>
+                <p style="color:white; font-size:16px;">¿Cómo dirías de forma obligatoria: "Tú necesitas asistir a la junta"?</p>
+                <div id="ans-s7" class="ans-box" style="background:#fee2e2; border-color:#be123c; color:#991b1b;">Tienes que asistir a la junta.</div>
+                <button class="btn btn-reveal" style="background:#be123c;" onclick="document.getElementById('ans-s7').style.display='block'; this.style.display='none';">Revelar Respuesta</button>
+            </div>
+            <div class="scaffold">
+                <strong>Clave de uso:</strong> Recuerda añadir siempre la partícula <strong>que</strong> antes del infinitivo para marcar la obligación de forma obligatoria.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">7 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
+</div>
+
+<!-- SLIDE 8 — ESTRUCTURA: LA CADENA DE VERBOS (RENOVADA) -->
+<div class="slide" id="s8">
+    <div class="slide-title">🔗 La Cadena de Verbos — Planes y Deseos</div>
+    <div class="badge-blue">🛠️ GRAMÁTICA EN ACCIÓN — Cómo conectar intenciones</div>
+    <p style="margin-bottom: 12px; font-size: 17px;">
+        Cuando combinamos dos verbos seguidos para hablar de planes, 
+        <span class="under">solo el primer verbo se conjuga</span>. El segundo se mantiene en <strong>infinitivo (-ar, -er, -ir)</strong>.
+    </p>
+
+    <div class="grid2" style="gap: 16px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="card" style="border-top-color: #1e3a8a; background: #f8fafc; padding: 16px;">
+                <h3 style="color: #1e3a8a; font-size: 18px; margin-bottom: 10px;">📐 La Fórmula Maestra</h3>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px; background: white; padding: 14px; border-radius: 12px; border: 2px solid #e2e8f0; font-weight: 700; font-size: 20px;">
+                    <span style="color: #be123c;">Verbo 1 <br><small style="font-size:12px; color:#64748b; font-weight:400;">(Conjugado)</small></span>
+                    <span style="color: #d97706;">+</span>
+                    <span style="color: #059669;">Verbo 2 <br><small style="font-size:12px; color:#64748b; font-weight:400;">(Infinitivo)</small></span>
+                </div>
+            </div>
+
+            <div class="card" style="border-top-color: #d97706; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                <h3 style="font-size: 16px; margin-bottom: 8px;">🏃‍♂️ Guía de Construcción Visual:</h3>
+                
+                <div style="display: flex; align-items: center; gap: 10px; background: #fff5f5; padding: 8px 12px; border-radius: 10px; margin-bottom: 6px;">
+                    <span class="pill p-red" style="min-width: 90px; text-align: center;">Quiero</span>
+                    <span style="color: #64748b;">➔</span>
+                    <span class="pill p-green">viajar</span>
+                    <span style="font-size: 14px; color: #475569; margin-left: auto;">a Santiago este fin de semana.</span>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 10px; background: #eff6ff; padding: 8px 12px; border-radius: 10px; margin-bottom: 6px;">
+                    <span class="pill p-blue" style="min-width: 90px; text-align: center;">Puedo</span>
+                    <span style="color: #64748b;">➔</span>
+                    <span class="pill p-green">hablar</span>
+                    <span style="font-size: 14px; color: #475569; margin-left: auto;">español en el trabajo.</span>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 10px; background: #fef3c7; padding: 8px 12px; border-radius: 10px;">
+                    <span class="pill p-amber" style="min-width: 90px; text-align: center;">Tengo que</span>
+                    <span style="color: #64748b;">➔</span>
+                    <span class="pill p-green">estudiar</span>
+                    <span style="font-size: 14px; color: #475569; margin-left: auto;">para la presentación.</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="iz" style="background: #0f172a; padding: 16px; flex: 1; justify-content: flex-start; gap: 10px;">
+                <div style="color: #94a3b8; font-size: 12px; font-weight: 700; letter-spacing: 1px; align-self: flex-start;">💡 DESAFÍO EN VIVO</div>
+                <p style="color: white; font-size: 16px; align-self: flex-start; line-height: 1.4;">
+                    ¿Cómo corregirías esta frase de un alumno?<br>
+                    <span style="color: #f87171; font-weight: 700; font-size: 18px;">*"Yo quiero puedo ir a la playa"*</span>
+                </p>
+                
+                <div id="ans-s8" class="ans-box" style="margin-top: 10px; font-size: 16px; border-style: solid; background: #dcfce7; color: #14532d;">
+                    <strong>Corrección correcta:</strong> "Yo <u>quiero</u> <strong>ir</strong> a la playa" o "Yo <u>puedo</u> <strong>ir</strong> a la playa". ¡No encadenes dos verbos conjugados de la misma categoría!
+                </div>
+                
+                <button class="btn btn-reveal" id="btn-s8" onclick="document.getElementById('ans-s8').style.display='block'; this.style.display='none';" style="margin-top: auto; width: 100%;">👁️ Revelar Análisis</button>
+            </div>
+
+            <div class="scaffold" style="font-size: 14px; padding: 8px 12px; border-left-color: #be123c;">
+                <strong>⚠️ Alerta de error:</strong> Evita la estructura incorrecta común. En español, la conexión entre el verbo de deseo y el infinitivo es <strong>directa</strong>, sin preposiciones intermedias.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">8 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width: 57.1%"></div></div>
+</div>
+
+<!-- SLIDE 9 — EJERCICIO DE RELLENAR HUECOS -->
+<div class="slide" id="s9">
+    <div class="slide-title">📝 Ejercicio: Completa los espacios</div>
+    <div class="badge-blue">✏️ PRÁCTICA INDEPENDIENTE</div>
+    <p style="margin-bottom:12px;">Escribe la forma adecuada de los verbos entre paréntesis siguiendo las reglas revisadas.</p>
+
+    <div class="grid2">
+        <div class="card" style="border-top-color: #059669; font-size:16px; line-height:1.7;">
+            <p>1. Yo <span class="under">_________</span> (querer) viajar a Madrid el próximo verano.</p>
+            <p>2. Nosotros <span class="under">_________</span> (poder) resolver este dilema técnico ahora.</p>
+            <p>3. Ellos <span class="under">_________</span> (tener) que entregar el balance contable.</p>
+            <p>4. ¿Tú <span class="under">_________</span> (querer) acompañarme a la reunión?</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="iz">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; align-self:flex-start;">👁️ SOLUCIONARIO</div>
+                <div id="ans-s9" class="ans-box" style="text-align:left; font-size:16px;">
+                    1. quiero<br>2. podemos<br>3. tienen<br>4. quieres
+                </div>
+                <button class="btn btn-reveal" onclick="document.getElementById('ans-s9').style.display='block'; this.style.display='none';">Mostrar Respuestas</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">9 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:64.2%"></div></div>
+</div>
+
+<!-- SLIDE 10 — DESAFÍO DE TRADUCCIÓN -->
+<div class="slide" id="s10">
+    <div class="slide-title">🔄 Desafío de Traducción Inmediata</div>
+    <div class="speak-badge">🗣️ PRODUCCIÓN ORAL</div>
+    <p style="margin-bottom:12px;">Traduce las siguientes estructuras rápidamente sin agregar palabras extra.</p>
+
+    <div class="grid2">
+        <div class="card" style="border-top-color: #1e3a8a; display:flex; flex-direction:column; justify-content:space-around;">
+            <div>
+                <strong style="color:#64748b; font-size:14px;">FRASE 1:</strong>
+                <p style="font-size:22px; font-weight:600;">"Eu quero viajar amanhã."</p>
+            </div>
+            <div>
+                <strong style="color:#64748b; font-size:14px;">FRASE 2:</strong>
+                <p style="font-size:22px; font-weight:600;">"Eles têm que estudar hoje."</p>
+            </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="iz">
+                <div id="ans-s10" class="ans-box" style="font-size:16px; text-align:left;">
+                    <strong>Equivalentes perfectos:</strong><br>
+                    1. "Quiero viajar mañana."<br>
+                    2. "Ellos tienen que estudiar hoy."
+                </div>
+                <button class="btn btn-reveal" onclick="document.getElementById('ans-s10').style.display='block'; this.style.display='none';">Verificar Equivalencias</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">10 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:71.4%"></div></div>
+</div>
+
+<!-- SLIDE 11 — ANÁLISIS DE CASOS -->
+<div class="slide" id="s11">
+    <div class="slide-title">🔍 Análisis de Casos: ¿Correcto o Incorrecto?</div>
+    <div class="badge-blue">🧪 LABORATORIO DE IDIOMAS</div>
+    <p style="margin-bottom:15px;">Identifica cuál de las dos opciones suena natural para un hablante nativo.</p>
+
+    <div class="grid2">
+        <div class="card" style="border-top-color: #be123c; display:flex; flex-direction:column; justify-content:center; gap:20px;">
+            <div style="background:#fff1f2; padding:12px; border-radius:12px;">
+                <p style="font-weight:700; color:#b91c1c;">Opción A:</p>
+                <p style="font-size:18px;">"Nosotros queremos para salir más temprano de la oficina."</p>
+            </div>
+            <div style="background:#f0fdf4; padding:12px; border-radius:12px;">
+                <p style="font-weight:700; color:#15803d;">Opción B:</p>
+                <p style="font-size:18px;">"Nosotros queremos salir más temprano de la oficina."</p>
+            </div>
+        </div>
+        <div class="iz">
+            <div id="ans-s11" class="ans-box">
+                ¡La Opción B es la única correcta! Jamás debemos colocar preposiciones entre el verbo conjugado de deseo y su infinitivo respectivo.
+            </div>
+            <button class="btn btn-reveal" onclick="document.getElementById('ans-s11').style.display='block'; this.style.display='none';">Confirmar Diagnóstico</button>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">11 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:78.5%"></div></div>
+</div>
+
+<!-- SLIDE 12 — PRÁCTICA DE ESCRITURA LIBRE -->
+<div class="slide" id="s12">
+    <div class="slide-title">✍️ Expresión Escrita Organizada</div>
+    <div class="badge-blue">📝 TRABAJO DE PRODUCCIÓN</div>
+    <p style="margin-bottom:12px;">Escribe tres oraciones reales describiendo tus planes comerciales o laborales para esta semana laboral.</p>
+
+    <div class="grid2">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <textarea class="write-area" rows="6" placeholder="Escribe aquí tus ejemplos utilizando: Quiero..., Puedo... y Tengo que..."></textarea>
+            <div class="scaffold" style="font-size:14px;">
+                <strong>Sugerencia de vocabulario:</strong> agendar, revisar, optimizar, redactar informes, enviar correos.
+            </div>
+        </div>
+        <div class="card" style="border-top-color: #d97706;">
+            <h3>Criterios de evaluación personal:</h3>
+            <ul style="padding-left:18px; margin-top:8px; font-size:15px; display:flex; flex-direction:column; gap:8px;">
+                <li>¿Cambiaste la raíz de los verbos cuando correspondía?</li>
+                <li>¿Evitaste conectar usando la palabra "para"?</li>
+                <li>¿El segundo verbo de la oración quedó en su estado infinitivo?</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">12 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:85.7%"></div></div>
+</div>
+
+<!-- SLIDE 13 — DINÁMICA DE REPASO RÁPIDO -->
+<div class="slide" id="s13">
+    <div class="slide-title">🔄 Repaso Relámpago Final</div>
+    <div class="speak-badge">⏱️ SIN PENSAR DOS VECES</div>
+    <p style="margin-bottom:15px;">Responde los siguientes cuestionamientos de manera oral y directa.</p>
+
+    <div class="grid3">
+        <div class="card" style="border-top-color:#1e3a8a;">
+            <p style="font-size:16px; font-weight:700;">Pregunta 1:</p>
+            <p style="font-size:15px; margin-top:5px;">¿Cuál es la mutación del verbo Poder en primera persona?</p>
+        </div>
+        <div class="card" style="border-top-color:#d97706;">
+            <p style="font-size:16px; font-weight:700;">Pregunta 2:</p>
+            <p style="font-size:15px; margin-top:5px;">¿Qué elemento falta aquí: "Yo tengo ______ estudiar"?</p>
+        </div>
+        <div class="card" style="border-top-color:#be123c;">
+            <p style="font-size:16px; font-weight:700;">Pregunta 3:</p>
+            <p style="font-size:15px; margin-top:5px;">¿Cómo suena la palabra "rico" al inicio de frase?</p>
+        </div>
+    </div>
+
+    <div class="iz" style="margin-top:15px; max-height:80px; flex-direction:row; padding:10px 20px;">
+        <div id="ans-s13" class="ans-box" style="font-size:15px; padding:6px;">Respuestas: 1. Puedo (O->UE) / 2. La palabra "que" / 3. Vibrante fuerte por posición inicial.</div>
+        <button class="btn btn-reveal" style="width:100%;" onclick="document.getElementById('ans-s13').style.display='block'; this.style.display='none';">Revelar Todo el Solucionario</button>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">13 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:92.8%"></div></div>
+</div>
+
+<!-- SLIDE 14 — CIERRE Y TAREAS -->
+<div class="slide" id="s14" style="justify-content:center; align-items:center; text-align:center;">
+    <h2 style="font-family:'Poppins',sans-serif; font-size:48px; color:#1e3a8a;">¡Excelente trabajo hoy!</h2>
+    <div class="accent-bar" style="margin:10px auto 20px;"></div>
+    <p style="font-size:22px; max-width:800px; color:#475569;">Has logrado estructurar tus intenciones y controlar los vicios de traducción más comunes.</p>
+    
+    <div class="card" style="border-top-color:#059669; background:white; margin-top:25px; padding:20px; max-width:600px; text-align:left;">
+        <h3 style="color:#059669; font-size:18px;">📌 Tarea para la bitácora:</h3>
+        <p style="font-size:16px; margin-top:6px; color:#1e293b;">Graba un audio de 45 segundos describiendo tus metas reales utilizando al menos 4 verbos irregulares de la sesión de hoy sin leer anotaciones.</p>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">14 / 14</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" disabled>Fin de la Clase</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+</div>
+
+<!-- ─── SCRIPT LÓGICO DE NAVEGACIÓN Y JUEGO ──────────────── -->
+<script>
+    let currentSlide = 1;
+    const totalSlides = 14;
+
+    function go(dir) {
+        const activeSlide = document.getElementById(`s${currentSlide}`);
+        if (activeSlide) activeSlide.classList.remove('active');
+        
+        currentSlide += dir;
+        if (currentSlide < 1) currentSlide = 1;
+        if (currentSlide > totalSlides) currentSlide = totalSlides;
+        
+        const nextSlide = document.getElementById(`s${currentSlide}`);
+        if (nextSlide) nextSlide.classList.add('active');
+    }
+
+    function makePicker(arr) {
+        let pool = [...arr];
+        return function() {
+            if (pool.length === 0) pool = [...arr];
+            const idx = Math.floor(Math.random() * pool.length);
+            return pool.splice(idx, 1)[0];
+        };
+    }
+
+    /* DATA DINÁMICA DE LA SLIDE 2 */
+    const categories = [
+        "Un país o ciudad", "Comida o fruta", "Verbo en infinitivo", 
+        "Algo que hay en una oficina", "Un animal salvaje", 
+        "Cosas rojas", "Medios de transporte", "Ropa o calzado"
+    ];
+    const letters = ["P", "M", "C", "A", "T", "V", "R", "L", "F"];
+    
+    const nextCategory = makePicker(categories);
+    const nextLetter = makePicker(letters);
+
+    function rollRace() {
+        document.getElementById('race-cat').textContent = nextCategory();
+        document.getElementById('race-let').textContent = nextLetter();
+    }
+
+    let s1 = 0, s2_score = 0;
+    function addScore(player) {
+        if (player === 1) { s1++; document.getElementById('score1').textContent = s1; }
+        else { s2_score++; document.getElementById('score2').textContent = s2_score; }
+    }
+</script>
+</body>
+</html>
