@@ -524,13 +524,33 @@
                     </a>
                 </div>
 
+                <div class="card" data-keywords="clase 5 conversación fluidez interacción expresiones vocabulario avanzado" style="animation-delay: 0.45s">
+                    <div>
+                        <div class="card-top">
+                            <span class="class-number">CLASE 5</span>
+                            <span class="class-icon"><i class="fa-solid fa-comments"></i></span>
+                        </div>
+                        <div class="card-content">
+                            <h2>Clase 5</h2>
+                            <p>Expresiones cotidianas, interacción fluida y ampliación de vocabulario práctico.</p>
+                            <div class="tags">
+                                <span class="tag">Fluidez</span>
+                                <span class="tag">Conversación</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="clase5/index.html" class="btn">
+                        Acceder a la clase <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
             </div>
 
             <h2 class="section-title"><i class="fa-solid fa-folder-plus"></i> Recursos y Material Extra</h2>
             
             <div class="grid" id="extraGrid">
                 
-                <div class="card" data-keywords="material extra vocabulario recopilación repaso glosario palabras" style="animation-delay: 0.45s">
+                <div class="card" data-keywords="material extra vocabulario recopilación repaso glosario palabras" style="animation-delay: 0.55s">
                     <div>
                         <div class="card-top">
                             <span class="class-number">RECURSO</span>
@@ -550,7 +570,7 @@
                     </a>
                 </div>
 
-                <div class="card" data-keywords="material extra ejercicios práctica cuestionario tareas actividades interactivo" style="animation-delay: 0.55s">
+                <div class="card" data-keywords="material extra ejercicios práctica cuestionario tareas actividades interactivo" style="animation-delay: 0.65s">
                     <div>
                         <div class="card-top">
                             <span class="class-number">RECURSO</span>
@@ -608,7 +628,7 @@
                 const keywords = (card.dataset.keywords || '').toLowerCase();
                 const matches = title.includes(query) || keywords.includes(query);
 
-                card.style.display = matches ? '' : 'none';
+                card.style.style.display = matches ? '' : 'none';
                 if (matches) visibleCount++;
             });
 
