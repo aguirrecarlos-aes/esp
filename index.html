@@ -544,13 +544,55 @@
                     </a>
                 </div>
 
+                <!-- Clase 6 añadida -->
+                <div class="card" data-keywords="clase 6 conversación fluidez práctica vocabulario gramática intermedia" style="animation-delay: 0.55s">
+                    <div>
+                        <div class="card-top">
+                            <span class="class-number">CLASE 6</span>
+                            <span class="class-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+                        </div>
+                        <div class="card-content">
+                            <h2>Clase 6</h2>
+                            <p>Contenido interactivo en desarrollo, gramática aplicada y ejercicios avanzados.</p>
+                            <div class="tags">
+                                <span class="tag">Gramática</span>
+                                <span class="tag">Vocabulario</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="clase6/index.html" class="btn">
+                        Acceder a la clase <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Clase 7 añadida -->
+                <div class="card" data-keywords="clase 7 conversación fluidez interacción expresiones vocabulario dinámicas" style="animation-delay: 0.65s">
+                    <div>
+                        <div class="card-top">
+                            <span class="class-number">CLASE 7</span>
+                            <span class="class-icon"><i class="fa-solid fa-comments"></i></span>
+                        </div>
+                        <div class="card-content">
+                            <h2>Clase 7</h2>
+                            <p>Sesión interactiva, práctica de conversación libre y corrección en tiempo real.</p>
+                            <div class="tags">
+                                <span class="tag">Conversación</span>
+                                <span class="tag">Expresiones</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="clase7/index.html" class="btn">
+                        Acceder a la clase <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
             </div>
 
             <h2 class="section-title"><i class="fa-solid fa-folder-plus"></i> Recursos y Material Extra</h2>
             
             <div class="grid" id="extraGrid">
                 
-                <div class="card" data-keywords="material extra vocabulario recopilación repaso glosario palabras" style="animation-delay: 0.55s">
+                <div class="card" data-keywords="material extra vocabulario recopilación repaso glosario palabras" style="animation-delay: 0.75s">
                     <div>
                         <div class="card-top">
                             <span class="class-number">RECURSO</span>
@@ -570,7 +612,7 @@
                     </a>
                 </div>
 
-                <div class="card" data-keywords="material extra ejercicios práctica cuestionario tareas actividades interactivo" style="animation-delay: 0.65s">
+                <div class="card" data-keywords="material extra ejercicios práctica cuestionario tareas actividades interactivo" style="animation-delay: 0.85s">
                     <div>
                         <div class="card-top">
                             <span class="class-number">RECURSO</span>
@@ -628,7 +670,7 @@
                 const keywords = (card.dataset.keywords || '').toLowerCase();
                 const matches = title.includes(query) || keywords.includes(query);
 
-                card.style.style.display = matches ? '' : 'none';
+                card.style.display = matches ? '' : 'none';
                 if (matches) visibleCount++;
             });
 
