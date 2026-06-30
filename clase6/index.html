@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Español en Acción · Clase 06 – Aguirre Español Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ─── RESET & BASE ─────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #cbd5e1;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            font-family: 'Lexend', sans-serif;
+            overflow: hidden;
+        }
+
+        /* ─── SLIDE SHELL ──────────────────────────────────────── */
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: #fff9e6;
+            display: none;
+            flex-direction: column;
+            padding: 28px 56px 85px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,.22);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .slide.active { display: flex; }
+
+        /* ─── TYPOGRAPHY ───────────────────────────────────────── */
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #1e3a8a;
+            border-left: 12px solid #d97706;
+            padding-left: 18px;
+            margin-bottom: 10px;
+            line-height: 1.15;
+        }
+        .sub { font-size: 18px; color: #475569; font-weight: 600; margin-bottom: 8px; }
+        p, li { font-size: 19px; color: #1e293b; line-height: 1.45; }
+
+        /* ─── PILLS & HIGHLIGHTS ───────────────────────────────── */
+        .pill { padding: 4px 12px; border-radius: 8px; font-weight: 700; display: inline-block; margin: 3px; font-size: 17px; }
+        .p-blue   { background: #dbeafe; color: #1e40af; }
+        .p-pink   { background: #fce7f3; color: #9d174d; }
+        .p-green  { background: #dcfce7; color: #14532d; }
+        .p-amber  { background: #fef3c7; color: #92400e; }
+        .p-red    { background: #fee2e2; color: #991b1b; }
+        .p-purple { background: #ede9fe; color: #5b21b6; }
+        .p-teal   { background: #ccfbf1; color: #134e4a; }
+        .under { text-decoration: underline; text-decoration-thickness: 3px; }
+
+        /* ─── GRID CARDS ───────────────────────────────────────── */
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; min-height: 0; }
+        .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; flex: 1; min-height: 0; }
+
+        .card {
+            background: white;
+            padding: 14px 18px;
+            border-radius: 18px;
+            border-top: 6px solid #1e3a8a;
+            box-shadow: 0 4px 10px rgba(0,0,0,.06);
+        }
+        .card h3 { font-size: 17px; color: #1e293b; margin-bottom: 6px; }
+        .card p  { font-size: 15px; color: #475569; }
+
+        /* ─── INTERACTIVE ZONE ─────────────────────────────────── */
+        .iz {
+            background: #0f172a;
+            border-radius: 26px;
+            padding: 18px 24px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            position: relative;
+            min-height: 0;
+        }
+
+        /* ─── BUTTONS ──────────────────────────────────────────── */
+        .btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            font-size: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Lexend', sans-serif;
+            transition: background .2s, transform .15s;
+        }
+        .btn:hover { background: #2563eb; transform: translateY(-2px); }
+        .btn-reveal { background: #059669; }
+        .btn-reveal:hover { background: #10b981; }
+        .btn-amber  { background: #d97706; }
+        .btn-amber:hover { background: #f59e0b; }
+        .btn-red { background: #be123c; }
+        .btn-red:hover { background: #e11d48; }
+
+        /* ─── ANSWER BOX ───────────────────────────────────────── */
+        .ans-box {
+            background: #f0fdf4;
+            color: #14532d;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            width: 100%;
+            border: 3px dashed #16a34a;
+            display: none;
+            text-align: center;
+        }
+
+        /* ─── SCAFFOLD STRIP ───────────────────────────────────── */
+        .scaffold {
+            background: #eff6ff;
+            border-left: 8px solid #1e3a8a;
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 16px;
+            color: #1e3a8a;
+            line-height: 1.5;
+        }
+        .scaffold strong { color: #d97706; }
+
+        /* ─── BADGES ───────────────────────────────────────────── */
+        .speak-badge, .badge-blue, .badge-red, .badge-green, .badge-purple {
+            display: inline-block;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 4px 12px;
+            margin-bottom: 6px;
+            letter-spacing: .5px;
+        }
+        .speak-badge  { background: #d97706; }
+        .badge-blue   { background: #1e3a8a; }
+        .badge-red    { background: #be123c; }
+        .badge-green  { background: #059669; }
+        .badge-purple { background: #7c3aed; }
+
+        /* ─── VERB TABLE ───────────────────────────────────────── */
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+            margin-top: 4px;
+        }
+        .verb-table tr.head-row { background: #f1f5f9; font-weight: 700; }
+        .verb-table td { padding: 6px 8px; color: #1e293b; border-bottom: 1px solid #e2e8f0; }
+
+        /* ─── WRITE ZONE ───────────────────────────────────────── */
+        .write-area {
+            width: 100%;
+            border: 3px solid #1e3a8a;
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 17px;
+            font-family: 'Lexend', sans-serif;
+            resize: none;
+            background: #f8fafc;
+            color: #1e293b;
+            outline: none;
+        }
+
+        /* ─── FOOTER NAV ───────────────────────────────────────── */
+        .nav {
+            position: absolute;
+            bottom: 18px;
+            left: 56px;
+            right: 56px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 10px;
+            background: #fff9e6;
+            z-index: 10;
+        }
+        .nav-counter { font-weight: 700; color: #94a3b8; font-size: 16px; }
+        .nav-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            font-family: 'Lexend', sans-serif;
+            transition: background .18s, color .18s;
+        }
+        .nav-btn:hover:not(:disabled) { background: #1e3a8a; color: white; }
+        .nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+        .accent-bar { width: 120px; height: 6px; background: #d97706; border-radius: 4px; margin: 16px auto; }
+
+        /* ─── PROGRESS BAR ─────────────────────────────────────── */
+        .progress-track {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 0 0 24px 24px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #d97706;
+            border-radius: 0 0 24px 24px;
+            transition: width .4s ease;
+        }
+
+        /* ─── DETECTIVE CARD ───────────────────────────────────── */
+        .scene-card {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            border-radius: 20px;
+            padding: 18px 22px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+        .scene-emoji { font-size: 34px; }
+        .scene-text { font-size: 22px; font-weight: 700; line-height: 1.3; }
+        .scene-label { font-size: 12px; color: #94a3b8; font-weight: 700; letter-spacing: 1px; }
+
+        /* ─── TIMER RING ───────────────────────────────────────── */
+        .timer-ring {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(#d97706 0%, #fef3c7 0%);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px; font-weight: 900;
+            color: #1e3a8a;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(217,119,6,.3);
+        }
+
+        /* ─── FREQUENCY TIMELINE ───────────────────────────────── */
+        .freq-bar {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 42px;
+            margin: 6px 0;
+        }
+        .freq-seg {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* ─── PHOTO FRAME ──────────────────────────────────────── */
+        .photo-frame {
+            background: #1e293b;
+            border-radius: 18px;
+            padding: 16px 20px;
+            color: white;
+            font-size: 16px;
+            line-height: 1.6;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .pt-br { color: #fbbf24; font-weight: 700; font-size: 15px; }
+        .es-hint { color: #86efac; font-size: 14px; }
+
+        /* ─── MISSION CARD ─────────────────────────────────────── */
+        .mission {
+            background: #7c3aed;
+            color: white;
+            border-radius: 18px;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+        .mission strong { color: #fde68a; }
+    </style>
+</head>
+<body>
+
+<div class="slide active" id="s1" style="justify-content:center; align-items:center; text-align:center;">
+    <p style="font-size:18px; font-weight:700; color:#d97706; letter-spacing:2px; text-transform:uppercase;">Clase 06</p>
+    <h1 style="font-family:'Poppins',sans-serif; font-size:62px; color:#1e3a8a; line-height:1.1; margin-top:10px;">¿Qué estás<br>haciendo ahora?</h1>
+    <div class="accent-bar"></div>
+    <p style="font-size:22px; color:#64748b; font-weight:600;">Presente Continuo · Conectores de Frecuencia · Descripción en Tiempo Real</p>
+    <p style="margin-top:35px; font-weight:700; color:#1e3a8a; font-size:20px;">Aguirre Español Studio</p>
+    <div class="nav">
+        <span class="nav-counter">1 / 15</span>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:6.7%"></div></div>
+</div>
+
+<div class="slide" id="s2">
+    <div class="slide-title">🎭 Ice Breaker — ¡Adivina la Acción!</div>
+    <div class="speak-badge">🙌 PRODUCCIÓN ORAL — Sin texto, solo movimiento y palabras</div>
+    <p style="margin-bottom:10px; font-size:16px;">Un alumno hace la <strong>mímica</strong> de una acción. El otro debe decirla en español usando la estructura: <span class="pill p-blue">"Estás ___ando / ___iendo"</span>. Gana un point quien lo diga correctamente primero.</p>
+
+    <div class="grid2">
+        <div style="display:flex; flex-direction:column; gap:10px; min-height:0;">
+            <div class="scene-card">
+                <div class="scene-label">🎲 ACCIÓN DE LA RONDA</div>
+                <div class="scene-emoji" id="mime-emoji">❓</div>
+                <div class="scene-text" id="mime-action">Haz clic para revelar la acción</div>
+                <div class="es-hint" id="mime-hint" style="display:none;"></div>
+                <div style="display:flex; gap:8px; margin-top:4px; flex-wrap: wrap;">
+                    <button class="btn btn-amber" onclick="rollMime()" style="flex:1 1 100%;">🎲 Nueva Acción</button>
+                    <button class="btn btn-reveal" onclick="showAction()" style="flex:1;">👁️ Mostrar Acción</button>
+                    <button class="btn btn-red" onclick="hideAction()" style="flex:1;">🙈 Ocultar Acción</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; min-height:0;">
+            <div style="display:flex; gap:12px; justify-content:center;">
+                <div class="card" style="border-top-color:#1e3a8a; text-align:center; flex:1;">
+                    <div style="font-size:12px; color:#64748b; font-weight:700;">JEOVÁ</div>
+                    <div style="font-size:36px; color:#1e3a8a; font-weight:700;" id="score1m">0</div>
+                    <button onclick="addScoreMime(1)" style="background:#dbeafe; border:none; border-radius:6px; padding:2px 10px; cursor:pointer; font-weight:700; color:#1e40af; font-size:12px; margin-top:2px;">+1 pt</button>
+                </div>
+                <div class="card" style="border-top-color:#d97706; text-align:center; flex:1;">
+                    <div style="font-size:12px; color:#64748b; font-weight:700;">NICK</div>
+                    <div style="font-size:36px; color:#d97706; font-weight:700;" id="score2m">0</div>
+                    <button onclick="addScoreMime(2)" style="background:#fef3c7; border:none; border-radius:6px; padding:2px 10px; cursor:pointer; font-weight:700; color:#92400e; font-size:12px; margin-top:2px;">+1 pt</button>
+                </div>
+            </div>
+            <div class="card" style="border-top-color:#d97706; flex:1; padding:10px 16px;">
+                <h3 style="font-size:15px; margin-bottom:6px;">📋 ¡A jugar!</h3>
+                <ol style="padding-left:16px; font-size:14px; color:#475569; line-height:1.7;">
+                    <li>Turnos rápidos para adivinar las mímicas.</li>
+                    <li>Suma puntos usando los botones superiores.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">2 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:13.3%"></div></div>
+</div>
+
+<div class="slide" id="s3">
+    <div class="slide-title">🔁 Warm Up — ¿Qué recuerdas de la Clase 05?</div>
+    <div class="badge-blue">⚡ ACTIVACIÓN DE MEMORIA — 3 minutos en voz alta</div>
+    <p style="margin-bottom:14px; font-size:16px;">Sin mirar apuntes. Responde oralmente de inmediato. <span style="color:#be123c; font-weight:700;">El primero en responder suma un punto.</span></p>
+
+    <div class="grid3">
+        <div class="card" style="border-top-color:#1e3a8a; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+                <span class="pill p-blue" style="font-size:13px;">Desafío 01</span>
+                <p style="margin-top:8px; font-size:15px;">"Yo ______ (querer) aprender español muy rápido."</p>
+            </div>
+            <div id="r1" class="ans-box" style="font-size:15px; margin-top:8px;">quiero ✅</div>
+            <button class="btn btn-reveal" style="margin-top:6px; font-size:13px; padding:6px 12px;" onclick="reveal('r1',this)">Ver</button>
+        </div>
+        <div class="card" style="border-top-color:#d97706; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+                <span class="pill p-amber" style="font-size:13px;">Desafío 02</span>
+                <p style="margin-top:8px; font-size:15px;">¿Cuál es el ERROR en esta oración?<br><em style="color:#be123c;">"Ellos quieren para salir hoy."</em></p>
+            </div>
+            <div id="r2" class="ans-box" style="font-size:14px; margin-top:8px;">La palabra "para" no va aquí: "Ellos quieren salir hoy." ✅</div>
+            <button class="btn btn-reveal" style="margin-top:6px; font-size:13px; padding:6px 12px;" onclick="reveal('r2',this)">Ver</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+                <span class="pill p-red" style="font-size:13px;">Desafío 03</span>
+                <p style="margin-top:8px; font-size:15px;">Traduce oralmente:<br><em style="color:#475569;">"Nós temos que terminar o projeto."</em></p>
+            </div>
+            <div id="r3" class="ans-box" style="font-size:14px; margin-top:8px;">Nosotros tenemos que terminar el proyecto. ✅</div>
+            <button class="btn btn-reveal" style="margin-top:6px; font-size:13px; padding:6px 12px;" onclick="reveal('r3',this)">Ver</button>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">3 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:20%"></div></div>
+</div>
+
+<div class="slide" id="s4">
+    <div class="slide-title">🎯 Objetivos de la Sesión</div>
+    <div class="badge-blue">📋 BITÁCORA DE APRENDIZAJE</div>
+    <p style="margin-bottom:18px;">Hoy saldrás de esta clase pudiendo describir lo que ocurre <em>en este momento</em> con total naturalidad.</p>
+
+    <div class="grid3">
+        <div class="card" style="border-top-color:#1e3a8a;">
+            <span class="pill p-blue">01</span>
+            <h3 style="margin-top:10px;">Presente Continuo</h3>
+            <p>Construir la estructura ESTAR conjugado + Gerundio para describir acciones en progreso ahora mismo.</p>
+        </div>
+        <div class="card" style="border-top-color:#d97706;">
+            <span class="pill p-amber">02</span>
+            <h3 style="margin-top:10px;">Conectores de Frecuencia</h3>
+            <p>Usar siempre, nunca, a veces, normalmente y hoy para matizar la frecuencia de las acciones.</p>
+        </div>
+        <div class="card" style="border-top-color:#059669;">
+            <span class="pill p-green">03</span>
+            <h3 style="margin-top:10px;">Descripción Oral</h3>
+            <p>Narrar en tiempo real situaciones cotidianas y laborales con fluidez y sin pausas largas.</p>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">4 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:26.7%"></div></div>
+</div>
+
+<div class="slide" id="s5">
+    <div class="slide-title">🌉 Puente PT → ES: El Gerundio</div>
+    <div class="badge-purple">🇧🇷 COMPARACIÓN LINGÜÍSTICA — Tu portugués te ayuda aquí</div>
+    <p style="margin-bottom:12px; font-size:16px;">¡Buenas noticias! El gerundio en español funciona de forma muy similar al portugués. Solo cambia la terminación.</p>
+
+    <div class="grid2">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="card" style="border-top-color:#7c3aed; padding:12px 16px;">
+                <h3 style="color:#7c3aed; font-size:16px;">📐 La Regla de Formación</h3>
+                <div style="margin-top:10px; display:flex; flex-direction:column; gap:8px;">
+                    <div style="background:#fef3c7; border-radius:10px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:700; color:#92400e;">Verbos <span class="under">-AR</span></span>
+                        <span style="font-size:20px; color:#d97706;">→</span>
+                        <span class="pill p-amber" style="font-size:16px;">-ANDO</span>
+                        <span style="font-size:13px; color:#475569;">habl<strong>ando</strong></span>
+                    </div>
+                    <div style="background:#dbeafe; border-radius:10px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:700; color:#1e40af;">Verbos <span class="under">-ER</span></span>
+                        <span style="font-size:20px; color:#1e3a8a;">→</span>
+                        <span class="pill p-blue" style="font-size:16px;">-IENDO</span>
+                        <span style="font-size:13px; color:#475569;">com<strong>iendo</strong></span>
+                    </div>
+                    <div style="background:#dcfce7; border-radius:10px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:700; color:#14532d;">Verbos <span class="under">-IR</span></span>
+                        <span style="font-size:20px; color:#059669;">→</span>
+                        <span class="pill p-green" style="font-size:16px;">-IENDO</span>
+                        <span style="font-size:13px; color:#475569;">escrib<strong>iendo</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="photo-frame">
+                <div style="font-size:13px; color:#94a3b8; font-weight:700; letter-spacing:1px;">🇧🇷 PT vs 🇪🇸 ES — Diferencias clave</div>
+                <div style="display:flex; flex-direction:column; gap:8px; margin-top:4px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; background:#1e293b; border-radius:10px; padding:8px 12px;">
+                        <span class="pt-br">falando</span>
+                        <span style="color:#94a3b8;">→</span>
+                        <span style="color:#86efac; font-weight:700;">hablando</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; background:#1e293b; border-radius:10px; padding:8px 12px;">
+                        <span class="pt-br">comendo</span>
+                        <span style="color:#94a3b8;">→</span>
+                        <span style="color:#86efac; font-weight:700;">comiendo</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; background:#1e293b; border-radius:10px; padding:8px 12px;">
+                        <span class="pt-br">escrevendo</span>
+                        <span style="color:#94a3b8;">→</span>
+                        <span style="color:#86efac; font-weight:700;">escribiendo</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; background:#1e293b; border-radius:10px; padding:8px 12px;">
+                        <span class="pt-br">trabalhando</span>
+                        <span style="color:#94a3b8;">→</span>
+                        <span style="color:#86efac; font-weight:700;">trabajando</span>
+                    </div>
+                </div>
+            </div>
+            <div class="scaffold" style="font-size:13px;">
+                <strong>Falso amigo:</strong> En PT dices "estou estudando" · En ES la lógica es igual pero recuerda conjugar <strong>ESTAR</strong> correctamente para cada persona.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">5 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:33.3%"></div></div>
+</div>
+
+<div class="slide" id="s6">
+    <div class="slide-title">🔧 Verbo ESTAR — La Base del Presente Continuo</div>
+    <div class="badge-blue">📋 CONJUGACIÓN COMPLETA — Memoriza esto primero</div>
+    <p style="margin-bottom:12px; font-size:16px;">El presente continuo usa siempre <strong>ESTAR conjugado</strong> + Gerundio. ESTAR tiene sus propias formas — todas irregulares con tilde.</p>
+
+    <div class="grid2">
+        <div class="card" style="border-top-color:#1e3a8a;">
+            <table class="verb-table">
+                <tr class="head-row"><td>Persona</td><td>ESTAR</td><td>PT (referencia)</td></tr>
+                <tr><td>Yo</td><td><span class="pill p-blue">estoy</span></td><td style="color:#94a3b8; font-size:13px;">estou</td></tr>
+                <tr><td>Tú</td><td><span class="pill p-blue">estás</span></td><td style="color:#94a3b8; font-size:13px;">está</td></tr>
+                <tr><td>Él / Ella / Ud.</td><td><span class="pill p-blue">está</span></td><td style="color:#94a3b8; font-size:13px;">está</td></tr>
+                <tr><td>Nosotros</td><td><span class="pill p-teal">estamos</span></td><td style="color:#94a3b8; font-size:13px;">estamos</td></tr>
+                <tr><td>Ellos / Uds.</td><td><span class="pill p-blue">están</span></td><td style="color:#94a3b8; font-size:13px;">estão</td></tr>
+            </table>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="iz" style="padding:16px; gap:10px;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; letter-spacing:1px; align-self:flex-start;">🔧 FÓRMULA MAESTRA</div>
+                <div style="background:#1e293b; border-radius:14px; padding:14px 20px; width:100%; text-align:center;">
+                    <div style="display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;">
+                        <span style="background:#1e40af; color:white; padding:8px 16px; border-radius:10px; font-size:18px; font-weight:700;">ESTAR</span>
+                        <span style="color:#d97706; font-size:24px; font-weight:900;">+</span>
+                        <span style="background:#059669; color:white; padding:8px 16px; border-radius:10px; font-size:18px; font-weight:700;">GERUNDIO</span>
+                    </div>
+                    <div style="margin-top:12px; font-size:15px; color:#94a3b8;">Yo <span style="color:#60a5fa; font-weight:700;">estoy</span> <span style="color:#4ade80; font-weight:700;">trabajando</span> ahora.</div>
+                    <div style="margin-top:4px; font-size:15px; color:#94a3b8;">Ella <span style="color:#60a5fa; font-weight:700;">está</span> <span style="color:#4ade80; font-weight:700;">comiendo</span> en casa.</div>
+                </div>
+                <div id="ans-s6" class="ans-box" style="font-size:15px; text-align:left;">
+                    Nosotros <strong>estamos</strong> aprendiendo español. ✅<br>
+                    Tú <strong>estás</strong> hablando muy bien. ✅
+                </div>
+                <button class="btn btn-reveal" onclick="reveal('ans-s6',this)" style="width:100%;">¿Cómo se dice? → Revelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">6 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+</div>
+
+<div class="slide" id="s7">
+    <div class="slide-title">🕵️ Detective de Situaciones — ¿Qué está pasando?</div>
+    <div class="speak-badge">🎙️ PRODUCCIÓN ORAL — Describe sin parar</div>
+    <p style="margin-bottom:12px; font-size:16px;">El profe lee una situación. Los alumnos deben describirla usando <strong>al menos 2 oraciones</strong> en presente continuo. ¡Gana quien diga más cosas correctas en 30 segundos!</p>
+
+    <div class="grid2">
+        <div class="scene-card" style="gap:12px; justify-content:space-between;">
+            <div class="scene-label">📍 SITUACIÓN ACTIVA</div>
+            <div style="font-size:32px;" id="det-emoji">❓</div>
+            <div style="font-size:19px; font-weight:700; line-height:1.4; color:white;" id="det-scene">Haz clic para revelar la situación</div>
+            <div id="det-clue" style="background:rgba(255,255,255,.1); border-radius:10px; padding:8px 12px; font-size:14px; color:#94a3b8; display:none;"></div>
+            <button class="btn btn-amber" onclick="rollDetective()" style="width:100%; margin-top:8px;">🔀 Nueva Situación</button>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; min-height:0;">
+            <div class="card" style="border-top-color:#059669; flex:1; overflow-y:auto;">
+                <h3 style="font-size:15px; margin-bottom:8px;">🗣️ Scaffolding — Verbos útiles para usar:</h3>
+                <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:10px;">
+                    <span class="pill p-green" style="font-size:13px;">hablando</span>
+                    <span class="pill p-green" style="font-size:13px;">trabajando</span>
+                    <span class="pill p-green" style="font-size:13px;">comiendo</span>
+                    <span class="pill p-green" style="font-size:13px;">escribiendo</span>
+                    <span class="pill p-green" style="font-size:13px;">esperando</span>
+                    <span class="pill p-green" style="font-size:13px;">leyendo</span>
+                    <span class="pill p-green" style="font-size:13px;">corriendo</span>
+                    <span class="pill p-green" style="font-size:13px;">bebiendo</span>
+                    <span class="pill p-green" style="font-size:13px;">mirando</span>
+                    <span class="pill p-green" style="font-size:13px;">escuchando</span>
+                </div>
+                <div class="scaffold" style="font-size:13px;">
+                    <strong>Modelo:</strong> "La señora <span style="color:#1e3a8a;">está</span> <span style="color:#059669;">comprando</span> frutas. El niño <span style="color:#1e3a8a;">está</span> <span style="color:#059669;">corriendo</span> al lado."
+                </div>
+            </div>
+            <div style="display:flex; gap:8px;">
+                <div class="card" style="border-top-color:#1e3a8a; text-align:center; flex:1;">
+                    <div style="font-size:12px; color:#64748b; font-weight:700;">JEOVÁ</div>
+                    <div style="font-size:28px; color:#1e3a8a; font-weight:700;" id="score1d">0</div>
+                    <button onclick="addScoreDet(1)" style="background:#dbeafe; border:none; border-radius:6px; padding:2px 8px; cursor:pointer; font-weight:700; color:#1e40af; font-size:11px; margin-top:2px;">+1 pt</button>
+                </div>
+                <div class="card" style="border-top-color:#d97706; text-align:center; flex:1;">
+                    <div style="font-size:12px; color:#64748b; font-weight:700;">NICK</div>
+                    <div style="font-size:28px; color:#d97706; font-weight:700;" id="score2d">0</div>
+                    <button onclick="addScoreDet(2)" style="background:#fef3c7; border:none; border-radius:6px; padding:2px 8px; cursor:pointer; font-weight:700; color:#92400e; font-size:11px; margin-top:2px;">+1 pt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">7 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:46.7%"></div></div>
+</div>
+
+<div class="slide" id="s8">
+    <div class="slide-title">⚠️ Gerundios con Trampa — Irregulares Frecuentes</div>
+    <div class="badge-red">🔍 ATENCIÓN — Estos NO siguen la regla general</div>
+    <p style="margin-bottom:12px; font-size:16px;">Algunos gerundios cambian la vocal de la raíz. Son muy usados en el día a día — ¡hay que memorizarlos!</p>
+
+    <div class="grid2">
+        <div class="card" style="border-top-color:#be123c; padding:12px 16px;">
+            <table class="verb-table">
+                <tr class="head-row"><td>Infinitivo</td><td>Gerundio Regular</td><td>Gerundio Real ✅</td></tr>
+                <tr>
+                    <td><strong>decir</strong></td>
+                    <td style="color:#be123c; text-decoration:line-through; font-size:13px;">dicendo❌ (incorrecto base)</td>
+                    <td><span class="pill p-red" style="font-size:13px;">diciendo</span></td>
+                </tr>
+                <tr>
+                    <td><strong>pedir</strong></td>
+                    <td style="color:#be123c; text-decoration:line-through; font-size:13px;">pediendo</td>
+                    <td><span class="pill p-red" style="font-size:13px;">pidiendo</span></td>
+                </tr>
+                <tr>
+                    <td><strong>venir</strong></td>
+                    <td style="color:#be123c; text-decoration:line-through; font-size:13px;">veniendo</td>
+                    <td><span class="pill p-red" style="font-size:13px;">viniendo</span></td>
+                </tr>
+                <tr>
+                    <td><strong>dormir</strong></td>
+                    <td style="color:#be123c; text-decoration:line-through; font-size:13px;">dormiendo</td>
+                    <td><span class="pill p-red" style="font-size:13px;">durmiendo</span></td>
+                </tr>
+                <tr>
+                    <td><strong>leer</strong></td>
+                    <td style="color:#be123c; text-decoration:line-through; font-size:13px;">leiendo</td>
+                    <td><span class="pill p-red" style="font-size:13px;">leyendo</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="iz" style="padding:14px; gap:10px; justify-content:flex-start;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; letter-spacing:1px; align-self:flex-start;">🎯 RETO ORAL — Di en voz alta:</div>
+                <div style="display:flex; flex-direction:column; gap:6px; width:100%; margin-top:4px;">
+                    <div style="background:#1e293b; padding:8px 14px; border-radius:10px; color:#fbbf24; font-size:16px; font-weight:700;">
+                        "Ella está <span id="irr1" style="color:#f87171;">_______</span> una novela."
+                    </div>
+                    <div style="background:#1e293b; padding:8px 14px; border-radius:10px; color:#fbbf24; font-size:16px; font-weight:700;">
+                        "¿Qué están <span id="irr2" style="color:#f87171;">_______</span> al mesero?"
+                    </div>
+                    <div style="background:#1e293b; padding:8px 14px; border-radius:10px; color:#fbbf24; font-size:16px; font-weight:700;">
+                        "El bebé está <span id="irr3" style="color:#f87171;">_______</span> profundamente."
+                    </div>
+                </div>
+                <div id="ans-s8" class="ans-box" style="font-size:14px; text-align:left;">
+                    1. <strong>leyendo</strong> una novela ✅<br>
+                    2. <strong>pidiendo</strong> al mesero ✅<br>
+                    3. <strong>durmiendo</strong> profundamente ✅
+                </div>
+                <button class="btn btn-reveal" onclick="reveal('ans-s8',this); fillIrregulares();" style="width:100%;">Revelar Respuestas</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">8 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:53.3%"></div></div>
+</div>
+
+<div class="slide" id="s9">
+    <div class="slide-title">⏱️ Conectores de Frecuencia — ¿Con qué frecuencia?</div>
+    <div class="badge-purple">📊 PRAGMÁTICA — Matiza tus acciones en el tiempo</div>
+    <p style="margin-bottom:10px; font-size:16px;">Estos conectores ubican la acción en el tiempo y agregan matiz a tus descripciones. Son esenciales para sonar natural.</p>
+
+    <div style="flex:1; display:flex; flex-direction:column; gap:10px; min-height:0;">
+        <div class="freq-bar">
+            <div class="freq-seg" style="width:16%; background:#1e3a8a;">siempre<br><small style="font-size:10px; font-weight:400;">100%</small></div>
+            <div class="freq-seg" style="width:16%; background:#2563eb;">normalmente<br><small style="font-size:10px; font-weight:400;">~80%</small></div>
+            <div class="freq-seg" style="width:17%; background:#0891b2;">a veces<br><small style="font-size:10px; font-weight:400;">~50%</small></div>
+            <div class="freq-seg" style="width:17%; background:#7c3aed;">pocas veces<br><small style="font-size:10px; font-weight:400;">~20%</small></div>
+            <div class="freq-seg" style="width:17%; background:#be123c;">casi nunca<br><small style="font-size:10px; font-weight:400;">~5%</small></div>
+            <div class="freq-seg" style="width:17%; background:#0f172a;">nunca<br><small style="font-size:10px; font-weight:400;">0%</small></div>
+        </div>
+
+        <div class="grid2" style="flex:1; gap:10px; min-height:0;">
+            <div class="card" style="border-top-color:#7c3aed; overflow-y:auto;">
+                <h3 style="font-size:15px;">🇧🇷 Equivalencias PT → ES</h3>
+                <table class="verb-table" style="font-size:14px; margin-top:6px;">
+                    <tr class="head-row"><td>Portugués</td><td>Español</td><td>Ejemplo</td></tr>
+                    <tr><td>sempre</td><td><span class="pill p-blue" style="font-size:12px;">siempre</span></td><td style="font-size:12px; color:#475569;">Siempre me levanto a la misma hora.</td></tr>
+                    <tr><td>normalmente</td><td><span class="pill p-blue" style="font-size:12px;">normalmente</span></td><td style="font-size:12px; color:#475569;">Normalmente como en casa.</td></tr>
+                    <tr><td>às vezes</td><td><span class="pill p-purple" style="font-size:12px;">a veces</span></td><td style="font-size:12px; color:#475569;">A veces leo por la noche.</td></tr>
+                    <tr><td>nunca</td><td><span class="pill p-red" style="font-size:12px;">nunca</span></td><td style="font-size:12px; color:#475569;">Nunca tomo alcohol.</td></tr>
+                </table>
+            </div>
+            <div class="iz" style="padding:14px; gap:8px; justify-content:flex-start;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; letter-spacing:1px; align-self:flex-start;">🗣️ RETO ORAL — Habla sobre ti mismo</div>
+                <p style="color:white; font-size:15px; line-height:1.5; margin-top:4px;">Completa estas frases con información <strong>real</strong> sobre tu vida:</p>
+                <div style="display:flex; flex-direction:column; gap:6px; width:100%;">
+                    <div style="background:#1e293b; padding:7px 12px; border-radius:10px; font-size:14px; color:#fbbf24;">Siempre estoy _______ por la mañana.</div>
+                    <div style="background:#1e293b; padding:7px 12px; border-radius:10px; font-size:14px; color:#fbbf24;">A veces estoy _______ los fines de semana.</div>
+                    <div style="background:#1e293b; padding:7px 12px; border-radius:10px; font-size:14px; color:#fbbf24;">Nunca estoy _______ en las clases.</div>
+                </div>
+                <div class="scaffold" style="font-size:13px; margin-top:4px; background:rgba(255,255,255,.1); border-left-color:#7c3aed; color:#e2e8f0;">
+                    <strong style="color:#fbbf24;">Importante:</strong> El conector va <strong>antes</strong> del verbo ESTAR. ✅ "Siempre <u>estoy</u>" ❌ "Estoy siempre"
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">9 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:60%"></div></div>
+</div>
+
+<div class="slide" id="s10">
+    <div class="slide-title">🔄 Ejercicio — Transforma al Presente Continuo</div>
+    <div class="badge-blue">✏️ PRÁCTICA GUIADA — De presente simple a continuo</div>
+    <p style="margin-bottom:12px; font-size:16px;">Convierte cada oración de presente simple a presente continuo. Indica que la acción está ocurriendo <em>en este momento</em>.</p>
+
+    <div class="grid2">
+        <div class="card" style="border-top-color:#059669; padding:12px 16px; font-size:15px; line-height:1.8;">
+            <p style="font-size:14px; color:#64748b; font-weight:700; margin-bottom:6px;">🇧🇷 Frase en PT → transforma a ES continuo:</p>
+            <p><span class="pill p-teal" style="font-size:13px;">1</span> "Eu trabalho em casa." → Yo estoy _______</p>
+            <p><span class="pill p-teal" style="font-size:13px;">2</span> "Ela come pizza." → Ella está _______</p>
+            <p><span class="pill p-teal" style="font-size:13px;">3</span> "Nós estudamos español." → Nosotros estamos _______</p>
+            <p><span class="pill p-teal" style="font-size:13px;">4</span> "Eles pedem ajuda." → Ellos están _______</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="iz">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; align-self:flex-start;">👁️ SOLUCIONARIO</div>
+                <div id="ans-s10" class="ans-box" style="text-align:left; font-size:15px;">
+                    1. Yo estoy <strong>trabajando</strong> en casa.<br>
+                    2. Ella está <strong>comiendo</strong> pizza.<br>
+                    3. Nosotros estamos <strong>estudiando</strong> español.<br>
+                    4. Ellos están <strong>pidiendo</strong> ayuda. (irregular ⚠️)
+                </div>
+                <button class="btn btn-reveal" onclick="reveal('ans-s10',this)">Mostrar Respuestas</button>
+            </div>
+            <div class="scaffold" style="font-size:13px;">
+                <strong>Patrón:</strong> Presente Simple habla de hábitos. Presente Continuo habla de lo que ocurre <em>ahora mismo</em>.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">10 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:66.7%"></div></div>
+</div>
+
+<div class="slide" id="s11">
+    <div class="slide-title">📺 ¡Noticiero en Vivo! — Reportero por un Minuto</div>
+    <div class="speak-badge">🎤 PRODUCCIÓN ORAL EXTENDIDA — Habla sin parar 60 segundos</div>
+    <p style="margin-bottom:10px; font-size:16px;">Cada alumno es un <strong>reportero de televisión</strong>. Debe describir una escena que el profe muestra, usando presente continuo. Mínimo <span style="color:#be123c; font-weight:700;">5 oraciones</span>.</p>
+
+    <div class="grid2">
+        <div class="iz" style="padding:16px; gap:10px; justify-content:flex-start;">
+            <div style="font-size:12px; color:#94a3b8; font-weight:700; letter-spacing:1px; align-self:flex-start;">📡 ESCENA DEL NOTICIERO</div>
+            <div style="font-size:30px; text-align:center;" id="news-emoji">🎬</div>
+            <div style="font-size:18px; font-weight:700; color:white; text-align:center; line-height:1.4;" id="news-scene">Haz clic para revelar la escena</div>
+            <div style="background:#1e293b; border-radius:10px; padding:10px 14px; width:100%;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; margin-bottom:4px;">🔑 PERSONAJES DE LA ESCENA:</div>
+                <div style="font-size:14px; color:#e2e8f0; line-height:1.6;" id="news-chars">—</div>
+            </div>
+            <button class="btn btn-amber" onclick="rollNews()" style="width:100%;">📡 Nueva Escena</button>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; min-height:0;">
+            <div class="mission">
+                <p style="font-size:15px; color:#fde68a; font-weight:700; margin-bottom:6px;">🎯 MISIÓN DEL REPORTERO:</p>
+                <ol style="padding-left:16px; font-size:14px; line-height:1.8; color:white;">
+                    <li>Presenta la escena como reportero: <strong>"Buenos días, estamos en..."</strong></li>
+                    <li>Describe al menos 3 personas o acciones distintas.</li>
+                    <li>Usa al menos 1 conector de frecuencia.</li>
+                    <li>¡Cierra el reporte! <strong>"Esto es todo desde el lugar de los hechos."</strong></li>
+                </ol>
+            </div>
+            <div class="card" style="border-top-color:#7c3aed; flex:1;">
+                <h3 style="font-size:14px; margin-bottom:6px;">🗣️ Expresiones de Reportero:</h3>
+                <div style="display:flex; flex-wrap:wrap; gap:4px;">
+                    <span class="pill p-purple" style="font-size:12px;">En este momento...</span>
+                    <span class="pill p-purple" style="font-size:12px;">Como podemos observar...</span>
+                    <span class="pill p-purple" style="font-size:12px;">Al fondo, alguien está...</span>
+                    <span class="pill p-purple" style="font-size:12px;">Aquí también están...</span>
+                    <span class="pill p-purple" style="font-size:12px;">Mientras tanto...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">11 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:73.3%"></div></div>
+</div>
+
+<div class="slide" id="s12">
+    <div class="slide-title">🪤 ¡Cuidado! — Interferencias del Portugués</div>
+    <div class="badge-red">⚠️ ANÁLISIS DE ERRORES — Lo que tu cerebro quiere decir vs. lo correcto</div>
+    <p style="margin-bottom:10px; font-size:15px;">Cuando aprendemos una lengua cercana, el cerebro hace traducciones automáticas. Algunos son correctos — otros no.</p>
+
+    <div class="grid3" style="gap:10px;">
+        <div class="card" style="border-top-color:#be123c; padding:10px 14px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:8px 12px; margin-bottom:8px;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700;">🇧🇷 INTENTO DEL ALUMNO</div>
+                <p style="font-size:16px; font-weight:700; color:#be123c; margin-top:4px;">"Estoy assistindo TV."</p>
+            </div>
+            <div id="c1" class="ans-box" style="font-size:13px; text-align:left;">"assistindo" no existe en ES.<br>✅ Correcto: "estoy <strong>viendo</strong> televisión."</div>
+            <button class="btn btn-reveal" style="margin-top:6px; width:100%; font-size:13px; padding:6px;" onclick="reveal('c1',this)">Analizar</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; padding:10px 14px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:8px 12px; margin-bottom:8px;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700;">🇧🇷 INTENTO DEL ALUMNO</div>
+                <p style="font-size:16px; font-weight:700; color:#be123c; margin-top:4px;">"Estou lembrando = Estoy lembrando."</p>
+            </div>
+            <div id="c2" class="ans-box" style="font-size:13px; text-align:left;">"lembrando" es PT.<br>✅ Correcto: "estoy <strong>recordando</strong>."</div>
+            <button class="btn btn-reveal" style="margin-top:6px; width:100%; font-size:13px; padding:6px;" onclick="reveal('c2',this)">Analizar</button>
+        </div>
+        <div class="card" style="border-top-color:#059669; padding:10px 14px;">
+            <div style="background:#f0fdf4; border-radius:10px; padding:8px 12px; margin-bottom:8px;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700;">✅ TRANSFERENCIA VÁLIDA</div>
+                <p style="font-size:16px; font-weight:700; color:#059669; margin-top:4px;">"Estoy trabajando mucho."</p>
+            </div>
+            <div id="c3" class="ans-box" style="font-size:13px; text-align:left; background:#f0fdf4; border-color:#059669; color:#14532d;">¡Correcto! "trabalhando" → "trabajando". Esta transferencia SÍ funciona. ✅</div>
+            <button class="btn btn-reveal" style="margin-top:6px; width:100%; font-size:13px; padding:6px;" onclick="reveal('c3',this)">Confirmar</button>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">12 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:80%"></div></div>
+</div>
+
+<div class="slide" id="s13">
+    <div class="slide-title">✍️ Mi Rutina en Este Momento</div>
+    <div class="badge-green">📝 PRODUCCIÓN ESCRITA + ORAL — Habla sobre tu realidad</div>
+    <p style="margin-bottom:12px; font-size:16px;">Describe tu situation actual usando los conectores de frecuencia y el presente continuo. <strong>Escribe 4 oraciones reales</strong>, luego léelas en voz alta.</p>
+
+    <div class="grid2">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <textarea class="write-area" rows="7" placeholder="Ejemplo:&#10;Normalmente estoy trabajando en mi oficina a esta hora.&#10;Ahora mismo estoy estudiando español con el Profe Carlos.&#10;Siempre estoy revisando correos por la mañana.&#10;A veces estoy tomando café mientras trabajo."></textarea>
+        </div>
+        <div class="card" style="border-top-color:#059669; display:flex; flex-direction:column; gap:10px;">
+            <h3 style="color:#059669; font-size:16px;">🎯 Criterios de Autocorrección:</h3>
+            <ul style="padding-left:16px; font-size:14px; color:#1e293b; line-height:1.9;">
+                <li>¿Conjugué bien el verbo <strong>ESTAR</strong> para cada persona?</li>
+                <li>¿El gerundio termina en <strong>-ando</strong> o <strong>-iendo</strong>?</li>
+                <li>¿Usé al menos un conector de frecuencia?</li>
+                <li>¿Ninguna oración mezcla PT y ES?</li>
+            </ul>
+            <div class="scaffold" style="font-size:13px; margin-top:auto;">
+                <strong>Bonus:</strong> Si puedes agregar una razón, mejor: <em>"Estoy estudiando español <span style="color:#1e3a8a;">porque</span> quiero hablar con clientes en Brasil."</em>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">13 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:86.7%"></div></div>
+</div>
+
+<div class="slide" id="s14">
+    <div class="slide-title">⚡ Repaso Relámpago — ¡Sin Pensar Dos Veces!</div>
+    <div class="speak-badge">🏁 CIERRE — Responde en 5 segundos o menos</div>
+    <p style="margin-bottom:14px; font-size:16px;">Responde de manera oral e inmediata. El profe señala a un alumno al azar.</p>
+
+    <div class="grid3">
+        <div class="card" style="border-top-color:#1e3a8a; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+                <span class="pill p-blue" style="font-size:13px;">Pregunta 01</span>
+                <p style="margin-top:8px; font-size:14px;">¿Cómo se forma el gerundio de HABLAR?</p>
+            </div>
+            <div id="q1" class="ans-box" style="font-size:14px; margin-top:8px;">habl- + <strong>ando</strong> = hablando ✅</div>
+            <button class="btn btn-reveal" style="margin-top:6px; font-size:13px; padding:6px 12px;" onclick="reveal('q1',this)">Ver</button>
+        </div>
+        <div class="card" style="border-top-color:#d97706; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+                <span class="pill p-amber" style="font-size:13px;">Pregunta 02</span>
+                <p style="margin-top:8px; font-size:14px;">¿Cuál es el error?<br><em style="color:#be123c;">"Yo estoy dormiendo."</em></p>
+            </div>
+            <div id="q2" class="ans-box" style="font-size:14px; margin-top:8px;">"dormiendo" ❌ → correcto: <strong>durmiendo</strong> ✅ (irregular O→U)</div>
+            <button class="btn btn-reveal" style="margin-top:6px; font-size:13px; padding:6px 12px;" onclick="reveal('q2',this)">Ver</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+                <span class="pill p-red" style="font-size:13px;">Pregunta 03</span>
+                <p style="margin-top:8px; font-size:14px;">Completa: "Ellos siempre _______ trabajando hasta tarde."</p>
+            </div>
+            <div id="q3" class="ans-box" style="font-size:14px; margin-top:8px;">Ellos siempre <strong>están</strong> trabajando hasta tarde. ✅</div>
+            <button class="btn btn-reveal" style="margin-top:6px; font-size:13px; padding:6px 12px;" onclick="reveal('q3',this)">Ver</button>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">14 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:93.3%"></div></div>
+</div>
+
+<div class="slide" id="s15" style="justify-content:center; align-items:center; text-align:center;">
+    <h2 style="font-family:'Poppins',sans-serif; font-size:44px; color:#1e3a8a;">¡Clase completada!</h2>
+    <div class="accent-bar" style="margin:10px auto 16px;"></div>
+    <p style="font-size:20px; max-width:800px; color:#475569;">Hoy lograste describir el mundo en tiempo real. El presente continuo ya es tuyo.</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:900px; margin-top:20px;">
+        <div class="card" style="border-top-color:#059669; text-align:left;">
+            <h3 style="color:#059669; font-size:16px;">📌 Tarea para la Bitácora:</h3>
+            <p style="font-size:14px; margin-top:6px; color:#1e293b; line-height:1.6;">
+                Graba un <strong>audio de 60 segundos</strong> describiéndote a ti mismo o describiendo tu entorno en este momento, usando al menos <strong>5 oraciones</strong> en presente continuo con conectores de frecuencia. Sin leer apuntes.
+            </p>
+        </div>
+        <div class="card" style="border-top-color:#7c3aed; text-align:left;">
+            <h3 style="color:#7c3aed; font-size:16px;">🔭 Vista Previa — Clase 07:</h3>
+            <p style="font-size:14px; margin-top:6px; color:#1e293b; line-height:1.6;">
+                Pasado Simple: ¿Qué hiciste ayer? Verbos regulares e irregulares de alta frecuencia para contar tu historia.
+            </p>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">15 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" disabled>Fin de la Clase</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = 15;
+
+    function go(dir) {
+        const active = document.getElementById(`s${currentSlide}`);
+        if (active) active.classList.remove('active');
+        currentSlide += dir;
+        if (currentSlide < 1) currentSlide = 1;
+        if (currentSlide > totalSlides) currentSlide = totalSlides;
+        const next = document.getElementById(`s${currentSlide}`);
+        if (next) next.classList.add('active');
+    }
+
+    function reveal(id, btn) {
+        document.getElementById(id).style.display = 'block';
+        if (btn) btn.style.display = 'none';
+    }
+
+    function makePicker(arr) {
+        let pool = [...arr];
+        return function () {
+            if (pool.length === 0) pool = [...arr];
+            const idx = Math.floor(Math.random() * pool.length);
+            return pool.splice(idx, 1)[0];
+        };
+    }
+
+    /* ── ICE BREAKER: MÍMICA ── */
+    const mimeActions = [
+        { emoji: '📱', action: 'Hablar por teléfono', answer: '¿Estás hablando por teléfono?' },
+        { emoji: '☕', action: 'Tomar café', answer: '¿Estás tomando café?' },
+        { emoji: '🏃', action: 'Correr', answer: '¿Estás corriendo?' },
+        { emoji: '💻', action: 'Escribir en el computador', answer: '¿Estás escribiendo en el computador?' },
+        { emoji: '🍕', action: 'Comer pizza', answer: '¿Estás comiendo pizza?' },
+        { emoji: '📖', action: 'Leer un libro', answer: '¿Estás leyendo un libro?' },
+        { emoji: '💤', action: 'Dormir', answer: '¿Estás durmiendo?' },
+        { emoji: '🎵', action: 'Escuchar música', answer: '¿Estás escuchando música?' },
+        { emoji: '🚗', action: 'Manejar un auto', answer: '¿Estás manejando?' },
+        { emoji: '🧹', action: 'Limpiar la casa', answer: '¿Estás limpiando?' },
+    ];
+    const nextMime = makePicker(mimeActions);
+    let currentMime = null;
+    let s1m = 0, s2m = 0;
+
+    function rollMime() {
+        currentMime = nextMime();
+        document.getElementById('mime-emoji').textContent = currentMime.emoji;
+        document.getElementById('mime-action').textContent = currentMime.action;
+        document.getElementById('mime-hint').textContent = '✅ Estructura: ' + currentMime.answer;
+        
+        document.getElementById('mime-emoji').style.visibility = 'visible';
+        document.getElementById('mime-action').style.visibility = 'visible';
+        document.getElementById('mime-hint').style.display = 'none';
+    }
+
+    function showAction() {
+        if (currentMime) {
+            document.getElementById('mime-emoji').textContent = currentMime.emoji;
+            document.getElementById('mime-action').textContent = currentMime.action;
+            document.getElementById('mime-emoji').style.visibility = 'visible';
+            document.getElementById('mime-action').style.visibility = 'visible';
+            document.getElementById('mime-hint').style.display = 'block';
+        }
+    }
+
+    function hideAction() {
+        if (currentMime) {
+            document.getElementById('mime-emoji').textContent = '🙈';
+            document.getElementById('mime-action').textContent = '🔒 Acción Oculta';
+            document.getElementById('mime-hint').style.display = 'none';
+        }
+    }
+
+    function addScoreMime(p) {
+        if (p === 1) { s1m++; document.getElementById('score1m').textContent = s1m; }
+        else { s2m++; document.getElementById('score2m').textContent = s2m; }
+    }
+
+    /* ── DETECTIVE DE SITUACIONES ── */
+    const scenes = [
+        { emoji: '🏪', scene: 'Supermercado lleno un sábado', chars: '· Una señora con carrito de compras\n· Un niño corriendo entre los pasillos\n· Un cajero atendiendo clientes\n· Un señor leyendo las etiquetas de los productos' },
+        { emoji: '🚉', scene: 'Estación de metro hora punta', chars: '· Personas esperando el tren\n· Un músico tocando guitarra\n· Dos amigos conversando\n· Un turista mirando el mapa' },
+        { emoji: '🍽️', scene: 'Restaurante concurrido a mediodía', chars: '· Un mesero sirviendo platos\n· Una pareja comiendo en silencio\n· Un grupo de amigos riendo\n· El cocinero preparando comida' },
+        { emoji: '🏋️', scene: 'Gimnasio por la tarde', chars: '· Una persona corriendo en la cinta\n· Alguien levantando pesas\n· Un instructor enseñando ejercicios\n· Dos amigas conversando entre series' },
+        { emoji: '🏖️', scene: 'Playa un día de verano', chars: '· Niños jugando en el agua\n· Una familia comiendo sandía\n· Una pareja caminando por la orilla\n· Un fotógrafo tomando fotos del atardecer' },
+        { emoji: '💼', scene: 'Reunión de trabajo en oficina', chars: '· El jefe presenting resultados\n· Alguien tomando notas\n· Dos colegas susurrando\n· La secretaria respondiendo mensajes' },
+    ];
+    const nextScene = makePicker(scenes);
+    let s1d = 0, s2d = 0;
+
+    function rollDetective() {
+        const s = nextScene();
+        document.getElementById('det-emoji').textContent = s.emoji;
+        document.getElementById('det-scene').textContent = s.scene;
+        document.getElementById('det-chars').innerHTML = s.chars.split('\n').map(l => `<div>${l}</div>`).join('');
+        document.getElementById('det-clue').style.display = 'block';
+    }
+
+    function addScoreDet(p) {
+        if (p === 1) { s1d++; document.getElementById('score1d').textContent = s1d; }
+        else { s2d++; document.getElementById('score2d').textContent = s2d; }
+    }
+
+    /* ── NOTICIERO EN VIVO ── */
+    const newsScenes = [
+        { emoji: '🚒', scene: 'Incendio en un edificio del centro', chars: 'Bomberos apagando el fuego · Vecinos mirando desde afuera · Un periodista transmitiendo · Paramédicos atendiendo a heridos' },
+        { emoji: '🎉', scene: 'Fiesta de cumpleaños en un parque', chars: 'Niños corriendo y jugando · Adultos conversando y comiendo · Alguien cortando el pastel · Un payaso haciendo magia' },
+        { emoji: '⚽', scene: 'Partido de fútbol en el estadio', chars: 'Jugadores corriendo en el campo · Hinchas gritando y cantando · El árbitro corriendo detrás del juego · El entrenador dando instrucciones' },
+        { emoji: '✈️', scene: 'Aeropuerto internacional hora punta', chars: 'Pasajeros cargando maletas · Personal revisando pasaportes · Familias despidiéndose · Un piloto caminando hacia la puerta de embarque' },
+        { emoji: '🏫', scene: 'Primer día de clases en una escuela', chars: 'Niños entrando con mochilas nuevas · Padres sacando fotos · Profesores saludando en la puerta · Niños buscando sus salones' },
+    ];
+    const nextNews = makePicker(newsScenes);
+
+    function rollNews() {
+        const n = nextNews();
+        document.getElementById('news-emoji').textContent = n.emoji;
+        document.getElementById('news-scene').textContent = n.scene;
+        document.getElementById('news-chars').innerHTML = n.chars.split(' · ').map(c => `<div>• ${c}</div>`).join('');
+    }
+
+    /* ── RELLENAR IRREGULARES ── */
+    function fillIrregulares() {
+        document.getElementById('irr1').textContent = 'leyendo';
+        document.getElementById('irr1').style.color = '#4ade80';
+        document.getElementById('irr2').textContent = 'pidiendo';
+        document.getElementById('irr2').style.color = '#4ade80';
+        document.getElementById('irr3').textContent = 'durmiendo';
+        document.getElementById('irr3').style.color = '#4ade80';
+    }
+</script>
+</body>
+</html>

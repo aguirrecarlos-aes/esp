@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Español en Acción · Clase 07 – Aguirre Español Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #cbd5e1;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            font-family: 'Lexend', sans-serif;
+            overflow: hidden;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: #fff9e6;
+            display: none;
+            flex-direction: column;
+            padding: 28px 56px 85px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,.22);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .slide.active { display: flex; }
+
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #1e3a8a;
+            border-left: 12px solid #d97706;
+            padding-left: 18px;
+            margin-bottom: 10px;
+            line-height: 1.15;
+        }
+        .sub { font-size: 18px; color: #475569; font-weight: 600; margin-bottom: 8px; }
+        p, li { font-size: 19px; color: #1e293b; line-height: 1.45; }
+
+        .pill { padding: 4px 12px; border-radius: 8px; font-weight: 700; display: inline-block; margin: 3px; font-size: 17px; }
+        .p-blue   { background: #dbeafe; color: #1e40af; }
+        .p-pink   { background: #fce7f3; color: #9d174d; }
+        .p-green  { background: #dcfce7; color: #14532d; }
+        .p-amber  { background: #fef3c7; color: #92400e; }
+        .p-red    { background: #fee2e2; color: #991b1b; }
+        .p-purple { background: #ede9fe; color: #5b21b6; }
+        .p-teal   { background: #ccfbf1; color: #134e4a; }
+        .under { text-decoration: underline; text-decoration-thickness: 3px; }
+
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; min-height: 0; }
+        .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; flex: 1; min-height: 0; }
+
+        .card {
+            background: white;
+            padding: 14px 18px;
+            border-radius: 18px;
+            border-top: 6px solid #1e3a8a;
+            box-shadow: 0 4px 10px rgba(0,0,0,.06);
+        }
+        .card h3 { font-size: 17px; color: #1e293b; margin-bottom: 6px; }
+        .card p  { font-size: 15px; color: #475569; }
+
+        .iz {
+            background: #0f172a;
+            border-radius: 26px;
+            padding: 18px 24px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            position: relative;
+            min-height: 0;
+        }
+
+        .btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            font-size: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Lexend', sans-serif;
+            transition: background .2s, transform .15s;
+        }
+        .btn:hover { background: #2563eb; transform: translateY(-2px); }
+        .btn-reveal { background: #059669; }
+        .btn-reveal:hover { background: #10b981; }
+        .btn-amber  { background: #d97706; }
+        .btn-amber:hover { background: #f59e0b; }
+        .btn-red { background: #be123c; }
+        .btn-red:hover { background: #e11d48; }
+
+        .ans-box {
+            background: #f0fdf4;
+            color: #14532d;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            width: 100%;
+            border: 3px dashed #16a34a;
+            display: none;
+            text-align: center;
+        }
+
+        .scaffold {
+            background: #eff6ff;
+            border-left: 8px solid #1e3a8a;
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 16px;
+            color: #1e3a8a;
+            line-height: 1.5;
+        }
+        .scaffold strong { color: #d97706; }
+
+        .speak-badge, .badge-blue, .badge-red, .badge-green, .badge-purple {
+            display: inline-block;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 4px 12px;
+            margin-bottom: 6px;
+            letter-spacing: .5px;
+        }
+        .speak-badge  { background: #d97706; }
+        .badge-blue   { background: #1e3a8a; }
+        .badge-red    { background: #be123c; }
+        .badge-green  { background: #059669; }
+        .badge-purple { background: #7c3aed; }
+
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+            margin-top: 4px;
+        }
+        .verb-table tr.head-row { background: #f1f5f9; font-weight: 700; }
+        .verb-table td { padding: 6px 8px; color: #1e293b; border-bottom: 1px solid #e2e8f0; }
+
+        .write-area {
+            width: 100%;
+            border: 3px solid #1e3a8a;
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 17px;
+            font-family: 'Lexend', sans-serif;
+            resize: none;
+            background: #f8fafc;
+            color: #1e293b;
+            outline: none;
+        }
+
+        .nav {
+            position: absolute;
+            bottom: 18px;
+            left: 56px;
+            right: 56px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 10px;
+            background: #fff9e6;
+            z-index: 10;
+        }
+        .nav-counter { font-weight: 700; color: #94a3b8; font-size: 16px; }
+        .nav-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            font-family: 'Lexend', sans-serif;
+            transition: background .18s, color .18s;
+        }
+        .nav-btn:hover:not(:disabled) { background: #1e3a8a; color: white; }
+        .nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+        .accent-bar { width: 120px; height: 6px; background: #d97706; border-radius: 4px; margin: 16px auto; }
+
+        .progress-track {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 0 0 24px 24px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #d97706;
+            border-radius: 0 0 24px 24px;
+            transition: width .4s ease;
+        }
+
+        .scene-card {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            border-radius: 20px;
+            padding: 18px 22px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+        .scene-emoji { font-size: 34px; }
+        .scene-text { font-size: 22px; font-weight: 700; line-height: 1.3; }
+        .scene-label { font-size: 12px; color: #94a3b8; font-weight: 700; letter-spacing: 1px; }
+
+        .photo-frame {
+            background: #1e293b;
+            border-radius: 18px;
+            padding: 16px 20px;
+            color: white;
+            font-size: 16px;
+            line-height: 1.6;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .pt-br { color: #fbbf24; font-weight: 700; font-size: 15px; }
+        .cl-tag { color: #86efac; font-size: 14px; }
+
+        .mission {
+            background: #7c3aed;
+            color: white;
+            border-radius: 18px;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+        .mission strong { color: #fde68a; }
+
+        .clock-card {
+            background: #fef3c7;
+            border: 3px solid #d97706;
+            border-radius: 16px;
+            padding: 10px 16px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1 — PORTADA -->
+<div class="slide active" id="s1" style="justify-content:center; align-items:center; text-align:center;">
+    <p style="font-size:18px; font-weight:700; color:#d97706; letter-spacing:2px; text-transform:uppercase;">Clase 07</p>
+    <h1 style="font-family:'Poppins',sans-serif; font-size:62px; color:#1e3a8a; line-height:1.1; margin-top:10px;">¿Qué hiciste<br>ayer?</h1>
+    <div class="accent-bar"></div>
+    <p style="font-size:22px; color:#64748b; font-weight:600;">Pasado Simple · Tu historia, contada en español</p>
+    <p style="margin-top:35px; font-weight:700; color:#1e3a8a; font-size:20px;">Aguirre Español Studio</p>
+    <div class="nav">
+        <span class="nav-counter">1 / 15</span>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:6.7%"></div></div>
+</div>
+
+<!-- SLIDE 2 — ICE BREAKER: LA MÁQUINA DEL TIEMPO -->
+<div class="slide" id="s2">
+    <div class="slide-title">⏳ Ice Breaker — La Máquina del Tiempo</div>
+    <div class="speak-badge">🙌 PARA HABLAR — Sin pensarlo mucho, solo dilo</div>
+    <p style="margin-bottom:10px; font-size:16px;">El profe tira el dado. Te toca una pregunta sobre tu pasado. Tienes que responder rápido, ¡no importa si te equivocas un poco!</p>
+
+    <div class="grid2">
+        <div style="display:flex; flex-direction:column; gap:10px; min-height:0;">
+            <div class="scene-card">
+                <div class="scene-label">🎲 PREGUNTA DE LA RONDA</div>
+                <div class="scene-emoji" id="time-emoji">⏳</div>
+                <div class="scene-text" id="time-question">Haz clic para sacar una pregunta</div>
+                <button class="btn btn-amber" onclick="rollTime()" style="width:100%; margin-top:4px;">🎲 Nueva Pregunta</button>
+            </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; min-height:0;">
+            <div style="display:flex; gap:12px; justify-content:center;">
+                <div class="card" style="border-top-color:#1e3a8a; text-align:center; flex:1;">
+                    <div style="font-size:12px; color:#64748b; font-weight:700;">JEOVÁ</div>
+                    <div style="font-size:36px; color:#1e3a8a; font-weight:700;" id="score1t">0</div>
+                    <button onclick="addScoreTime(1)" style="background:#dbeafe; border:none; border-radius:6px; padding:2px 10px; cursor:pointer; font-weight:700; color:#1e40af; font-size:12px; margin-top:2px;">+1 pt</button>
+                </div>
+                <div class="card" style="border-top-color:#d97706; text-align:center; flex:1;">
+                    <div style="font-size:12px; color:#64748b; font-weight:700;">NICK</div>
+                    <div style="font-size:36px; color:#d97706; font-weight:700;" id="score2t">0</div>
+                    <button onclick="addScoreTime(2)" style="background:#fef3c7; border:none; border-radius:6px; padding:2px 10px; cursor:pointer; font-weight:700; color:#92400e; font-size:12px; margin-top:2px;">+1 pt</button>
+                </div>
+            </div>
+            <div class="card" style="border-top-color:#d97706; flex:1; padding:10px 16px;">
+                <h3 style="font-size:15px; margin-bottom:6px;">📋 ¿Cómo se juega?</h3>
+                <ol style="padding-left:16px; font-size:14px; color:#475569; line-height:1.7;">
+                    <li>Sale una pregunta sobre algo que pasó antes.</li>
+                    <li>Respondes con una frase completa, no solo una palabra.</li>
+                    <li>Si la dices bien, sumas un punto.</li>
+                    <li>¡No te preocupes si suena raro todavía, para eso estamos hoy!</li>
+                </ol>
+            </div>
+            <div class="scaffold" style="font-size:13px; padding:8px 12px;">
+                <strong>Para qué sirve:</strong> Vamos a notar qué partes del pasado ya sabemos decir y cuáles vamos a aprender hoy.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">2 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:13.3%"></div></div>
+</div>
+
+<!-- SLIDE 3 — WARM UP: REPASO CLASE 06 -->
+<div class="slide" id="s3">
+    <div class="slide-title">🔁 Warm Up — ¿Qué recuerdas de la Clase 06?</div>
+    <div class="badge-blue">⚡ CALENTAMIENTO — 3 minutos hablando en voz alta</div>
+    <p style="margin-bottom:14px; font-size:16px;">Sin mirar tus apuntes. Responde apenas lo sepas. <span style="color:#be123c; font-weight:700;">El primero que responda bien, gana un punto.</span></p>
+
+    <div class="grid3">
+        <div class="card" style="border-top-color:#1e3a8a; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+                <span class="pill p-blue" style="font-size:13px;">Desafío 01</span>
+                <p style="margin-top:8px; font-size:15px;">Di una frase completa: "Yo estoy ______ ahora mismo."</p>
+            </div>
+            <div id="r1" class="ans-box" style="font-size:14px; margin-top:8px;">Cualquier respuesta válida con ESTAR + gerundio. Ej: "Yo estoy hablando." ✅</div>
+            <button class="btn btn-reveal" style="margin-top:6px; font-size:13px; padding:6px 12px;" onclick="reveal('r1',this)">Ver</button>
+        </div>
+        <div class="card" style="border-top-color:#d97706; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+                <span class="pill p-amber" style="font-size:13px;">Desafío 02</span>
+                <p style="margin-top:8px; font-size:15px;">¿Cuál es la forma correcta? <em style="color:#be123c;">"Ella está dormiendo."</em> ¿Está bien o mal?</p>
+            </div>
+            <div id="r2" class="ans-box" style="font-size:14px; margin-top:8px;">Está mal. Lo correcto es "Ella está <strong>durmiendo</strong>." ✅</div>
+            <button class="btn btn-reveal" style="margin-top:6px; font-size:13px; padding:6px 12px;" onclick="reveal('r2',this)">Ver</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+                <span class="pill p-red" style="font-size:13px;">Desafío 03</span>
+                <p style="margin-top:8px; font-size:15px;">Nombra 2 palabras que indiquen frecuencia (siempre, a veces, etc).</p>
+            </div>
+            <div id="r3" class="ans-box" style="font-size:14px; margin-top:8px;">Siempre, normalmente, a veces, pocas veces, nunca. ✅</div>
+            <button class="btn btn-reveal" style="margin-top:6px; font-size:13px; padding:6px 12px;" onclick="reveal('r3',this)">Ver</button>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">3 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:20%"></div></div>
+</div>
+
+<!-- SLIDE 4 — OBJETIVOS DE LA CLASE -->
+<div class="slide" id="s4">
+    <div class="slide-title">🎯 ¿Qué vamos a lograr hoy?</div>
+    <div class="badge-blue">📋 PLAN DE LA CLASE</div>
+    <p style="margin-bottom:18px;">Hoy vas a poder contar lo que hiciste ayer, la semana pasada o en cualquier momento del pasado, de forma natural.</p>
+
+    <div class="grid3">
+        <div class="card" style="border-top-color:#1e3a8a;">
+            <span class="pill p-blue">01</span>
+            <h3 style="margin-top:10px;">Hablar del pasado</h3>
+            <p>Aprender a contar acciones que ya terminaron: "Comí, trabajé, fui, hice."</p>
+        </div>
+        <div class="card" style="border-top-color:#d97706;">
+            <span class="pill p-amber">02</span>
+            <h3 style="margin-top:10px;">Verbos importantes</h3>
+            <p>Dominar los verbos que más usamos para contar historias: ir, hacer, comer, trabajar.</p>
+        </div>
+        <div class="card" style="border-top-color:#059669;">
+            <span class="pill p-green">03</span>
+            <h3 style="margin-top:10px;">Contar tu día</h3>
+            <p>Poder responder con confianza cuando alguien te pregunte "¿qué hiciste ayer?"</p>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">4 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:26.7%"></div></div>
+</div>
+
+<!-- SLIDE 5 — VERBOS REGULARES EN PASADO -->
+<div class="slide" id="s5">
+    <div class="slide-title">📐 Lo más fácil primero: Verbos Regulares</div>
+    <div class="badge-green">✅ BUENA NOTICIA — Estos verbos siguen un patrón simple</div>
+    <p style="margin-bottom:12px; font-size:16px;">La mayoría de los verbos en español terminan en <strong>-AR</strong>, <strong>-ER</strong> o <strong>-IR</strong>. Para hablar del pasado, solo cambias la terminación.</p>
+
+    <div class="grid2">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="card" style="border-top-color:#059669; padding:12px 16px;">
+                <h3 style="color:#059669; font-size:16px;">🟢 Verbos -AR → terminan en "-É"</h3>
+                <div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:6px;">
+                    <span class="pill p-green">trabajar → trabaj<strong>é</strong></span>
+                    <span class="pill p-green">hablar → habl<strong>é</strong></span>
+                    <span class="pill p-green">estudiar → estudi<strong>é</strong></span>
+                </div>
+            </div>
+            <div class="card" style="border-top-color:#1e3a8a; padding:12px 16px;">
+                <h3 style="color:#1e3a8a; font-size:16px;">🔵 Verbos -ER / -IR → terminan en "-Í"</h3>
+                <div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:6px;">
+                    <span class="pill p-blue">comer → com<strong>í</strong></span>
+                    <span class="pill p-blue">salir → sal<strong>í</strong></span>
+                    <span class="pill p-blue">escribir → escrib<strong>í</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="iz" style="padding:16px; gap:10px;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; letter-spacing:1px; align-self:flex-start;">💬 EJEMPLOS REALES</div>
+                <div style="background:#1e293b; border-radius:14px; padding:14px 18px; width:100%; display:flex; flex-direction:column; gap:8px;">
+                    <p style="color:white; font-size:16px;">Ayer <span style="color:#4ade80; font-weight:700;">trabajé</span> hasta tarde.</p>
+                    <p style="color:white; font-size:16px;">Anoche <span style="color:#60a5fa; font-weight:700;">comí</span> empanadas.</p>
+                    <p style="color:white; font-size:16px;">El fin de semana <span style="color:#fbbf24; font-weight:700;">salí</span> con amigos.</p>
+                </div>
+                <div id="ans-s5" class="ans-box" style="font-size:15px;">"Yo estudié español ayer." ✅</div>
+                <button class="btn btn-reveal" onclick="reveal('ans-s5',this)" style="width:100%;">¿Cómo dirías "Estudié ayer"? Ver</button>
+            </div>
+            <div class="scaffold" style="font-size:13px;">
+                <strong>Truco:</strong> Si el verbo termina en -AR, piensa "É" al final. Si termina en -ER o -IR, piensa "Í".
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">5 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:33.3%"></div></div>
+</div>
+
+<!-- SLIDE 6 — VERBO IR / SER -->
+<div class="slide" id="s6">
+    <div class="slide-title">⭐ El verbo más usado: IR (y también SER)</div>
+    <div class="badge-blue">🔧 ESPECIAL — Este verbo no sigue el patrón normal</div>
+    <p style="margin-bottom:12px; font-size:16px;">El verbo IR es uno de los más importantes y se usa todo el tiempo: "Fui al trabajo", "Fui a Santiago". Hay que memorizarlo completo.</p>
+
+    <div class="grid2">
+        <div class="card" style="border-top-color:#1e3a8a;">
+            <table class="verb-table">
+                <tr class="head-row"><td>Persona</td><td>IR (pasado)</td></tr>
+                <tr><td>Yo</td><td><span class="pill p-blue">fui</span></td></tr>
+                <tr><td>Tú</td><td><span class="pill p-blue">fuiste</span></td></tr>
+                <tr><td>Él / Ella / Ud.</td><td><span class="pill p-blue">fue</span></td></tr>
+                <tr><td>Nosotros</td><td><span class="pill p-teal">fuimos</span></td></tr>
+                <tr><td>Ellos / Uds.</td><td><span class="pill p-blue">fueron</span></td></tr>
+            </table>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="iz" style="padding:16px; gap:10px;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; letter-spacing:1px; align-self:flex-start;">💡 DATO CURIOSO</div>
+                <p style="color:white; font-size:15px; line-height:1.5;">IR y SER tienen exactamente la misma forma en pasado. El contexto te dice cuál es cuál:</p>
+                <div style="background:#1e293b; border-radius:12px; padding:10px 16px; width:100%; display:flex; flex-direction:column; gap:6px;">
+                    <p style="color:#86efac; font-size:15px;">"Fui al cine." → eso es <strong>IR</strong></p>
+                    <p style="color:#fbbf24; font-size:15px;">"Fui profesor en Chile." → eso es <strong>SER</strong></p>
+                </div>
+                <div id="ans-s6" class="ans-box" style="font-size:15px;">"Nosotros fuimos a la playa." ✅</div>
+                <button class="btn btn-reveal" onclick="reveal('ans-s6',this)" style="width:100%;">¿Cómo dirías "Fuimos a la playa"? Ver</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">6 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+</div>
+
+<!-- SLIDE 7 — VERBO HACER -->
+<div class="slide" id="s7">
+    <div class="slide-title">🔨 El verbo HACER — Para todo tipo de acciones</div>
+    <div class="badge-blue">🔧 ESPECIAL — También hay que memorizarlo</div>
+    <p style="margin-bottom:12px; font-size:16px;">"Hacer" es otro verbo clave porque sirve para hablar de casi cualquier actividad: "Hice ejercicio", "Hice la tarea", "Hice un asado".</p>
+
+    <div class="grid2">
+        <div class="card" style="border-top-color:#d97706;">
+            <table class="verb-table">
+                <tr class="head-row"><td>Persona</td><td>HACER (pasado)</td></tr>
+                <tr><td>Yo</td><td><span class="pill p-amber">hice</span></td></tr>
+                <tr><td>Tú</td><td><span class="pill p-amber">hiciste</span></td></tr>
+                <tr><td>Él / Ella / Ud.</td><td><span class="pill p-amber">hizo</span></td></tr>
+                <tr><td>Nosotros</td><td><span class="pill p-teal">hicimos</span></td></tr>
+                <tr><td>Ellos / Uds.</td><td><span class="pill p-amber">hicieron</span></td></tr>
+            </table>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="iz" style="padding:16px; gap:10px;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; letter-spacing:1px; align-self:flex-start;">💬 EXPRESIONES COTIDIANAS</div>
+                <div style="background:#1e293b; border-radius:12px; padding:10px 16px; width:100%; display:flex; flex-direction:column; gap:6px;">
+                    <p style="color:white; font-size:15px;">"¿Qué <span style="color:#fbbf24; font-weight:700;">hiciste</span> el fin de semana?"</p>
+                    <p style="color:white; font-size:15px;">"<span style="color:#fbbf24; font-weight:700;">Hice</span> un asado con mis amigos."</p>
+                    <p style="color:white; font-size:15px;">"Ella <span style="color:#fbbf24; font-weight:700;">hizo</span> las compras ayer."</p>
+                </div>
+                <div id="ans-s7" class="ans-box" style="font-size:15px;">"¿Tú hiciste ejercicio ayer?" ✅</div>
+                <button class="btn btn-reveal" onclick="reveal('ans-s7',this)" style="width:100%;">¿Cómo preguntarías "Hiciste ejercicio ayer"? Ver</button>
+            </div>
+            <div class="scaffold" style="font-size:13px;">
+                <strong>Ojo:</strong> "Hizo" se escribe con Z, no con C ni S.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">7 / 15</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:46.7%"></div></div>
+</div>
+
+<!-- SLIDE 8 — CHILENISMOS PARA HABLAR DEL PASADO -->
+<div class="slide" id="s8">
+    <div class="slide-title">🇨🇱 Así se habla realmente</div>
+    <div class="badge-purple">🗣️ HABLA REAL — Lo que vas a escuchar en la calle</div>
+    <p style="margin-bottom:10px; font-size:15px;">En Chile usamos palabras y expresiones propias para hablar del pasado y de la vida diaria. Conócelas para entender mejor a la gente y sonar más natural.</p>
+
+    <div class="grid2" style="gap:14px;">
+        <div class="card" style="border-top-color:#7c3aed; padding:10px 14px; overflow-y:auto;">
+            <table class="verb-table" style="font-size:13px;">
+                <tr class="head-row"><td>Expresión chilena</td><td>Significado</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">ayer</span></td><td style="font-size:12px;">el día antes de hoy</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">anoche</span></td><td style="font-size:12px;">ayer en la noche</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">la otra semana</span></td><td style="font-size:12px;">hace unos días atrás</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">el finde pasado</span></td><td style="font-size:12px;">el fin de semana anterior</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">recién</span></td><td style="font-size:12px;">hace muy poco tiempo</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">altiro</span></td><td style="font-size:12px;">de inmediato, ahora mismo</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">cachái</span></td><td style="font-size:12px;">¿entiendes? / ¿me explico?</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">fome</span></td><td style="font-size:12px;">aburrido, sin gracia</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">bacán / la raja</span></td><td style="font-size:12px;">muy bueno, genial</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">pega</span></td><td style="font-size:12px;">trabajo</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">carrete</span></td><td style="font-size:12px;">fiesta, reunión social</td></tr>
+                <tr><td><span class="pill p-purple" style="font-size:12px;">al tiro</span></td><td style="font-size:12px;">enseguida, sin demora</td></tr>
+            </table>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; min-height:0;">
+            <div class="photo-frame" style="font-size:14px; gap:6px; padding:12px 16px;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; letter-spacing:1px;">💬 CONVERSACIÓN TÍPICA EN CHILE</div>
+                <p style="color:#e2e8f0; font-size:14px; margin-top:2px;">— ¿Qué tal tu pega ayer? ¿Fome o bacán?</p>
+                <p style="color:#86efac; font-size:14px;">— ¡La raja! Salí altiro y me fui a un carrete con amigos.</p>
+                <p style="color:#e2e8f0; font-size:14px;">— ¿Cachái lo que te digo? Recién llegué de ahí.</p>
+            </div>
+            <div class="iz" style="padding:14px; gap:8px; justify-content:flex-start;">
+                <div style="font-size:12px; color:#94a3b8; font-weight:700; letter-spacing:1px; align-self:flex-start;">🎯 ACTIVIDAD — Úsalas tú mismo</div>
+                <p style="color:white; font-size:13px; line-height:1.5; margin-top:2px;">El profe saca una pregunta. Tienes que responder usando <strong>al menos una expresión chilena</strong> de la tabla.</p>
+                <div style="font-size:18px; font-weight:700; color:#fbbf24; text-align:center; margin-top:4px;" id="chile-question">Haz clic para sacar una pregunta</div>
+                <button class="btn btn-amber" onclick="rollChile()" style="width:100%;">🎲 Nueva Pregunta</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">8 / 16</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
+</div>
+
+<!-- SLIDE 9 — PRÁCTICA ORAL: ENTREVISTA RÁPIDA -->
+<div class="slide" id="s9">
+    <div class="slide-title">🎤 Entrevista Rápida — Cuéntame tu día</div>
+    <div class="speak-badge">🗣️ PRODUCCIÓN ORAL — Pregúntense entre ustedes</div>
+    <p style="margin-bottom:10px; font-size:16px;">Sale una pregunta. Un alumno se la hace al otro, y el otro responde con una frase real y completa, usando el pasado.</p>
+
+    <div class="grid2">
+        <div class="iz" style="padding:16px; gap:10px; justify-content:flex-start;">
+            <div style="font-size:12px; color:#94a3b8; font-weight:700; letter-spacing:1px; align-self:flex-start;">🎙️ PREGUNTA PARA TU COMPAÑERO</div>
+            <div style="font-size:20px; font-weight:700; color:white; text-align:center; line-height:1.4; margin-top:6px;" id="int-question">Haz clic para sacar una pregunta</div>
+            <button class="btn btn-amber" onclick="rollInterview()" style="width:100%; margin-top:8px;">🔀 Nueva Pregunta</button>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; min-height:0;">
+            <div class="card" style="border-top-color:#059669; flex:1;">
+                <h3 style="font-size:15px; margin-bottom:8px;">🗣️ Frases útiles para empezar tu respuesta:</h3>
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                    <span class="pill p-green" style="font-size:14px; width:fit-content;">Ayer yo...</span>
+                    <span class="pill p-green" style="font-size:14px; width:fit-content;">El fin de semana...</span>
+                    <span class="pill p-green" style="font-size:14px; width:fit-content;">Hace poco...</span>
+                    <span class="pill p-green" style="font-size:14px; width:fit-content;">La otra semana...</span>
+                </div>
+            </div>
+            <div class="scaffold" style="font-size:13px;">
+                <strong>Importante:</strong> No respondas con una sola palabra. Intenta dar una razón también: "Fui al gimnasio <em>porque</em> quiero estar más activo."
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">9 / 16</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:56.25%"></div></div>
+</div>
+
+<!-- SLIDE 10 — EJERCICIO: ¿QUÉ PASÓ AQUÍ? -->
+<div class="slide" id="s10">
+    <div class="slide-title">🔍 ¿Qué Pasó Aquí? — Investiga la Escena</div>
+    <div class="badge-blue">📝 PRÁCTICA GUIADA — Observa y describe en pasado</div>
+    <p style="margin-bottom:10px; font-size:16px;">El profe describe una escena "después de" algo. Tú tienes que adivinar e inventar, en pasado, qué fue lo que pasó antes para que quedara así.</p>
+
+    <div class="grid2">
+        <div class="scene-card" style="gap:10px; justify-content:space-between;">
+            <div class="scene-label">🕵️ ESCENA ENCONTRADA</div>
+            <div style="font-size:30px; text-align:center;" id="cluescene-emoji">❓</div>
+            <div style="font-size:18px; font-weight:700; color:white; text-align:center; line-height:1.4;" id="cluescene-text">Haz clic para revelar la escena</div>
+            <button class="btn btn-amber" onclick="rollClueScene()" style="width:100%;">🔀 Nueva Escena</button>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="card" style="border-top-color:#059669; padding:12px 16px;">
+                <h3 style="font-size:15px; margin-bottom:6px;">🎯 Tu misión:</h3>
+                <p style="font-size:14px; color:#475569; line-height:1.6;">Inventa <strong>2 o 3 oraciones en pasado</strong> explicando qué pasó antes de esta escena. ¡No hay una sola respuesta correcta, usa tu imaginación!</p>
+            </div>
+            <div class="card" style="border-top-color:#7c3aed; flex:1;">
+                <h3 style="font-size:14px; margin-bottom:6px;">💡 Ejemplo con otra escena:</h3>
+                <p style="font-size:13px; color:#475569; line-height:1.6;"><em>Escena: "La cocina está llena de harina."</em><br>Posible historia: "Camila hizo un pastel. Cocinó toda la tarde y se le cayó la harina por todos lados."</p>
+            </div>
+            <div class="scaffold" style="font-size:13px;">
+                <strong>Pista:</strong> Usa los verbos que ya conoces: fue, hizo, comió, trabajó, salió, llegó.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">10 / 16</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:62.5%"></div></div>
+</div>
+
+<!-- SLIDE 11 — ACTIVIDAD ORAL: EL CUENTACUENTOS -->
+<div class="slide" id="s11">
+    <div class="slide-title">📖 El Cuentacuentos — Con un Giro Inesperado</div>
+    <div class="speak-badge">🎤 PRODUCCIÓN ORAL EXTENDIDA — Trabajo en equipo, sin parar</div>
+    <p style="margin-bottom:8px; font-size:15px;">Entre los dos van a inventar una historia, turnándose. Cada uno agrega una oración en pasado. Pero ojo: ¡a la mitad sale un giro que tienen que incluir!</p>
+
+    <div class="grid2">
+        <div class="iz" style="padding:14px; gap:8px; justify-content:flex-start;">
+            <div style="font-size:12px; color:#94a3b8; font-weight:700; letter-spacing:1px; align-self:flex-start;">📚 INICIO DE LA HISTORIA</div>
+            <div style="font-size:18px; font-weight:700; color:white; text-align:center; line-height:1.3; margin-top:4px;" id="story-start">Haz clic para empezar una historia</div>
+            <button class="btn btn-amber" onclick="rollStory()" style="width:100%; margin-top:4px;">📖 Nueva Historia</button>
+
+            <div style="background:#7c3aed; border-radius:12px; padding:10px 14px; width:100%; margin-top:6px;">
+                <div style="font-size:11px; color:#fde68a; font-weight:700; letter-spacing:1px;">🌀 GIRO SORPRESA</div>
+                <div style="font-size:15px; font-weight:700; color:white; margin-top:2px;" id="story-twist">Haz clic para revelar el giro</div>
+            </div>
+            <button class="btn" style="background:#7c3aed; width:100%;" onclick="rollTwist()">🎲 Sacar Giro</button>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:8px; min-height:0;">
+            <div class="mission" style="padding:12px 16px;">
+                <p style="font-size:14px; color:#fde68a; font-weight:700; margin-bottom:4px;">🎯 CÓMO JUGAR:</p>
+                <ol style="padding-left:16px; font-size:13px; line-height:1.6; color:white;">
+                    <li>El profe lee la primera oración de la historia.</li>
+                    <li>Jeová y Nick se turnan agregando oraciones en pasado.</li>
+                    <li>Después de unas 4 oraciones, saca el giro sorpresa y ¡tienen que incluirlo en la historia!</li>
+                    <li>Sigan así hasta cerrar la historia entre los dos.</li>
+                </ol>
+            </div>
+            <div class="card" style="border-top-color:#7c3aed; flex:1; padding:10px 14px;">
+                <h3 style="font-size:13px; margin-bottom:6px;">🗣️ Conectores para continuar la historia:</h3>
+                <div style="display:flex; flex-wrap:wrap; gap:4px;">
+                    <span class="pill p-purple" style="font-size:11px;">Después...</span>
+                    <span class="pill p-purple" style="font-size:11px;">Entonces...</span>
+                    <span class="pill p-purple" style="font-size:11px;">Luego...</span>
+                    <span class="pill p-purple" style="font-size:11px;">De repente...</span>
+                    <span class="pill p-purple" style="font-size:11px;">Sin previo aviso...</span>
+                    <span class="pill p-purple" style="font-size:11px;">Justo en ese momento...</span>
+                    <span class="pill p-purple" style="font-size:11px;">Al final...</span>
+                    <span class="pill p-purple" style="font-size:11px;">Para sorpresa de todos...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">11 / 16</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:68.75%"></div></div>
+</div>
+
+<!-- SLIDE 12 — ERRORES COMUNES (PARTE 1) -->
+<div class="slide" id="s12">
+    <div class="slide-title">🪤 ¡Cuidado! — Errores que se Repiten Mucho (1/2)</div>
+    <div class="badge-red">⚠️ REVISIÓN — Lo que tu portugués te puede confundir</div>
+    <p style="margin-bottom:8px; font-size:14px;">Cuando hablamos rápido, es normal mezclar el portugués con el español. Veamos algunos errores típicos.</p>
+
+    <div class="grid3" style="gap:8px;">
+        <div class="card" style="border-top-color:#be123c; padding:8px 12px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">❌ ERROR COMÚN</div>
+                <p style="font-size:14px; font-weight:700; color:#be123c; margin-top:2px;">"Yo fazí un asado."</p>
+            </div>
+            <div id="c1" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px;">"fazí" no existe en español.<br>✅ Correcto: "Yo <strong>hice</strong> un asado."</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('c1',this)">Corregir</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; padding:8px 12px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">❌ ERROR COMÚN</div>
+                <p style="font-size:14px; font-weight:700; color:#be123c; margin-top:2px;">"Yo fue al trabajo."</p>
+            </div>
+            <div id="c2" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px;">"fue" es para él/ella.<br>✅ Correcto: "Yo <strong>fui</strong> al trabajo."</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('c2',this)">Corregir</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; padding:8px 12px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">❌ ERROR COMÚN</div>
+                <p style="font-size:14px; font-weight:700; color:#be123c; margin-top:2px;">"Yo comió pizza ayer."</p>
+            </div>
+            <div id="c4" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px;">"comió" es para él/ella.<br>✅ Correcto: "Yo <strong>comí</strong> pizza ayer."</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('c4',this)">Corregir</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; padding:8px 12px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">❌ ERROR COMÚN</div>
+                <p style="font-size:14px; font-weight:700; color:#be123c; margin-top:2px;">"Ella hació la tarea."</p>
+            </div>
+            <div id="c5" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px;">"hació" no existe.<br>✅ Correcto: "Ella <strong>hizo</strong> la tarea."</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('c5',this)">Corregir</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; padding:8px 12px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">❌ ERROR COMÚN</div>
+                <p style="font-size:14px; font-weight:700; color:#be123c; margin-top:2px;">"Nosotros trabajemos ayer."</p>
+            </div>
+            <div id="c6" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px;">Esa forma no es pasado.<br>✅ Correcto: "Nosotros <strong>trabajamos</strong> ayer."</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('c6',this)">Corregir</button>
+        </div>
+        <div class="card" style="border-top-color:#059669; padding:8px 12px;">
+            <div style="background:#f0fdf4; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">✅ ESTO SÍ FUNCIONA</div>
+                <p style="font-size:14px; font-weight:700; color:#059669; margin-top:2px;">"Yo trabajé mucho ayer."</p>
+            </div>
+            <div id="c3" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px; background:#f0fdf4; border-color:#059669; color:#14532d;">¡Perfecto! Esta frase está completamente bien construida. ✅</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('c3',this)">Confirmar</button>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">12 / 16</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:75%"></div></div>
+</div>
+
+<!-- SLIDE 13 — ERRORES COMUNES (PARTE 2) -->
+<div class="slide" id="s13">
+    <div class="slide-title">🪤 ¡Cuidado! — Errores que se Repiten Mucho (2/2)</div>
+    <div class="badge-red">⚠️ REVISIÓN — Más casos para detectar y corregir</div>
+    <p style="margin-bottom:8px; font-size:14px;">Sigamos revisando errores típicos. Intenta corregir antes de hacer clic en el botón.</p>
+
+    <div class="grid3" style="gap:8px;">
+        <div class="card" style="border-top-color:#be123c; padding:8px 12px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">❌ ERROR COMÚN</div>
+                <p style="font-size:14px; font-weight:700; color:#be123c; margin-top:2px;">"Ellos fueron al cine y come popcorn."</p>
+            </div>
+            <div id="d1" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px;">"come" está en presente.<br>✅ Correcto: "...y <strong>comieron</strong> popcorn."</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('d1',this)">Corregir</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; padding:8px 12px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">❌ ERROR COMÚN</div>
+                <p style="font-size:14px; font-weight:700; color:#be123c; margin-top:2px;">"Tú hiciste mucho pega esta semana."</p>
+            </div>
+            <div id="d2" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px;">"pega" es femenino.<br>✅ Correcto: "...hiciste mucha <strong>pega</strong> esta semana."</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('d2',this)">Corregir</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; padding:8px 12px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">❌ ERROR COMÚN</div>
+                <p style="font-size:14px; font-weight:700; color:#be123c; margin-top:2px;">"Eu salí temprano ayer."</p>
+            </div>
+            <div id="d3" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px;">"Eu" es portugués.<br>✅ Correcto: "<strong>Yo</strong> salí temprano ayer."</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('d3',this)">Corregir</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; padding:8px 12px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">❌ ERROR COMÚN</div>
+                <p style="font-size:14px; font-weight:700; color:#be123c; margin-top:2px;">"Nosotros fuimos al carrete y bebió mucho."</p>
+            </div>
+            <div id="d4" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px;">"bebió" es para él/ella.<br>✅ Correcto: "...y <strong>bebimos</strong> mucho."</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('d4',this)">Corregir</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; padding:8px 12px;">
+            <div style="background:#fff1f2; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">❌ ERROR COMÚN</div>
+                <p style="font-size:14px; font-weight:700; color:#be123c; margin-top:2px;">"Yo fue muy fome el finde."</p>
+            </div>
+            <div id="d5" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px;">Mezcla de "ir" y "ser".<br>✅ Correcto: "El finde <strong>fue</strong> muy fome." (ser/estar, no "yo")</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('d5',this)">Corregir</button>
+        </div>
+        <div class="card" style="border-top-color:#059669; padding:8px 12px;">
+            <div style="background:#f0fdf4; border-radius:10px; padding:6px 10px; margin-bottom:6px;">
+                <div style="font-size:11px; color:#94a3b8; font-weight:700;">✅ ESTO SÍ FUNCIONA</div>
+                <p style="font-size:14px; font-weight:700; color:#059669; margin-top:2px;">"Anoche salimos altiro del carrete."</p>
+            </div>
+            <div id="d6" class="ans-box" style="font-size:12px; text-align:left; padding:6px 10px; background:#f0fdf4; border-color:#059669; color:#14532d;">¡Perfecto! Pasado correcto + expresión chilena bien usada. ✅</div>
+            <button class="btn btn-reveal" style="margin-top:4px; width:100%; font-size:12px; padding:5px;" onclick="reveal('d6',this)">Confirmar</button>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">13 / 16</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:81.25%"></div></div>
+</div>
+
+<!-- SLIDE 14 — PRODUCCIÓN ESCRITA GUIADA -->
+<div class="slide" id="s14">
+    <div class="slide-title">✍️ Mi Fin de Semana, en Mis Propias Palabras</div>
+    <div class="badge-green">📝 ESCRITURA + LECTURA EN VOZ ALTA — Habla sobre tu realidad</div>
+    <p style="margin-bottom:12px; font-size:16px;">Escribe sobre algo que hiciste de verdad el fin de semana pasado. <strong>Mínimo 4 oraciones</strong>, luego léelas en voz alta.</p>
+
+    <div class="grid2">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <textarea class="write-area" rows="7" placeholder="Ejemplo:&#10;El sábado pasado fui a un café con mi familia.&#10;Comimos algo rico y conversamos mucho.&#10;Después hice algunas compras en el supermercado.&#10;El domingo descansé todo el día en casa."></textarea>
+        </div>
+        <div class="card" style="border-top-color:#059669; display:flex; flex-direction:column; gap:10px;">
+            <h3 style="color:#059669; font-size:16px;">🎯 Revisa antes de leer:</h3>
+            <ul style="padding-left:16px; font-size:14px; color:#1e293b; line-height:1.9;">
+                <li>¿Usaste el verbo en pasado, no en presente?</li>
+                <li>¿Los verbos -AR terminan en "-é" o "-ó"?</li>
+                <li>¿Usaste "fui" o "hice" donde corresponde?</li>
+                <li>¿Cada oración cuenta algo real de tu vida?</li>
+            </ul>
+            <div class="scaffold" style="font-size:13px; margin-top:auto;">
+                <strong>Extra:</strong> Si puedes, agrega cómo te sentiste: <em>"Fue un día muy tranquilo y lo disfruté mucho."</em>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">14 / 16</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:87.5%"></div></div>
+</div>
+
+<!-- SLIDE 15 — REPASO RELÁMPAGO FINAL -->
+<div class="slide" id="s15">
+    <div class="slide-title">⚡ Repaso Relámpago — ¡Rápido, sin pensar mucho!</div>
+    <div class="speak-badge">🏁 CIERRE — Responde en pocos segundos</div>
+    <p style="margin-bottom:10px; font-size:15px;">El profe pregunta y tú respondes de inmediato, en voz alta.</p>
+
+    <div class="grid3" style="gap:8px;">
+        <div class="card" style="border-top-color:#1e3a8a; display:flex; flex-direction:column; justify-content:space-between; padding:10px 14px;">
+            <div>
+                <span class="pill p-blue" style="font-size:12px;">Pregunta 01</span>
+                <p style="margin-top:6px; font-size:13px;">¿Cómo dirías "Yo comí" pero hablando de "nosotros"?</p>
+            </div>
+            <div id="q1" class="ans-box" style="font-size:13px; margin-top:6px; padding:6px 10px;">comimos ✅</div>
+            <button class="btn btn-reveal" style="margin-top:4px; font-size:12px; padding:5px 10px;" onclick="reveal('q1',this)">Ver</button>
+        </div>
+        <div class="card" style="border-top-color:#d97706; display:flex; flex-direction:column; justify-content:space-between; padding:10px 14px;">
+            <div>
+                <span class="pill p-amber" style="font-size:12px;">Pregunta 02</span>
+                <p style="margin-top:6px; font-size:13px;">¿Cuál es el error?<br><em style="color:#be123c;">"Yo fue al cine."</em></p>
+            </div>
+            <div id="q2" class="ans-box" style="font-size:13px; margin-top:6px; padding:6px 10px;">"fue" ❌ → correcto: <strong>fui</strong> ✅</div>
+            <button class="btn btn-reveal" style="margin-top:4px; font-size:12px; padding:5px 10px;" onclick="reveal('q2',this)">Ver</button>
+        </div>
+        <div class="card" style="border-top-color:#be123c; display:flex; flex-direction:column; justify-content:space-between; padding:10px 14px;">
+            <div>
+                <span class="pill p-red" style="font-size:12px;">Pregunta 03</span>
+                <p style="margin-top:6px; font-size:13px;">Completa: "Ellos _______ (hacer) la tarea ayer."</p>
+            </div>
+            <div id="q3" class="ans-box" style="font-size:13px; margin-top:6px; padding:6px 10px;">Ellos <strong>hicieron</strong> la tarea ayer. ✅</div>
+            <button class="btn btn-reveal" style="margin-top:4px; font-size:12px; padding:5px 10px;" onclick="reveal('q3',this)">Ver</button>
+        </div>
+        <div class="card" style="border-top-color:#7c3aed; display:flex; flex-direction:column; justify-content:space-between; padding:10px 14px;">
+            <div>
+                <span class="pill p-purple" style="font-size:12px;">Pregunta 04</span>
+                <p style="margin-top:6px; font-size:13px;">¿Qué significa "altiro" en Chile?</p>
+            </div>
+            <div id="q4" class="ans-box" style="font-size:13px; margin-top:6px; padding:6px 10px;">De inmediato, ahora mismo. ✅</div>
+            <button class="btn btn-reveal" style="margin-top:4px; font-size:12px; padding:5px 10px;" onclick="reveal('q4',this)">Ver</button>
+        </div>
+        <div class="card" style="border-top-color:#059669; display:flex; flex-direction:column; justify-content:space-between; padding:10px 14px;">
+            <div>
+                <span class="pill p-green" style="font-size:12px;">Pregunta 05</span>
+                <p style="margin-top:6px; font-size:13px;">¿Cómo dirías "trabajar" en pasado, hablando de "tú"?</p>
+            </div>
+            <div id="q5" class="ans-box" style="font-size:13px; margin-top:6px; padding:6px 10px;">trabajaste ✅</div>
+            <button class="btn btn-reveal" style="margin-top:4px; font-size:12px; padding:5px 10px;" onclick="reveal('q5',this)">Ver</button>
+        </div>
+        <div class="card" style="border-top-color:#1e3a8a; display:flex; flex-direction:column; justify-content:space-between; padding:10px 14px;">
+            <div>
+                <span class="pill p-blue" style="font-size:12px;">Pregunta 06</span>
+                <p style="margin-top:6px; font-size:13px;">Corrige: <em style="color:#be123c;">"Ella hació el almuerzo."</em></p>
+            </div>
+            <div id="q6" class="ans-box" style="font-size:13px; margin-top:6px; padding:6px 10px;">Ella <strong>hizo</strong> el almuerzo. ✅</div>
+            <button class="btn btn-reveal" style="margin-top:4px; font-size:12px; padding:5px 10px;" onclick="reveal('q6',this)">Ver</button>
+        </div>
+    </div>
+
+    <div class="nav">
+        <span class="nav-counter">15 / 16</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" onclick="go(1)">Siguiente →</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:93.75%"></div></div>
+</div>
+
+<!-- SLIDE 16 — CIERRE -->
+<div class="slide" id="s16" style="justify-content:center; align-items:center; text-align:center;">
+    <h2 style="font-family:'Poppins',sans-serif; font-size:48px; color:#1e3a8a;">¡Excelente clase!</h2>
+    <div class="accent-bar" style="margin:10px auto 20px;"></div>
+    <p style="font-size:22px; max-width:800px; color:#475569;">Hoy aprendiste a contar tu pasado. Ya puedes responder cuando alguien te pregunte "¿qué hiciste?"</p>
+
+    <div class="nav">
+        <span class="nav-counter">16 / 16</span>
+        <button class="nav-btn" onclick="go(-1)">← Anterior</button>
+        <button class="nav-btn" disabled>Fin de la Clase</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+</div>
+
+<!-- ─── SCRIPT LÓGICO ──────────────────────────────────── -->
+<script>
+    let currentSlide = 1;
+    const totalSlides = 16;
+
+    function go(dir) {
+        const active = document.getElementById(`s${currentSlide}`);
+        if (active) active.classList.remove('active');
+        currentSlide += dir;
+        if (currentSlide < 1) currentSlide = 1;
+        if (currentSlide > totalSlides) currentSlide = totalSlides;
+        const next = document.getElementById(`s${currentSlide}`);
+        if (next) next.classList.add('active');
+    }
+
+    function reveal(id, btn) {
+        document.getElementById(id).style.display = 'block';
+        if (btn) btn.style.display = 'none';
+    }
+
+    function makePicker(arr) {
+        let pool = [...arr];
+        return function () {
+            if (pool.length === 0) pool = [...arr];
+            const idx = Math.floor(Math.random() * pool.length);
+            return pool.splice(idx, 1)[0];
+        };
+    }
+
+    /* ── ICE BREAKER: LA MÁQUINA DEL TIEMPO ── */
+    const timeQuestions = [
+        { emoji: '🍽️', q: '¿Qué comiste ayer en la noche?' },
+        { emoji: '🚗', q: '¿Cómo llegaste a tu casa la última vez que saliste?' },
+        { emoji: '🎬', q: '¿Cuál fue la última película que viste?' },
+        { emoji: '📱', q: '¿A quién le escribiste un mensaje hoy?' },
+        { emoji: '☕', q: '¿Qué tomaste esta mañana?' },
+        { emoji: '🛒', q: '¿Cuándo fuiste al supermercado por última vez?' },
+        { emoji: '💼', q: '¿Qué hiciste en tu trabajo ayer?' },
+        { emoji: '🎵', q: '¿Qué música escuchaste hoy?' },
+        { emoji: '🏖️', q: '¿Cuál fue tu último viaje?' },
+        { emoji: '👨‍👩‍👧', q: '¿Con quién hablaste por teléfono la semana pasada?' },
+    ];
+    const nextTime = makePicker(timeQuestions);
+    let s1t = 0, s2t = 0;
+
+    function rollTime() {
+        const t = nextTime();
+        document.getElementById('time-emoji').textContent = t.emoji;
+        document.getElementById('time-question').textContent = t.q;
+    }
+
+    function addScoreTime(p) {
+        if (p === 1) { s1t++; document.getElementById('score1t').textContent = s1t; }
+        else { s2t++; document.getElementById('score2t').textContent = s2t; }
+    }
+
+    /* ── ACTIVIDAD CHILENISMOS ── */
+    const chileQuestions = [
+        '¿Cómo estuvo tu pega esta semana?',
+        '¿Fuiste a algún carrete últimamente?',
+        '¿Qué hiciste altiro cuando llegaste a tu casa ayer?',
+        '¿Tu finde pasado fue fome o bacán?',
+        '¿Recién llegaste de algún viaje?',
+    ];
+    const nextChile = makePicker(chileQuestions);
+
+    function rollChile() {
+        document.getElementById('chile-question').textContent = nextChile();
+    }
+
+    /* ── ¿QUÉ PASÓ AQUÍ? ── */
+    const clueScenes = [
+        { emoji: '🧁', text: 'La cocina está llena de harina y hay un pastel a medio hacer.' },
+        { emoji: '🧳', text: 'Hay una maleta abierta en medio de la sala, con ropa por todos lados.' },
+        { emoji: '⚽', text: 'Una ventana está rota y hay una pelota en el living.' },
+        { emoji: '📚', text: 'Hay libros y cuadernos abiertos sobre la mesa a las 2 de la mañana.' },
+        { emoji: '🚗', text: 'El auto está estacionado torcido y faltan las llaves de la casa.' },
+        { emoji: '🎂', text: 'Hay globos, confeti y platos sucios por toda la casa.' },
+    ];
+    const nextClueScene = makePicker(clueScenes);
+
+    function rollClueScene() {
+        const c = nextClueScene();
+        document.getElementById('cluescene-emoji').textContent = c.emoji;
+        document.getElementById('cluescene-text').textContent = c.text;
+    }
+
+    /* ── ENTREVISTA RÁPIDA ── */
+    const interviewQuestions = [
+        '¿Qué hiciste el fin de semana pasado?',
+        '¿A qué hora te despertaste hoy?',
+        '¿Qué desayunaste esta mañana?',
+        '¿Cuándo fue la última vez que cocinaste algo?',
+        '¿Qué hiciste la última vez que tuviste un día libre?',
+        '¿Adónde fuiste de vacaciones la última vez?',
+        '¿Qué estudiaste o aprendiste la semana pasada?',
+        '¿Con quién almorzaste ayer?',
+        '¿Qué hiciste para celebrar tu último cumpleaños?',
+        '¿Cuál fue la última vez que hiciste ejercicio?',
+    ];
+    const nextInterview = makePicker(interviewQuestions);
+
+    function rollInterview() {
+        document.getElementById('int-question').textContent = nextInterview();
+    }
+
+    /* ── CUENTACUENTOS ── */
+    const storyStarters = [
+        'Un día, Camila salió de su casa muy temprano...',
+        'La semana pasada, Jeová y Nick fueron a un partido de fútbol...',
+        'Anoche, alguien llamó a la puerta a las 11 de la noche...',
+        'El año pasado, una familia viajó a Valparaíso por primera vez...',
+        'Un sábado cualquiera, un perro se escapó del patio...',
+        'Hace dos semanas, un grupo de amigos organizó un asado en la playa...',
+    ];
+    const nextStory = makePicker(storyStarters);
+
+    function rollStory() {
+        document.getElementById('story-start').textContent = nextStory();
+    }
+
+    const storyTwists = [
+        '¡De repente empezó a llover muy fuerte!',
+        '¡Alguien tocó la puerta a esa hora!',
+        '¡Se cortó la luz de un momento a otro!',
+        '¡Apareció una persona que nadie esperaba!',
+        '¡Sonó el teléfono con una noticia urgente!',
+        '¡Se les olvidó algo muy importante!',
+    ];
+    const nextTwist = makePicker(storyTwists);
+
+    function rollTwist() {
+        document.getElementById('story-twist').textContent = nextTwist();
+    }
+</script>
+</body>
+</html>
